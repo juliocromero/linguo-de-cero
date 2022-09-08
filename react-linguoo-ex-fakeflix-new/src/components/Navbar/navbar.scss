@@ -1,11 +1,14 @@
 @import '../../scss/mixin';
 @import '../../scss/variables';
 
+
 .Navbar {
+    padding-left: 22vh;
     position: fixed;
+    padding: 70px;
     box-sizing: border-box;
     z-index: 10;
-    width: 100%;
+    width: calc(100% - 25vh);
     height: 70px;
     top: 0;
     display: flex;
@@ -15,6 +18,9 @@
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     transition: all 0.2s ease-out;
 
+    &__navitem:first-child{
+        width: 100%;
+    }
     &__fixed {
         background-image: none;
         background-color: $black;
@@ -28,12 +34,14 @@
             max-width: 130px;
         }
     }
-
+    
     &__primarynav,
     &__secondarynav {
+        justify-content: space-between;
+
+        width: 100%;
         display: flex;
         align-items: center;
-        margin: 0;
         padding: 0;
     }
     
@@ -297,3 +305,9 @@
         }
     }
 }
+
+@media (max-width: 800px) {
+    .Navbar{
+      width: calc(100% - 60px)
+    }
+  }

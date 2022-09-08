@@ -1,0 +1,132 @@
+@import "../../scss/variables";
+@import "../../scss/mixin";
+
+
+.siderbar {
+  padding: 20px 2vw;
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+
+  position: fixed;
+  background-image: none;
+  background-color: #141414;
+  color: #0078c2;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  z-index: 10;
+  flex-wrap: nowrap;
+    overflow: hidden;
+
+  &__hr {
+        border: 1px solid rgb(50, 50, 50);
+    
+  }
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding-left: 0;
+  }
+  &__icon-radius {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    left: 3px;
+    top: 1px;
+    background: gray;
+    border-radius: 16px;
+    &-after {
+      background-color: #0078c2;
+    }
+  }
+  &__main-container {
+    width: 25vh;
+    display: flex;
+    position: relative;
+  }
+
+  &__icon {
+    width: 42px;
+    height: 40px;
+    margin-top: 7px;
+    margin-left: 7px;
+
+    color: rgb(227, 227, 227);
+    &-after {
+      color: rgb(255, 255, 255);
+    }
+  }
+  &__logo {
+    display: none;
+    @include mq(xs) {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      padding: 2em;
+
+      &--img {
+        width: 80%;
+        max-width: 160px;
+      }
+    }
+  }
+  &__link {
+    font-family: "Poppins";
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    color: gray;
+    padding: 5px 45px;
+    &-after {
+      color: white;
+    }
+  }
+  &__link:hover > .siderbar__icon-radius {
+    background-color: #0078c2;
+  }
+  &__link:hover {
+    color: white;
+  }
+  &__top_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+  }
+  &__routes {
+    padding: 10vh 0;
+    width: 100%;
+    font-weight: 600;
+    size: 14px;
+    display: flex;
+    line-height: 15.46px;
+    letter-spacing: 0.3px;
+    flex-direction: column;
+  }
+  &__link_text {
+    padding-left: 20px;
+  }
+}
+
+.siderbar__main-container{
+  width: 25vh;
+}
+
+@media (max-width: 800px) {
+  .siderbar__main-container {
+    width: 60px !important;
+  }
+  .siderbar {
+    width: 60px !important;
+  }
+}

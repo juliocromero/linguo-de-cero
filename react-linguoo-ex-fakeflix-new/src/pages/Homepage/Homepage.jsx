@@ -1,5 +1,4 @@
 import "./homepage.scss"
-import Banner from "../../components/Banner/Banner"
 import Row from "../../components/Row/Row"
 import { useRetrieveData } from "../../hooks/useRetrieveData";
 import { motion } from "framer-motion";
@@ -31,7 +30,10 @@ const Homepage = () => {
 
     // taking out playlist from this list to avoid repeating
     const rows = primaryrows && primaryrows.length > 0 && primaryrows.filter(r => r.genre !== 'toprated');
-
+    
+    /* let ultimos = []
+    ultimos = rows.filter(list => list.genre === "latestrecent") */
+    
     const preventUndefinedSelector = () => undefined;
 
     const playListSelector = selectTopRatedMovies ? selectTopRatedMovies : preventUndefinedSelector;
@@ -39,7 +41,7 @@ const Homepage = () => {
 
     const continueListeningSelector = selectContinueListeningData ? selectContinueListeningData : preventUndefinedSelector;
     const rowDataContinueListening = useSelector(continueListeningSelector);
-
+    
     return (
         <motion.div
             className="Homepage"
@@ -47,8 +49,7 @@ const Homepage = () => {
             initial="initial"
             animate="animate"
             exit="exit"
-        >
-            <Banner />            
+        >        
             { rowPlaylists.data && rowPlaylists.data.length > 0 ? 
             <Row 
                 key={0}  
@@ -67,6 +68,7 @@ const Homepage = () => {
                 isLarge={false} 
                  /> : null 
             }
+            
             {rows && rows.map(props => {
                 props.listLastViewed = [1,2,3,4];
                 return (

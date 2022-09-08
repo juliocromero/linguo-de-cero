@@ -35,8 +35,15 @@ const Row = ({
 	// }
 
 	//Custom Swiper config
+	
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
+	let breakpointsPlay = {
+		1378: { slidesPerView: 3, slidesPerGroup: 3 },
+		998: { slidesPerView: 3, slidesPerGroup: 3 },
+		625: { slidesPerView: 2, slidesPerGroup: 2 },
+		330: { slidesPerView: 1, slidesPerGroup: 1 },
+	}
     const customSwiperParams = {
         observer: true,
         observeParents: true,
@@ -44,12 +51,11 @@ const Row = ({
 			prevEl: navigationPrevRef.current,
 			nextEl: navigationNextRef.current,
 		},
-		breakpoints:{
-			1378: { slidesPerView: 6, slidesPerGroup: 6 },
+		breakpoints:{			
+			1378: { slidesPerView: 4, slidesPerGroup: 4 },
 			998: { slidesPerView: 4, slidesPerGroup: 4 },
 			625: { slidesPerView: 3, slidesPerGroup: 3 },
 			330: { slidesPerView: 2, slidesPerGroup: 2 },
-			0: { slidesPerView: 1.5, slidesPerGroup: 1.5 }
 		},
 		loopAdditionalSlides: width >= 1378 ? 5 : width >= 998 ? 3 : width >= 625 ? 2 : 2,
 		pagination: true,
@@ -88,7 +94,6 @@ const Row = ({
 			else if ([3, 6, 9, 12, 15, 18].includes(i)) return 'right'
 		}
 	}
-
 	return (
 		<div className="Row">
 			{error && <div className='Row__not-loaded'>Oops, an error occurred.</div>}
@@ -107,7 +112,7 @@ const Row = ({
 					</h3>
 				)
 			}
-			{!loading && !error && (
+			{!loading && !error &&  (
 				<div className="Row__poster--wrp">
 					<div className="Row__slider--mask left" ref={navigationPrevRef}>
 						<MdChevronLeft className="Row__slider--mask-icon left" size="3em" style={{ color:'white' }} />
@@ -117,6 +122,7 @@ const Row = ({
 					</div>
 					<Swiper
 						{...customSwiperParams}
+						breakpoints={genre === "toprated"? breakpointsPlay: customSwiperParams.breakpoints}
 						onBeforeInit={(swiper) => {
 							swiper.params.navigation.prevEl = navigationPrevRef.current;
 							swiper.params.navigation.nextEl = navigationNextRef.current;

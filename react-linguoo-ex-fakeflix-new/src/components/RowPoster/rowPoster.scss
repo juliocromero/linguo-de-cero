@@ -48,9 +48,11 @@
   }
 
   &--big {
+    padding: 0px 10px;
     img {
       width: 100%;
       min-height: auto;
+      border-radius: 10px;
     }
   }
 
