@@ -9,6 +9,10 @@ export const emailSignInStart = emailAndPassword => ({
     type: authActionTypes.EMAIL_SIGN_IN_START,
     payload: emailAndPassword
 })
+export const tokenSignInStart = token => ({
+    type: authActionTypes.SIGN_IN_WITH_TOKEN,
+    payload: token
+})
 
 export const googleSignInStart = () => ({
     type: authActionTypes.GOOGLE_SIGN_IN_START

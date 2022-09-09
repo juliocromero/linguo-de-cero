@@ -17,6 +17,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
 }
 
 export function* getSnapshotFromMongoDBUserAuth(isSignUp, userAuth, token) {
+	console.log(isSignUp, userAuth, token)
 	try {
 		const userRef = yield call(authMongoDB.createUserProfileDocument, isSignUp, userAuth, token);
 		// const userSnapshot = yield userRef.get();
@@ -45,9 +46,19 @@ export function* signInWithGoogle() {
 // 	}
 // }
 
+export function* signInWithToken({payload: { token }}) {
+	
+	try {
+		yield getSnapshotFromMongoDBUserAuth(false, {_id: '630620aca9a92b1270e99b85', email: 'julioromero138@gmail.com', name: 'julio'}, token);
+	} catch (e) {
+		yield put(signInFailure(e.message));
+	}
+}
+
 export function* signInWithEmail({payload: { email, password }}) {
 	try {
 		const { isSignUp, user, token  } = yield authMongoDB.signInWithEmailAndPassword(email, password);
+		
 		yield getSnapshotFromMongoDBUserAuth(isSignUp, user, token);
 	} catch (e) {
 		yield put(signInFailure(e.message));
@@ -122,6 +133,10 @@ export function* onEmailSignInStart(){
 	yield takeLatest(authActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
+export function* onTokenSignInStart(){
+	yield takeLatest(authActionTypes.SIGN_IN_WITH_TOKEN, signInWithToken);
+}
+
 export function* onAnonymousSignInStart(){
 	yield takeLatest(authActionTypes.ANONYMOUS_SIGN_IN_START, signInAnonymously);
 }
@@ -147,5 +162,6 @@ export function* authSagas() {
 		call(onSignOutStart),
 		call(onSignUpStart),
 		call(onSignUpSuccess),
+		call(onTokenSignInStart)
 	]);
 }

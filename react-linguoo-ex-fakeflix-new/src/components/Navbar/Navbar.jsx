@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import useScroll from "../../hooks/useScroll";
 import useOutsideClick from "../../hooks/useOutsideClick";
 
+
 import { motion } from "framer-motion";
 import { navbarFadeInVariants } from "../../motionUtils";
 import {  PROFILE_PIC_URL } from "../../requests";
@@ -16,7 +17,7 @@ import { signOutStart } from "../../redux/auth/auth.actions";
 // import { getLocalStorageCurrentUser, removeUserAuth } from '../../shared/localStorage'
 
 const Navbar = () => {
-	
+
 	const isScrolled = useScroll(70);
 	const [genresNav, setGenresNav] = useState(false);
 	const [profileNav, setProfileNav] = useState(false);
@@ -32,6 +33,11 @@ const Navbar = () => {
 	useOutsideClick(profileNavRef, () => {
 		if (profileNav) setProfileNav(false);
 	});
+
+	async function handleSubmit() {
+		dispatch(signOutStart())
+	}
+	
 
 	return (
 		<>
@@ -68,7 +74,7 @@ const Navbar = () => {
 										{currentUser && (
 											<li
 												className="Navbar__navlinks--link"
-												onClick={() => {dispatch(signOutStart())}}
+												onClick={() => {handleSubmit()}}
 												// onClick={() => {removeUserAuth(); }}
 												// onClick={() => {removeUserAuth(); dispatch(signOutStart())}}
 											>

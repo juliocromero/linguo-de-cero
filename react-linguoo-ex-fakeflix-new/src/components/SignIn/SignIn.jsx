@@ -7,7 +7,7 @@ import { authFadeInUpVariants, staggerOne } from "../../motionUtils";
 import { useForm } from "react-hook-form";
 // import { emailSignInStart, googleSignInStart, anonymousSignInStart } from "../../redux/auth/auth.actions";
 // import { emailSignInStart, anonymousSignInStart } from "../../redux/auth/auth.actions";
-import { emailSignInStart } from "../../redux/auth/auth.actions";
+import { emailSignInStart, tokenSignInStart } from "../../redux/auth/auth.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthLoadingState } from "../../redux/auth/auth.selectors";
 import {useTranslation} from 'react-i18next'
@@ -25,6 +25,11 @@ const SignIn = () => {
 		dispatch(emailSignInStart({ email, password }));
 	}
 
+	let token = localStorage.getItem("linguoo_web_lplayer_token");
+	if(token){
+		dispatch(tokenSignInStart(token));
+	}
+		
 	return (
 		<motion.form
 			variants={staggerOne}

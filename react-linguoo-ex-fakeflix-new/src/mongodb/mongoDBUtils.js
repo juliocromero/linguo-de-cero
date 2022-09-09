@@ -23,6 +23,15 @@ export const authMongoDB = {
         .catch((error)=>{
             console.log('Ocurrió un error con la autenticación.', error);
         })   
+    },
+    signInWithTokenUser: (token) => {
+        return instanceLinguoo.post('users/login', {token})
+        .then((res)=>{
+            return res.data;
+        })
+        .catch((error)=>{
+            console.log('Ocurrió un error con la autenticación.', error);
+        })   
     }
     ,
     createUserProfileDocument: async (isSignUp, userAuth, token) => {
