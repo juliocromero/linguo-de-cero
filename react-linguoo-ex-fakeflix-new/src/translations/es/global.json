@@ -1,0 +1,11 @@
+{
+  "header": {
+    "SIGN_IN": "Iniciar Sesión",
+    "HAVENT": "¿Aún no te has registrado?",
+    "REGIST": "Registrar",
+    "EMAIL": "Email",
+    "PASS": "Contraseña",
+    "NAME": "Nombre",
+    "CREAR_ACCOUT": "Crear Cuenta"
+  }
+}

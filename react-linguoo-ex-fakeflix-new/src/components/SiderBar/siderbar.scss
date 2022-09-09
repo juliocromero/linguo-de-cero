@@ -23,11 +23,12 @@
   z-index: 10;
   flex-wrap: nowrap;
     overflow: hidden;
-
+  
   &__hr {
         border: 1px solid rgb(50, 50, 50);
     
   }
+  
   a {
     display: flex;
     align-items: center;
@@ -72,6 +73,8 @@
       left: 0;
       z-index: 2;
       padding: 2em;
+      width: 80%;
+      margin-top: -10px;
 
       &--img {
         width: 80%;

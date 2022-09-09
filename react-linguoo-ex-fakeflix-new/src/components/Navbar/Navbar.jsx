@@ -2,11 +2,13 @@ import "./navbar.scss";
 import { useState, useRef } from "react";
 import useScroll from "../../hooks/useScroll";
 import useOutsideClick from "../../hooks/useOutsideClick";
+
 import { motion } from "framer-motion";
 import { navbarFadeInVariants } from "../../motionUtils";
 import {  PROFILE_PIC_URL } from "../../requests";
 import { FaCaretDown } from "react-icons/fa";
 import Searchbar from "../Searchbar/Searchbar";
+
 import { useDispatch, useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../redux/auth/auth.selectors";
@@ -14,6 +16,7 @@ import { signOutStart } from "../../redux/auth/auth.actions";
 // import { getLocalStorageCurrentUser, removeUserAuth } from '../../shared/localStorage'
 
 const Navbar = () => {
+	
 	const isScrolled = useScroll(70);
 	const [genresNav, setGenresNav] = useState(false);
 	const [profileNav, setProfileNav] = useState(false);

@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeSearchInputValue, clearSearchInputValue, fetchSearchResultsAsync } from "../../redux/search/search.actions";
-import { FiSearch } from "react-icons/fi";
-import { RiCloseFill } from "react-icons/ri";
+//import { FiSearch } from "react-icons/fi";
+//import { RiCloseFill } from "react-icons/ri";
 import useOutsideClick from "../../hooks/useOutsideClick";
 
 const Searchbar = () => {
@@ -70,7 +70,7 @@ const Searchbar = () => {
         <div className="Searchbar" ref={searchbarRef}>
             <input
                 type="text"
-                placeholder="Search articles or audiobooks"
+                placeholder="Buscar"
                 value={searchInput}
                 onChange={handleSearchInput}
                 onKeyPress={handleKeyPress}
@@ -81,13 +81,13 @@ const Searchbar = () => {
                 className="Searchbar--toggler"
                 onClick={handleSearchInputToggle}
             >
-                <FiSearch size="1.5em" />
+                {/* <FiSearch size="1.5em" /> */}
             </div>
             <div
                 className={`Searchbar--clear ${searchInputToggle && searchInput.length && "typing"}`}
                 onClick={clearSearchInputToggle}
             >
-                <RiCloseFill />
+                {/* <RiCloseFill /> */}
             </div>
         </div>
     )

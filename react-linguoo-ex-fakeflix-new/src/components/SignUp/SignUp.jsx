@@ -7,14 +7,15 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpStart } from "../../redux/auth/auth.actions";
 import { selectAuthLoadingState } from "../../redux/auth/auth.selectors";
+import {useTranslation} from 'react-i18next'
 
 const SignUp = () => {
 	const dispatch = useDispatch();
 	const isLoading = useSelector(selectAuthLoadingState);
-	const { register, handleSubmit, errors, getValues } = useForm({
+	const { register, handleSubmit, errors } = useForm({
 		mode: "onTouched"
 	})
-
+	const [t] = useTranslation("global")
 	const onSubmit = data => {
 		const { displayName, email, password } = data;
 		dispatch(signUpStart({ displayName, email, password }));
@@ -33,7 +34,7 @@ const SignUp = () => {
 				<InputField
 					type="text"
 					name="displayName"
-					placeholder="Your name"
+					placeholder={`${t('header.NAME')}`}
 					validationMessage="Please enter your name."
 					validation={register({
 						required: true,
@@ -48,7 +49,7 @@ const SignUp = () => {
 				<InputField
 					type="text"
 					name="email"
-					placeholder="E-mail"
+					placeholder={`${t('header.EMAIL')}`}
 					validationMessage="Please enter a valid email address."
 					validation={register({
 						required: true,
@@ -62,7 +63,7 @@ const SignUp = () => {
 				<InputField
 					type="password"
 					name="password"
-					placeholder="Password"
+					placeholder={`${t('header.PASS')}`}
 					validationMessage="The password should have a length between 6 and 30 characters."
 					validation={register({
 						required: true,
@@ -74,7 +75,7 @@ const SignUp = () => {
 				/>
 			</motion.div>
 			<motion.div variants={authFadeInUpVariants} className="SignUp__form--inputwrp">
-				<InputField
+				{/* <InputField
 					type="password"
 					name="check_password"
 					placeholder="Repeat your password"
@@ -89,7 +90,7 @@ const SignUp = () => {
 					})}
 					errors={errors}
 					disabled={isLoading}
-				/>
+				/> */}
 			</motion.div>
 			<motion.button
 				type="submit"
@@ -97,7 +98,7 @@ const SignUp = () => {
 				className={`SignUp__form--button button__submit ${isLoading && 'loading'}`}
 				disabled={isLoading}
 			>
-				{isLoading ? <Loader /> : 'Sign Up'}
+				{isLoading ? <Loader /> : `${t("header.CREAR_ACCOUT")}`}
 			</motion.button>
 		</motion.form>
 	)

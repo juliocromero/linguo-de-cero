@@ -1,0 +1,11 @@
+{
+  "header": {
+    "SIGN_IN": "Sign In",
+    "HAVENT": "Haven't you registered yet?",
+    "REGIST": "Register",
+    "EMAIL": "Email",
+    "PASS": "Password",
+    "NAME": "Your name",
+    "CREAR_ACCOUT": "Create account"
+  }
+}

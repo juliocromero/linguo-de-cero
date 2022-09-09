@@ -1,0 +1,23 @@
+@import "../../scss/mixin";
+@import "../../scss/variables";
+
+.Select {
+
+    &__Input_lenguaje {
+        margin-left: 90%;
+        color: black;
+        @include mq(xs) {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          padding: 2em;
+        }
+      }
+    &__Input {
+            font-size: 12px;
+            margin: 0 10px;
+            opacity: 0.7;
+    }
+}

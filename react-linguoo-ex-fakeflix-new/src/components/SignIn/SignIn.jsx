@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { emailSignInStart } from "../../redux/auth/auth.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthLoadingState } from "../../redux/auth/auth.selectors";
+import {useTranslation} from 'react-i18next'
 
 const SignIn = () => {
 	const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const SignIn = () => {
 	const { register, handleSubmit, errors } = useForm({
 		mode: "onTouched"
 	})
+	const [t] = useTranslation("global")
 
 	const onSubmit = data => {
 		const { email, password } = data;
@@ -36,7 +38,7 @@ const SignIn = () => {
 				<InputField
 					type="text"
 					name="email"
-					placeholder="E-mail"
+					placeholder={`${t('header.EMAIL')}`}
 					validationMessage="Please enter a valid email address."
 					validation={register({
 						required: true,
@@ -50,7 +52,7 @@ const SignIn = () => {
 				<InputField
 					type="password"
 					name="password"
-					placeholder="Password"
+					placeholder={`${t('header.PASS')}`}
 					validationMessage="The password should have a length between 6 and 30 characters."
 					validation={register({
 						required: true,
@@ -67,7 +69,7 @@ const SignIn = () => {
 				className={`SignIn__form--button button__submit ${isLoading && 'loading'}`}
 				disabled={isLoading}
 			>
-				{isLoading ? <Loader /> : 'Sign in'}
+				{isLoading ? <Loader /> : `${t("header.SIGN_IN")}`}
 			</motion.button>
 			{/* <motion.button
 				type="button"

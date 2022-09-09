@@ -19,6 +19,7 @@ import { motion
 import useScroll from "../../hooks/useScroll";
 import { calcTimeToShow } from '../../shared/timer/calcTime';
 import AudioVelocity from "./AudioVelocity";
+import {FaRedo , FaVolumeUp} from 'react-icons/fa'
 // import { selectCurrentPlayListDataSelector } from '../../redux/currentplaylistdata/currentplaylistdata.selectors';
 
 /*
@@ -248,7 +249,7 @@ const changeVelocity = velActual => {
               alt={`track artwork for ${originalName} by ${narratorName}`}
             /> */}
             <h2 className="title">{originalName}</h2>
-            <h3 className="artist">{narratorName}</h3>
+            {/* <h3 className="artist">{narratorName}</h3> */}
           </div>
           <div className="audio-controls"> 
             <AudioControls
@@ -301,6 +302,9 @@ const changeVelocity = velActual => {
               velActual={velActual}
             />
           </h2>
+          <h2 className="changeVelocity"><FaRedo /></h2>
+          <h2 className="changeVelocity"><FaVolumeUp /></h2>
+          
           <Backdrop
             trackIndex={trackIndex}
             activeColor={color}

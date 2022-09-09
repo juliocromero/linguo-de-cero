@@ -1,7 +1,11 @@
 import "./siderbar.scss";
 import React , {useEffect }from 'react'
+import { LOGO_URL, MOBILE_LOGO_URL } from "../../requests";
+import useViewport from "../../hooks/useViewport";
+import { Link } from "react-router-dom";
 import { motion } from 'framer-motion'
 import { NavLink , useLocation } from "react-router-dom";
+import { Switch } from 'react-switch-input';
 import {FaHome , FaHeadphonesAlt  , FaRegLaugh , FaDownload , FaRegPlayCircle} from 'react-icons/fa'
 const routes = [
     {
@@ -24,21 +28,23 @@ const routes = [
         name : 'Conocenos!',
         icon : <FaRegLaugh/>
     },
-    {
-        path: '/Category',
-        name : 'Descargar app',
-        spacen : '100%',
-        icon : <FaDownload />
-    }
 ]
 const Siderbar = () =>{
+    const { width } = useViewport();
     let location = useLocation()
    
     useEffect(()=>{
         
     }, [location])
     return <div className='siderbar__main-container'>
+              
         <motion.div animate ={{width : '250px'}} className="siderbar">
+                   
+                    
+                   
+        <Link to="/browse">
+					<img className="siderbar__logo" src={width >= 600 ? LOGO_URL : MOBILE_LOGO_URL} alt="" />
+				</Link>
             <section className="siderbar__routes">
                 {routes.map((route)=>(
                     <NavLink to={route.path} key={route.name} className={location.pathname == route.path ? "siderbar__link-after siderbar__link" : "siderbar__link"}>
@@ -49,6 +55,9 @@ const Siderbar = () =>{
                      <div className="siderbar__link_text">{route.name}</div>
                     </NavLink>
                 ))}
+                 <Switch
+                    className="siderbar__Switch"
+                    /> Night Mode
             </section>
             <section className="siderbar__routes">
                     <hr className="siderbar__hr" />
@@ -57,11 +66,11 @@ const Siderbar = () =>{
                         <div className="siderbar__icon"><FaDownload /></div>
                         </div>
                         
-                     <div className="siderbar__link_text">prueba</div>
+                     <div className="siderbar__link_text">Descargar app</div>
                     </NavLink>
                     <hr className="siderbar__hr"/>
             </section>
-
+           
         </motion.div>
     </div>
 }
