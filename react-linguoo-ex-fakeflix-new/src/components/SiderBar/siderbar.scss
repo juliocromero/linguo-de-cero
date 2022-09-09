@@ -84,9 +84,9 @@
   }
   &__link {
     font-family: "Poppins";
+    font-weight: 300;
     margin-top: 20px;
     margin-bottom: 20px;
-    font-weight: 600;
     display: flex;
     color: gray;
     padding: 5px 45px;
@@ -109,7 +109,6 @@
   &__routes {
     padding: 10vh 0;
     width: 100%;
-    font-weight: 600;
     size: 14px;
     display: flex;
     line-height: 15.46px;
