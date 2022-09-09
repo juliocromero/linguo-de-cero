@@ -51,7 +51,7 @@ const Homepage = () => {
     let data = true
     document.addEventListener('scroll', () => {
         if (document.body.scrollHeight - window.innerHeight === window.scrollY && data) {
-          console.log('estoy en el final del scroll')
+          
           data = false
           const lazy = infiniteScroll + LAZY_COUNT_COLUMN
           setInfiniteSroll(lazy)
