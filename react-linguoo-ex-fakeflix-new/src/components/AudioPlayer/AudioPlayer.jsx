@@ -39,8 +39,8 @@ export const AudioPlayer = () => {
   const preventUndefinedSelector = () => undefined;
   const selectorAudioPlaying = selectAudioPlayingSelector ? selectAudioPlayingSelector : preventUndefinedSelector;
   const audioPlaying = useSelector(selectorAudioPlaying);
-  const { playIngCurrentList, articleid, isPlaying, categoryid, trackingProgress } = audioPlaying;
-  console.log(categoryid);
+  const { playIngCurrentList, articleid, isPlaying,  trackingProgress } = audioPlaying;
+  
   const [trackIndex, setTrackIndex] = useState(playIngCurrentList.findIndex(article => article._id == articleid));
   const [trackProgress, setTrackProgress] = useState(trackingProgress);
   const [localIsPlaying, setLocalIsPlaying] = useState(isPlaying);

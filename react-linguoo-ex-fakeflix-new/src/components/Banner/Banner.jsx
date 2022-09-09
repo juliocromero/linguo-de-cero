@@ -18,7 +18,7 @@ import { selectRecentLastAudios } from '../../redux/movies/movies.selectors'
 import {setAudioPlayingCompleteData, setAudioStoped } from '../../redux/audioplaying/audioplaying.actions';
 import { removeContinueListeningArticle } from '../../redux/listcontinuelistening/listcontinuelistening.actions';
 
-const Banner = ({ type }) => {
+const Banner = () => {
 	// let selector;
 	// switch (type) {
 	// 	case "movies":
@@ -31,7 +31,6 @@ const Banner = ({ type }) => {
 	// 		// selector = selectNetflixMovies;
 	// 		break;
 	// }
-	console.log(type);
 
 	// const myData = useSelector(selector);
 	// const { loading, error, data: results } = myData;

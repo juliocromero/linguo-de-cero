@@ -126,7 +126,7 @@ const RowPoster = result => {
 			setIsVotedUp(true);
 			dispatch(addToVotedAsync(_id));
 			dispatch(updateVotesSuccess(_id));
-			console.log(status);
+			//console.log(status);
 		}
 	}
 

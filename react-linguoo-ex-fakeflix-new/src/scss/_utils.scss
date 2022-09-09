@@ -1,0 +1,25 @@
+$breakpoints-padding: (
+  4: 64px,
+  3: 32px,
+  2: 16px,
+  1: 8px,
+  0: 0
+);
+
+@each $name, $margin in $breakpoints-padding {
+  .p-#{$name} {
+    padding: $margin;
+  }
+  .pt-#{$name} {
+    padding-top: $margin;
+  }
+  .pl-#{$name} {
+    padding-left: $margin;
+  }
+  .pr-#{$name} {
+    padding-right: $margin;
+  }
+  .pb-#{$name} {
+    padding-bottom: $margin;
+  }
+}

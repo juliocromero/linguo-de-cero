@@ -15,9 +15,8 @@
     align-items: center;
     justify-content: flex-start;
     padding: 0 4vw;
-    background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     transition: all 0.2s ease-out;
-
+    background-color: $black;
     &__navitem:first-child{
         width: 100%;
     }

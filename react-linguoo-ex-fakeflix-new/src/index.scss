@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import './scss/mixin';
 @import './scss/variables';
+@import './scss/utils';
 
 * {
   margin: 0;
@@ -21,8 +22,10 @@ body {
 .container-root{
   width: calc(100% - 25vh);
   height: 100vh;
+
   &--before{
-    width: 100% !important
+    width: 100% !important;
+
   }
 }
 @media (max-width: 800px) {

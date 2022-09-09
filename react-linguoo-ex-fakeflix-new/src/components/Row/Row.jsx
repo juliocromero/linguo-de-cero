@@ -3,7 +3,7 @@ import RowPoster from "../RowPoster/RowPoster";
 import SkeletonElement from "../SkeletonElement/SkeletonElement";
 import SkeletonPoster from "../SkeletonPoster/SkeletonPoster";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useViewport from "../../hooks/useViewport";
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
@@ -27,8 +27,15 @@ const Row = ({
 	const { loading, error, data: results } = rowData;
 	const { pathname } = useLocation();
 
+	const [lazy, setLazy] = useState(8)
+	
+	function handleLazy(){
+		let count = lazy + 8
+		setLazy(count)
+	}
+
 	if(listLastViewed && listLastViewed.id <= listLastViewed.length){
-		console.log('listLastViewed',listLastViewed);		
+		//console.log('listLastViewed',listLastViewed);		
 	}
 	// else {
 	// 	isListLastViewwedComplete = true;
@@ -38,6 +45,7 @@ const Row = ({
 	
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
+	
 	let breakpointsPlay = {
 		1378: { slidesPerView: 3, slidesPerGroup: 3 },
 		998: { slidesPerView: 3, slidesPerGroup: 3 },
@@ -79,7 +87,7 @@ const Row = ({
 
 	const insertPositionClassName = (index) => {
 		const i = index + 1
-
+		console.log(index)
 		if (i === 1) return 'left'
 		else if (i === 20) return 'right'
 
@@ -94,6 +102,7 @@ const Row = ({
 			else if ([3, 6, 9, 12, 15, 18].includes(i)) return 'right'
 		}
 	}
+						
 	return (
 		<div className="Row">
 			{error && <div className='Row__not-loaded'>Oops, an error occurred.</div>}
@@ -127,24 +136,32 @@ const Row = ({
 							swiper.params.navigation.prevEl = navigationPrevRef.current;
 							swiper.params.navigation.nextEl = navigationNextRef.current;
 						}}
+						onSlideChange={() => handleLazy() }
 					>
 						{!loading &&
 							results &&
-							results.map((result, i) => (
-								<SwiperSlide
-									key={result._id}
-									className={insertPositionClassName(i)}
-									onMouseOver={rightMouseOver}
-									onMouseOut={rightMouseOut}
-								>
-									<RowPoster
-										item={result}
-										isLarge={isLarge}
-										isFavourite={result.isFavourite}
-										key={result._id}
-									/>
-								</SwiperSlide>
-							))
+							results.map((result, i) => {
+								if(i < lazy){
+									return (
+								
+										<SwiperSlide
+											key={result._id}
+											className={insertPositionClassName(i)}
+											onMouseOver={rightMouseOver}
+											onMouseOut={rightMouseOut}
+										>
+											<RowPoster
+												item={result}
+												isLarge={isLarge}
+												isFavourite={result.isFavourite}
+												key={result._id}
+											/>
+										</SwiperSlide>
+									)
+								}
+								
+							}
+							)
 						}
 					</Swiper>
 				</div>

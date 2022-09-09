@@ -55,9 +55,7 @@ const Siderbar = () =>{
                      <div className="siderbar__link_text">{route.name}</div>
                     </NavLink>
                 ))}
-                 <Switch
-                    className="siderbar__Switch"
-                    /> Night Mode
+                 
             </section>
             <section className="siderbar__routes">
                     <hr className="siderbar__hr" />
@@ -69,6 +67,12 @@ const Siderbar = () =>{
                      <div className="siderbar__link_text">Descargar app</div>
                     </NavLink>
                     <hr className="siderbar__hr"/>
+                    
+            </section>
+            <section>
+            <Switch
+                    className="siderbar__Switch"
+                    /> Night Mode
             </section>
            
         </motion.div>
