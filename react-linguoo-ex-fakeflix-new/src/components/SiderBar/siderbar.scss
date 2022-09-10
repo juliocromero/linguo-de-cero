@@ -41,9 +41,10 @@
     height: 32px;
     left: 3px;
     top: 1px;
-    background: gray;
     border-radius: 16px;
+    background: #333333;
     &-after {
+      opacity: 1;
       background-color: #0078c2;
     }
   }
@@ -54,14 +55,15 @@
   }
 
   &__icon {
-    width: 42px;
-    height: 40px;
-    margin-top: 7px;
-    margin-left: 7px;
-
-    color: rgb(227, 227, 227);
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    color: $color-icon;
     &-after {
       color: rgb(255, 255, 255);
+    }
+    svg{
+      height: 100%;
     }
   }
   &__logo {
@@ -89,7 +91,7 @@
     margin-bottom: 20px;
     display: flex;
     color: gray;
-    padding: 5px 45px;
+    
     &-after {
       color: white;
     }

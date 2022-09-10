@@ -48,7 +48,7 @@ const Siderbar = () =>{
             <section className="siderbar__routes">
                 {routes.map((route)=>(
                     <NavLink to={route.path} key={route.name} className={location.pathname == route.path ? "siderbar__link-after siderbar__link" : "siderbar__link"}>
-                        <div className={location.pathname == route.path ? "siderbar__icon-radius-after siderbar__icon-radius" : "siderbar__icon-radius"}>
+                        <div className={location.pathname == route.path ? "siderbar__icon-radius-after siderbar__icon-radius " : "siderbar__icon-radius"}>
                         <div className={location.pathname == route.path ? "siderbar__icon-after siderbar__icon" : "siderbar__icon"}>{route.icon}</div>
                         </div>
                         
@@ -60,8 +60,8 @@ const Siderbar = () =>{
             <section className="siderbar__routes">
                     <hr className="siderbar__hr" />
                     <NavLink to={'/'} className="siderbar__link">
-                        <div className="siderbar__icon-radius">
-                        <div className="siderbar__icon"><FaDownload /></div>
+                        <div className="siderbar__icon-radius ">
+                            <div className="siderbar__icon"><FaDownload color="#ffffff" /></div>
                         </div>
                         
                      <div className="siderbar__link_text">Descargar app</div>

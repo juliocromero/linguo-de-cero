@@ -36,3 +36,8 @@ body {
     width: calc(100% - 60px);
   }
 }
+
+.color-opacity {
+  background: $color-default;
+  opacity: 0.1;
+}
