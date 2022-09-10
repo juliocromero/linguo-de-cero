@@ -15,14 +15,16 @@
     align-items: center;
     justify-content: flex-start;
     padding: 0 4vw;
-    transition: all 0.2s ease-out;
-    background-color: $black;
+    transition: all 0.2s ease-out;    
+    background-color: $color-bg;
+    
     &__navitem:first-child{
         width: 100%;
     }
     &__fixed {
         background-image: none;
-        background-color: $black;
+        background-color: $color-bg;
+
     }
 
     

@@ -1,18 +1,19 @@
 @import "../../scss/variables";
 @import "../../scss/mixin";
 
-
 .siderbar {
-  padding: 20px 2vw;
+  padding: 0;
+  width:  15em;
+  height: 100%;
+  position: inherit;
+  height: 100vh;
   z-index: 11;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
-
-  position: fixed;
+  background-color: $color-bg;
   background-image: none;
-  background-color: #141414;
   color: #0078c2;
   align-items: center;
   height: 100vh;
@@ -22,13 +23,16 @@
   overflow-y: auto;
   z-index: 10;
   flex-wrap: nowrap;
-    overflow: hidden;
-  
-  &__hr {
-        border: 1px solid rgb(50, 50, 50);
-    
+  overflow: hidden;
+
+  &__space {
+    position: fixed;
+    width: auto;
   }
-  
+  &__hr {
+    border: 1px solid rgb(50, 50, 50);
+  }
+
   a {
     display: flex;
     align-items: center;
@@ -62,7 +66,7 @@
     &-after {
       color: rgb(255, 255, 255);
     }
-    svg{
+    svg {
       height: 100%;
     }
   }
@@ -75,8 +79,10 @@
       left: 0;
       z-index: 2;
       padding: 2em;
-      width: 80%;
+      width: 100%;
       margin-top: -10px;
+      padding: 2em 0;
+      padding-right: 2em;
 
       &--img {
         width: 80%;
@@ -91,7 +97,7 @@
     margin-bottom: 20px;
     display: flex;
     color: gray;
-    
+
     &-after {
       color: white;
     }
@@ -116,13 +122,14 @@
     line-height: 15.46px;
     letter-spacing: 0.3px;
     flex-direction: column;
+    
   }
   &__link_text {
     padding-left: 20px;
   }
 }
 
-.siderbar__main-container{
+.siderbar__main-container {
   width: 25vh;
 }
 
@@ -132,5 +139,15 @@
   }
   .siderbar {
     width: 60px !important;
+    &__link_text {
+      display: none;
+    }
+    &__routes{
+      align-items: center;
+    }
+    &__logo {
+      padding: 0 15px;
+      padding-top: 1.5em;
+    }
   }
 }

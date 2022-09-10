@@ -39,11 +39,12 @@ const Siderbar = () =>{
     return <div className='siderbar__main-container'>
               
         <motion.div animate ={{width : '250px'}} className="siderbar">
+            <div className="siderbar__space">
                    
                     
                    
         <Link to="/browse">
-					<img className="siderbar__logo" src={width >= 600 ? LOGO_URL : MOBILE_LOGO_URL} alt="" />
+					<img className="siderbar__logo" src={width >= 800 ? LOGO_URL : MOBILE_LOGO_URL} alt="" />
 				</Link>
             <section className="siderbar__routes">
                 {routes.map((route)=>(
@@ -74,7 +75,7 @@ const Siderbar = () =>{
                     className="siderbar__Switch"
                     /> Night Mode
             </section>
-           
+            </div>
         </motion.div>
     </div>
 }

@@ -26,7 +26,7 @@
     display: inline-block;
     height: 100%;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 12px;
   }
 
   &__fallback {
@@ -48,11 +48,12 @@
   }
 
   &--big {
-    padding: 0px 10px;
+    
+    border-radius: 12px;
     img {
       width: 100%;
       min-height: auto;
-      border-radius: 10px;
+      border-radius: 12px;
     }
   }
 
@@ -276,6 +277,7 @@
 }
 
 .swiper-slide {
+  padding: 0px 10px;
   .Row__poster {
     &::after {
       content: "";

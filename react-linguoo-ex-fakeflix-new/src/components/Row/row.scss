@@ -11,18 +11,19 @@
   }
 
   &__title {
-    margin-bottom: 1rem;
-    padding: 0 4%;
-    font-size: 16px;
+    font-size: 1.8vw;
+    margin-bottom: 2rem;
+    padding: 0 5%;
+    font-size: 30px;
     line-height: 1.25vw;
     text-align: left;
     display: inline-block;
 
     @include mq("md") {
-      font-size: 18px;
+      font-size: 1.8vw;
     }
     @include mq(1330px) {
-      font-size: 1.2vw;
+      font-size: 2vw;
     }
 
     a {
@@ -85,6 +86,7 @@
       &.is-left {
         &:hover {
           .swiper-slide {
+            
             &:hover {
               ~ .swiper-slide {
                 transform: translateX(28%);

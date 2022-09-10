@@ -14,8 +14,8 @@
 
 body {
   font-family: $main-font;
-  font-family: 'Poppins', sans-serif;
-  background-color: $black;
+  font-family: 'Poppins', sans-serif;  
+  background-color: $color-bg;
   color: $white;
 }
 
@@ -23,8 +23,9 @@ body {
   display: flex;
 }
 .container-root{
-  width: calc(100% - 25vh);
+  width: calc(100% - 15em);
   height: 100vh;
+  background-color: $color-bg;
 
   &--before{
     width: 100% !important;

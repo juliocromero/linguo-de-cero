@@ -278,13 +278,13 @@ const RowPoster = result => {
 					{isLarge ? (
 						poster_path ? (
 							isLinguoo ?
-							<img src={`${poster_path}`} alt={fallbackTitle} /> 
-							: <img src={`${BASE_IMG_URL}/${poster_path}`} alt={fallbackTitle} />
+							<img loading="lazy"  src={`${poster_path}`} alt={fallbackTitle} /> 
+							: <img loading="lazy" src={`${BASE_IMG_URL}/${poster_path}`} alt={fallbackTitle} />
 							) : ""
 					) : backdrop_path ? (
 						isLinguoo ?
-						<img src={`${backdrop_path}`} alt={fallbackTitle} /> 
-						: <img src={`${BASE_IMG_URL}/${backdrop_path}`} alt={fallbackTitle} />
+						<img loading="lazy" src={`${backdrop_path}`} alt={fallbackTitle} /> 
+						: <img loading="lazy" src={`${BASE_IMG_URL}/${backdrop_path}`} alt={fallbackTitle} />
 					) : (
 						<>
 							<img src={FALLBACK_IMG_URL} alt={fallbackTitle} />
@@ -298,16 +298,16 @@ const RowPoster = result => {
 			: ( isLarge ? (
 				poster_path ? (
 					isLinguoo ?
-					<img src={`${poster_path}`} alt={fallbackTitle} /> 
-					: <img src={`${BASE_IMG_URL}/${poster_path}`} alt={fallbackTitle} />
+					<img loading="lazy" src={`${poster_path}`} alt={fallbackTitle} /> 
+					: <img loading="lazy" src={`${BASE_IMG_URL}/${poster_path}`} alt={fallbackTitle} />
 					) : ""
 			) : backdrop_path ? (
 				isLinguoo ?
-				<img src={`${backdrop_path}`} alt={fallbackTitle} /> 
-				: <img src={`${BASE_IMG_URL}/${backdrop_path}`} alt={fallbackTitle} />
+				<img loading="lazy" src={`${backdrop_path}`} alt={fallbackTitle} /> 
+				: <img loading="lazy" src={`${BASE_IMG_URL}/${backdrop_path}`} alt={fallbackTitle} />
 			) : (
 				<>
-					<img src={FALLBACK_IMG_URL} alt={fallbackTitle} />
+					<img loading="lazy" src={FALLBACK_IMG_URL} alt={fallbackTitle} />
 					<div className="Row__poster__fallback">
 						<span>{fallbackTitle}</span>
 					</div>
