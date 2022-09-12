@@ -3,9 +3,7 @@
 
 .Row {
   display: block;
-  padding: 1.5vh 0;
-  margin-bottom: 2.5em;
-
+  padding: 1em 0;
   @include mq("md") {
     padding: 3vh 0;
   }
@@ -232,10 +230,21 @@
         right: 0;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
+        .Row__poster--big{
+          .Row__poster--card{
+            display: none;
+          }
+        }
       }
 
       &.left,
       &.right {
+        .Row__poster--big{
+          .Row__poster--card{
+            display: none;
+          }
+        }
+         
         &:hover {
           .Row__slider--mask-icon {
             opacity: 1;
@@ -265,4 +274,8 @@
       }
     }
   }
+}
+
+.swiper-card{
+  width: 30%;
 }

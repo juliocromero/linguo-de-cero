@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import './scss/mixin';
 @import './scss/variables';
 @import './scss/utils';
@@ -23,7 +22,7 @@ body {
   display: flex;
 }
 .container-root{
-  width: calc(100% - 15em);
+  width: calc(100% - 15.4em);
   height: 100vh;
   background-color: $color-bg;
 
@@ -41,4 +40,14 @@ body {
 .color-opacity {
   background: $color-default;
   opacity: 0.1;
+}
+
+.text-max{
+
+  font-size: 15px;
+  margin-bottom: 0.3em;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

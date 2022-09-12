@@ -7,6 +7,24 @@
   margin-right: 0.5rem;
   cursor: pointer;
 
+  &--time {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    padding: 0.8rem;
+    &_min{
+      padding: 0.1rem 0.5rem;
+      background: rgba(0, 0, 0, 0.451);
+      border-radius: 7px;
+      font-size: small;
+    }
+  }
+  &--avatar {
+    left: calc(90% - 55px);
+    top: 40%;
+  }
+
   &:last-of-type {
     img {
       margin-right: 3rem;
@@ -16,6 +34,7 @@
   &--wrp {
     display: flex;
     position: relative;
+    padding-right: 4em;
 
     &::-webkit-scrollbar {
       display: none;
@@ -46,14 +65,28 @@
     z-index: -1;
     padding: 0 1em;
   }
+  &--card {
+    width: auto;
+    height: auto;
+    max-height: 366px;
 
+    &--img {
+      background-size: cover;
+    }
+  }
   &--big {
-    
+    width: 100%;
     border-radius: 12px;
     img {
       width: 100%;
       min-height: auto;
-      border-radius: 12px;
+      border-radius: 12px 12px 0 0;
+      height: 100%;
+    }
+    &__play-list {
+      img {
+        border-radius: 12px;
+      }
     }
   }
 
@@ -65,36 +98,63 @@
   // }
 
   &-info {
-    position: absolute;
+    background: $color-card;
+    justify-content: space-between;
+    position: relative;
+    height: 10rem;
+    max-height: 160px;
     left: 0;
-    bottom: 0;
-    transform: translateY(20%);
+    top: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-end;
     width: 100%;
     // width: calc(100% - 6px);
-    height: 100%;
     padding: 0.6em;
-    opacity: 0.8;
     // background-color: alpha($color: #0000008e);
     z-index: 2;
-    border-radius: 5px;
+    border-radius: 0 0px 12px 12px;
     pointer-events: none;
     transition: all 0.4s ease 0.15s;
 
+    &-play-list {
+      height: auto;
+      position: absolute;
+      top: 1.5em;
+      right: 1em;
+      background: none;
+      padding: 1rem !important;
+      .Row__poster-info--title {
+        white-space: pre-wrap;
+        h3 {
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+      }
+    }
     @include mq("md") {
       pointer-events: all;
     }
-
+    &--iconswrp-breeder {
+      display: none;
+    }
     &--iconswrp {
       display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      background-color: $black;
+      align-items: stretch;
+      justify-content: space-between;
       border-radius: 1em;
-      padding: 0.3em;
+
+      flex-wrap: nowrap;
+      width: 100%;
+      bottom: 80%;
+      left: 0;
+
+      &-description {
+        p {
+          font-weight: 200;
+          font-size: 0.8rem;
+        }
+      }
     }
 
     &--icon {
@@ -194,18 +254,29 @@
       // 	}
       // }
     }
+    &--name {
+      font-size: 1rem;
+      font-weight: 400;
+      color: $color-text-secondary;
+      @include mq(xs) {
+        font-size: 0.8rem;
+      }
+    }
 
     &--title {
+      width: 100%;
+      white-space: pre-wrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
       h3 {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         text-transform: none;
-        background-color: $black;
         border-radius: 1em;
-        padding: 0.3em;
 
         @include mq("lg") {
-          font-size: 15px;
+          font-size: 12px;
         }
 
         @include mq(1378px, 1680px) {
@@ -213,7 +284,7 @@
         }
 
         @include mq(1680px) {
-          font-size: 15px;
+          font-size: 12px;
         }
       }
 
@@ -277,7 +348,9 @@
 }
 
 .swiper-slide {
-  padding: 0px 10px;
+  padding: 0;
+  margin: 12px;
+  width: 30%;
   .Row__poster {
     &::after {
       content: "";
@@ -306,14 +379,15 @@
     &:hover {
       .Row__poster {
         &::after {
-          opacity: 0.6;
         }
 
         &-info {
-          opacity: 0.6;
           transform: translateY(0);
         }
       }
     }
   }
+}
+.Row__poster-info--iconswrp-breeder {
+  display: none;
 }

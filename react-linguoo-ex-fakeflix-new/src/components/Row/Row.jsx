@@ -26,7 +26,7 @@ const Row = ({
 	const rowData = useSelector(selector);
 	const { loading, error, data: results } = rowData;
 	const { pathname } = useLocation();
-
+	console.log(results, 'results')
 	const [lazy, setLazy] = useState(8)
 	
 	function handleLazy(){
@@ -47,9 +47,13 @@ const Row = ({
 	const navigationNextRef = useRef(null);
 	
 	let breakpointsPlay = {
-		1378: { slidesPerView: 3, slidesPerGroup: 3 },
-		998: { slidesPerView: 3, slidesPerGroup: 3 },
-		625: { slidesPerView: 2, slidesPerGroup: 2 },
+
+		1900: { slidesPerView: 4, slidesPerGroup: 4 },
+		1700: { slidesPerView: 3.5, slidesPerGroup: 3.5 },
+		1400: { slidesPerView: 3, slidesPerGroup: 3 },
+		1280: { slidesPerView: 2.5, slidesPerGroup: 2.5 },
+		1000: { slidesPerView: 2, slidesPerGroup: 2 },
+		625: { slidesPerView: 1.5, slidesPerGroup: 1.5 },
 		330: { slidesPerView: 1, slidesPerGroup: 1 },
 	}
     const customSwiperParams = {
@@ -60,10 +64,15 @@ const Row = ({
 			nextEl: navigationNextRef.current,
 		},
 		breakpoints:{			
-			1378: { slidesPerView: 4, slidesPerGroup: 4 },
-			998: { slidesPerView: 4, slidesPerGroup: 4 },
-			625: { slidesPerView: 3, slidesPerGroup: 3 },
-			330: { slidesPerView: 2, slidesPerGroup: 2 },
+			
+		1900: { slidesPerView: 5, slidesPerGroup: 5 },
+		1700: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
+		1400: { slidesPerView: 4, slidesPerGroup: 4 },
+		1280: { slidesPerView: 3.5, slidesPerGroup: 3.5 },
+		1000: { slidesPerView: 3, slidesPerGroup: 3 },
+		625: { slidesPerView: 2, slidesPerGroup: 2 },
+		430: { slidesPerView: 1.5, slidesPerGroup: 1.5 },
+		300: { slidesPerView: 1, slidesPerGroup: 1 },
 		},
 		loopAdditionalSlides: width >= 1378 ? 5 : width >= 998 ? 3 : width >= 625 ? 2 : 2,
 		pagination: true,
@@ -87,7 +96,6 @@ const Row = ({
 
 	const insertPositionClassName = (index) => {
 		const i = index + 1
-		console.log(index)
 		if (i === 1) return 'left'
 		else if (i === 20) return 'right'
 

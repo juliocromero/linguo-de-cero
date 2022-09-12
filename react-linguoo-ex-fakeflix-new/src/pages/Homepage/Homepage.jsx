@@ -35,7 +35,7 @@ const Homepage = () => {
     // const rows = useRetrieveData('movies');
 
     // taking out playlist from this list to avoid repeating
-    const rows = primaryrows && primaryrows.length > 0 && primaryrows.filter(r => r.genre !== 'toprated').slice(0, infiniteScroll)
+    const rows = primaryrows && primaryrows.length > 0 && primaryrows.filter(r => r.genre !== 'toprated')
     
     /* let ultimos = []
     ultimos = rows.filter(list => list.genre === "latestrecent") */
