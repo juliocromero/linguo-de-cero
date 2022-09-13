@@ -6,17 +6,18 @@ import { Link } from "react-router-dom";
 import { motion } from 'framer-motion'
 import { NavLink , useLocation } from "react-router-dom";
 import { Switch } from 'react-switch-input';
-import {FaHome , FaHeadphonesAlt  , FaRegLaugh , FaDownload , FaRegPlayCircle} from 'react-icons/fa'
+import {BsHouse} from 'react-icons/bs'
+import {  FaRegLaugh , FaDownload , FaRegPlayCircle , FaHeart} from 'react-icons/fa'
 const routes = [
     {
         path: '/browse',
         name : 'Descubre',
-        icon: <FaHome /> 
+        icon: <BsHouse /> 
     },
     {
         path: '/mylist',
-        name : 'Mi Biblioteca',
-        icon : <FaHeadphonesAlt />
+        name : 'Favoritos',
+        icon : <FaHeart />
     },
     {
         path: '/Category',
@@ -25,7 +26,7 @@ const routes = [
     },
     {
         path: '/Category',
-        name : 'Conocenos!',
+        name : 'Conocenos',
         icon : <FaRegLaugh/>
     },
 ]

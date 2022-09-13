@@ -116,9 +116,7 @@ input[type="range"] {
   height: 3em;
 }
 
-.audio-controls path {
-  fill: var(--white);
-}
+
 
 .color-backdrop {
   background: linear-gradient(45deg, var(--active-color) 20%, transparent 100%)

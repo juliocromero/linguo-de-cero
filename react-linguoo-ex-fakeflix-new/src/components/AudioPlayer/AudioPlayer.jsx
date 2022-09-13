@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import AudioControls from "./AudioControls";
 import Backdrop from "./Backdrop";
 import "./styles.css";
-
+import { ReactComponent as Next } from "./assets/group.svg";
+import { ReactComponent as Volumen } from "./assets/volume.svg";
 // import {setAudioPlayingCompleteData, setAudioPaused, setAudioTracking} from '../../redux/audioplaying/audioplaying.actions'
 import {setAudioPlayingCompleteData, setAudioTracking} from '../../redux/audioplaying/audioplaying.actions'
 import { useSelector } from 'react-redux';
@@ -19,7 +20,6 @@ import { motion
 import useScroll from "../../hooks/useScroll";
 import { calcTimeToShow } from '../../shared/timer/calcTime';
 import AudioVelocity from "./AudioVelocity";
-import {FaRedo , FaVolumeUp} from 'react-icons/fa'
 // import { selectCurrentPlayListDataSelector } from '../../redux/currentplaylistdata/currentplaylistdata.selectors';
 
 /*
@@ -59,7 +59,7 @@ export const AudioPlayer = () => {
   const [ narratorName, setNarratorName ] = useState('');
 
 
-  const color = "#00000";
+  const color = "#141414";
   const audioRef = useRef(new Audio(audio));
   const intervalRef = useRef();
   const isReady = useRef(false);
@@ -296,14 +296,16 @@ const changeVelocity = velActual => {
             }            
           </h2>  
           <h2 className="changeVelocity">
+            <Next/>
+          </h2>
+          <h2 className="changeVelocity">
             <AudioVelocity 
               // audioData = {audioPlaying}
               onChangeVelocityClick={changeVelocity}
               velActual={velActual}
             />
           </h2>
-          <h2 className="changeVelocity"><FaRedo /></h2>
-          <h2 className="changeVelocity"><FaVolumeUp /></h2>
+          <h2 className="changeVelocity"><Volumen type="button" /></h2>
           
           <Backdrop
             trackIndex={trackIndex}

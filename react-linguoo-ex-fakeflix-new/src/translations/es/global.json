@@ -6,6 +6,7 @@
     "EMAIL": "Email",
     "PASS": "Contraseña",
     "NAME": "Nombre",
-    "CREAR_ACCOUT": "Crear Cuenta"
+    "CREAR_ACCOUT": "Crear Cuenta",
+    "LOGIN" : "¿Iniciar Sesión?"
   }
 }

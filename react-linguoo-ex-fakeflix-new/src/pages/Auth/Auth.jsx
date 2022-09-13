@@ -42,7 +42,7 @@ const Auth = () => {
 				
 				<motion.div variants={staggerOne} initial="initial" animate="animate" exit="exit">
 					<motion.h2 variants={authFadeInUpVariants} className="Auth__content--title">
-						{t('header.SIGN_IN')}
+						{isSignedUp ? t('header.SIGN_IN') : t("header.CREAR_ACCOUT")}
 					</motion.h2>
 					{/* <motion.small variants={authFadeInUpVariants} className="Auth__content--disclaimer">
 						{`Pay attention: this is not the original Netflix ${isSignedUp ? "sign in" : "sign up"}. Don't insert your real credentials here!`}
@@ -51,9 +51,9 @@ const Auth = () => {
 					{authError && <motion.p variants={authFadeInUpVariants} className='Auth__content--errors'>{authError}</motion.p>}
 					<motion.hr variants={authFadeInUpVariants} className="Auth__content--divider" />
 					<motion.small variants={authFadeInUpVariants} className="Auth__content--toggleView">
-					{t('header.HAVENT')}
+					{isSignedUp ? t('header.HAVENT') : ''}
 						<span className="toggler" onClick={() => setIsSignedUp(!isSignedUp)}>
-						{t('header.REGIST')}
+						{ isSignedUp ? t('header.REGIST') : t('header.LOGIN') }
 						</span>
 					</motion.small>	
 			     	
