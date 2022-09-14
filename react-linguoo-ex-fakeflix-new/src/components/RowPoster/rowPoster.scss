@@ -73,6 +73,12 @@
     &--img {
       background-size: cover;
     }
+    &:hover{
+      .icon--play__play{
+        display: flex;
+      }
+      
+    }
   }
   &--big {
     position: relative;
@@ -139,7 +145,7 @@
       pointer-events: all;
     }
     &--iconswrp-breeder {
-      display: none;
+      
     }
     &--iconswrp {
       display: flex;
@@ -193,8 +199,6 @@
       }
 
       &:hover {
-        background: $white;
-        color: $black;
       }
 
       //   &:first-child {
@@ -244,6 +248,7 @@
       &:hover {
         background: rgba($white, 0.7);
         border-color: rgba($white, 0.7);
+        
       }
 
       // &:first-child {
@@ -392,5 +397,43 @@
   }
 }
 .Row__poster-info--iconswrp-breeder {
-  display: none;
+}
+.icon--play{
+  &__play{
+    border: none;
+    border-radius: 0;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: calc(100% - 20px);
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    border-radius: 8px 8px 0 0 ;
+    &--icon{
+      width: 20px;
+      height: 20px;
+    }
+    &:hover{
+      background-color: rgba(0, 0, 0, 0.319);
+    }
+  }
+  &__favourite{
+    position: absolute;   
+    top:0; 
+    z-index:101;
+    margin: 10px;
+
+  }
+  &__like{
+    display: none;
+  }
+}
+.Row__icon{
+  position: absolute;
+  z-index: 100;
 }

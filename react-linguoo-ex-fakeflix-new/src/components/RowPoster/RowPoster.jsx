@@ -114,7 +114,7 @@ const RowPoster = (result) => {
   const [isVotedUp, setIsVotedUp] = useState(status && status == "upVote");
   const [showPlayIcon, setShowPlayIcon] = useState(true);
   const [durationToShow, setDurationToShow] = useState("");
-  console.log(durationToShow, upVotes, isPlaylist ,'asdasdasdasdasd');
+  console.log(durationToShow, upVotes, isPlaylist, "asdasdasdasdasd");
   //#endregion
 
   //#region PlayingBehaviorVariableDefinitions
@@ -430,9 +430,7 @@ const RowPoster = (result) => {
         )}
         {!isPlaylist || durationToShow ? (
           <div className="Row__poster--time">
-            <div className="Row__poster--time_min">
-              { `${durationToShow} m`}
-            </div>
+            <div className="Row__poster--time_min">{`${durationToShow} m`}</div>
           </div>
         ) : null}
         {!isPlaylist && narrator.image ? (
@@ -445,6 +443,98 @@ const RowPoster = (result) => {
             />
           </div>
         ) : null}
+        <div>
+          {!isPlaylist ? (
+            <div>
+              {isLinguoo ? (
+                isPlaylist ? null : showPlayIcon ? (
+                  <button
+                    className={
+                      isPlayingPaused
+                        ? "Row__poster-info--icon-reverse icon--play"
+                        : "Row__poster-info--icon icon--play__play"
+                    }
+                    onClick={handlePlayActionLinguoo}
+                  >
+                    <FaPlay className="icon--play" />
+                  </button>
+                ) : (
+                  <button
+                    className="Row__poster-info--icon icon--play__play"
+                    onClick={handlePauseActionLinguoo}
+                  >
+                    <FaPause className="icon--play" />
+                  </button>
+                )
+              ) : (
+                <Link
+                  className="Row__poster-info--icon icon--play__play"
+                  onClick={handlePlayAction}
+                  to={"/play"}
+                >
+                  <FaPlay className="icon--play" />
+                </Link>
+              )}
+            </div>
+          ) : null}
+        </div>
+        {!isPlaylist ? (
+        <div>
+          <div>
+            {!isPlaylist && isLinguoo ? (
+              isPlaylist ? null : isPlayingPaused ? (
+                <button
+                  className="Row__poster-info--icon icon--play__play"
+                  onClick={handleStopActionLinguoo}
+                >
+                  <FaStop />
+                </button>
+              ) : null
+            ) : null}
+          </div>
+        </div>):null}
+        {!isPlaylist ? (
+        <div>
+          <div>
+          {!isPlaylist &&
+            (isLocalFavourite ? (
+              <button
+                className="Row__poster-info--icon icon--favourite icon--play__favourite"
+                onClick={handleRemove}
+              >
+                <FaMinus />
+              </button>
+            ) : (
+              <button
+                className="Row__poster-info--icon icon--favourite icon--play__favourite"
+                onClick={handleAdd}
+              >
+                <FaPlus />
+              </button>
+            ))}
+        </div>
+        </div>):null}
+        
+        {!isPlaylist ? (
+        <div>
+          <div>
+        {isLinguoo ? (
+              isPlaylist ? null : (
+                <button
+                  className={
+                    isVotedUp
+                      ? "Row__poster-info--icon-reverse icon--play icon--play__like"
+                      : "Row__poster-info--icon icon--play icon--play__like"
+                  }
+                  onClick={handleVoteAction}
+                >
+                  <FaHeart />
+                </button>
+              )
+            ) : null}
+        </div>
+        </div>):null}
+        
         <div
           className={
             isPlaylist
@@ -453,75 +543,7 @@ const RowPoster = (result) => {
           }
         >
           <div className="Row__poster-info--iconswrp Row__poster-info--iconswrp-breeder">
-            {isLinguoo ? (
-              isPlaylist ? null : showPlayIcon ? (
-                <button
-                  className={
-                    isPlayingPaused
-                      ? "Row__poster-info--icon-reverse icon--play"
-                      : "Row__poster-info--icon icon--play"
-                  }
-                  onClick={handlePlayActionLinguoo}
-                >
-                  <FaPlay />
-                </button>
-              ) : (
-                <button
-                  className="Row__poster-info--icon icon--play"
-                  onClick={handlePauseActionLinguoo}
-                >
-                  <FaPause />
-                </button>
-              )
-            ) : (
-              <Link
-                className="Row__poster-info--icon icon--play"
-                onClick={handlePlayAction}
-                to={"/play"}
-              >
-                <FaPlay />
-              </Link>
-            )}
-            {isLinguoo ? (
-              isPlaylist ? null : isPlayingPaused ? (
-                <button
-                  className="Row__poster-info--icon icon--play"
-                  onClick={handleStopActionLinguoo}
-                >
-                  <FaStop />
-                </button>
-              ) : null
-            ) : null}
-            {!isPlaylist &&
-              (isLocalFavourite ? (
-                <button
-                  className="Row__poster-info--icon icon--favourite"
-                  onClick={handleRemove}
-                >
-                  <FaMinus />
-                </button>
-              ) : (
-                <button
-                  className="Row__poster-info--icon icon--favourite"
-                  onClick={handleAdd}
-                >
-                  <FaPlus />
-                </button>
-              ))}
-            {isLinguoo ? (
-              isPlaylist ? null : (
-                <button
-                  className={
-                    isVotedUp
-                      ? "Row__poster-info--icon-reverse icon--play"
-                      : "Row__poster-info--icon icon--play"
-                  }
-                  onClick={handleVoteAction}
-                >
-                  <FaHeart />
-                </button>
-              )
-            ) : null}
+            
           </div>
 
           <div></div>
