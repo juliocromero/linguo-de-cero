@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import "./audioplayer.scss";
-import {FaRandom} from 'react-icons/fa'
+import { ReactComponent as Next } from "./assets/Seconds.svg";
 
 const AudioVelocity = (
   {velActual, onChangeVelocityClick}
@@ -15,7 +15,7 @@ const AudioVelocity = (
         style={{ color: 'white', fontSize:'1em'}}
         onClick = {() => onChangeVelocityClick(velActual)}
       >
-         <FaRandom/> {`${velActual}`}
+         <Next/> {`${velActual}`}
       </button>
   </div>
   )
