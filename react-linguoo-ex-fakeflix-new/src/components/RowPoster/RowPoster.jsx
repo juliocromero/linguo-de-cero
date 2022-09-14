@@ -83,7 +83,6 @@ const RowPoster = (result) => {
     isLarge,
     isFavourite,
   } = result;
-  console.log(duration, "result");
 
   const history = useHistory();
   const favs = useSelector(selectFavouritesList);
@@ -115,7 +114,7 @@ const RowPoster = (result) => {
   const [isVotedUp, setIsVotedUp] = useState(status && status == "upVote");
   const [showPlayIcon, setShowPlayIcon] = useState(true);
   const [durationToShow, setDurationToShow] = useState("");
-  console.log(durationToShow, upVotes);
+  console.log(durationToShow, upVotes, isPlaylist ,'asdasdasdasdasd');
   //#endregion
 
   //#region PlayingBehaviorVariableDefinitions
@@ -429,14 +428,14 @@ const RowPoster = (result) => {
             </div>
           </>
         )}
-        {!isPlaylist ? (
+        {!isPlaylist || durationToShow ? (
           <div className="Row__poster--time">
             <div className="Row__poster--time_min">
               { `${durationToShow} m`}
             </div>
           </div>
         ) : null}
-        {!isPlaylist ? (
+        {!isPlaylist && narrator.image ? (
           <div>
             <Avatar
               badge={true}
@@ -527,7 +526,7 @@ const RowPoster = (result) => {
 
           <div></div>
 
-          {!isPlaylist ? (
+          {!isPlaylist && narrator.name ? (
             <h2 className="Row__poster-info--name">{narrator.name}</h2>
           ) : null}
           <div className="Row__poster-info--title">

@@ -1,5 +1,7 @@
 import "./category.scss"
-import Poster from "../../components/Poster/Poster";
+//import Poster from "../../components/Poster/Poster";
+import RowPoster from "../../components/RowPoster/RowPoster";
+
 import SkeletonPage from "../../components/SkeletonPage/SkeletonPage";
 import SkeletonPoster from "../../components/SkeletonPoster/SkeletonPoster";
 import { motion } from "framer-motion";
@@ -19,6 +21,7 @@ const Category = ({ match }) => {
     const preventUndefinedSelector = () => undefined;
     const selector = categoryData ? categoryData.selector : preventUndefinedSelector;
     const selectedGenre = useSelector(selector);
+    console.log(selectedGenre,'test')
     const handleLoadMore = () => setPage(page => page + 50);
     const [endPageRef, isIntersecting] = useLazyLoad(handleLoadMore);
 
@@ -38,16 +41,20 @@ const Category = ({ match }) => {
                         initial="initial"
                         animate="animate"
                         exit="exit"
-                    >
+                    ><div className="PlayListContent__row PlayListContent__row--list">
                         {selectedGenre.data && selectedGenre.data.length > 0
                             && selectedGenre.data.map(result => (
-                                <Poster
+                                <div
+                                    className="PlayListContent__row--col"
+                                    key={result._id}>
+                                <RowPoster
                                     key={result._id}
                                     item={result}
                                     {...result}
                                 />
+                                </div>
                             ))
-                        }
+                        }</div>
                         {selectedGenre.loading && <div className='Category__subtitle'><SkeletonPoster /></div>}
                         {selectedGenre.error && <div className='Category__subtitle'>Oops, an error occurred.</div>}
                         <div className={`Category__endPage ${isIntersecting ? 'intersected' : null}`} ref={endPageRef} />

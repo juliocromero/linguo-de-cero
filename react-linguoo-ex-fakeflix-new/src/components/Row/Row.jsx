@@ -26,7 +26,7 @@ const Row = ({
 	const rowData = useSelector(selector);
 	const { loading, error, data: results } = rowData;
 	const { pathname } = useLocation();
-	console.log(results, 'results')
+	
 	const [lazy, setLazy] = useState(8)
 	
 	function handleLazy(){
@@ -48,6 +48,7 @@ const Row = ({
 	
 	let breakpointsPlay = {
 
+		2300: { slidesPerView: 5, slidesPerGroup: 5 },
 		1900: { slidesPerView: 4, slidesPerGroup: 4 },
 		1700: { slidesPerView: 3.5, slidesPerGroup: 3.5 },
 		1400: { slidesPerView: 3, slidesPerGroup: 3 },
@@ -65,6 +66,7 @@ const Row = ({
 		},
 		breakpoints:{			
 			
+		2000: { slidesPerView: 6, slidesPerGroup: 6 },
 		1900: { slidesPerView: 5, slidesPerGroup: 5 },
 		1700: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
 		1400: { slidesPerView: 4, slidesPerGroup: 4 },

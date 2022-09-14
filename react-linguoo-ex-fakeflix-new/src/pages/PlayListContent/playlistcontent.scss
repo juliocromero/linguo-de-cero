@@ -31,7 +31,40 @@
       font-size: 1vw;
     }
   }
+  &__row {
+    .Row__poster--card {
+      max-height: none;
+    }
+    img{
+      height: auto !important;
+      max-height: none;
+    }
+    margin-bottom: 5em;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-column-gap: 2em;
+    grid-row-gap: 10px;
 
+    &--col{
+      padding-bottom: 1em;
+    }
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    @media (min-width: 1000px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1400px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (min-width: 1900px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (min-width: 2500px) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
   &__wrp {
     margin: 0 auto;
     margin-top: 3vh;
