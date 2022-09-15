@@ -71,7 +71,7 @@ export const AudioPlayer = () => {
     ? `${((trackProgress/velActual) / (duration/velActual)) * 100}%`
     : "0%";
   const trackStyling = `
-    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
+    -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #F6AB3B), color-stop(${currentPercentage}, #777))
   `;
 
   //#endregion 
@@ -193,7 +193,13 @@ const changeVelocity = velActual => {
           // setDuration(playIngCurrentList[provisoryIndex].duration);
           // setDuration(playIngCurrentList[provisoryIndex].duration/velActual);
           setDuration(playIngCurrentList[provisoryIndex].duration);
-          setbackdropPath(playIngCurrentList[provisoryIndex].backdrop_path);
+          console.log(playIngCurrentList, 'foter')
+          if(playIngCurrentList[provisoryIndex].narrator.image){
+            setbackdropPath(playIngCurrentList[provisoryIndex].narrator.image);
+          }else {
+            setbackdropPath(playIngCurrentList[provisoryIndex].backdrop_path);
+          }
+          
           setNarratorName(playIngCurrentList[provisoryIndex].narrator.name);
         }
   }, [playIngCurrentList,articleid])

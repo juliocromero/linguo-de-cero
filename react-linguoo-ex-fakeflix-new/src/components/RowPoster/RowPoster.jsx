@@ -48,6 +48,8 @@ import {
 
 import Avatar from "../Avatar/Avatar";
 
+import IconCheck from '../../assests/icon/IconCheck'
+
 //#endregion
 
 const RowPoster = (result) => {
@@ -440,7 +442,8 @@ const RowPoster = (result) => {
               className="Row__poster--avatar"
               img={narrator.image}
               active={null}
-            />
+            >
+            <IconCheck/></Avatar>
           </div>
         ) : null}
         <div>
@@ -479,62 +482,44 @@ const RowPoster = (result) => {
           ) : null}
         </div>
         {!isPlaylist ? (
-        <div>
           <div>
-            {!isPlaylist && isLinguoo ? (
-              isPlaylist ? null : isPlayingPaused ? (
-                <button
-                  className="Row__poster-info--icon icon--play__play"
-                  onClick={handleStopActionLinguoo}
-                >
-                  <FaStop />
-                </button>
-              ) : null
-            ) : null}
+            <div>
+              {!isPlaylist && isLinguoo ? (
+                isPlaylist ? null : isPlayingPaused ? (
+                  <button
+                    className="Row__poster-info--icon icon--play__play"
+                    onClick={handleStopActionLinguoo}
+                  >
+                    <FaStop />
+                  </button>
+                ) : null
+              ) : null}
+            </div>
           </div>
-        </div>):null}
+        ) : null}
         {!isPlaylist ? (
-        <div>
           <div>
-          {!isPlaylist &&
-            (isLocalFavourite ? (
-              <button
-                className="Row__poster-info--icon icon--favourite icon--play__favourite"
-                onClick={handleRemove}
-              >
-                <FaMinus />
-              </button>
-            ) : (
-              <button
-                className="Row__poster-info--icon icon--favourite icon--play__favourite"
-                onClick={handleAdd}
-              >
-                <FaPlus />
-              </button>
-            ))}
-        </div>
-        </div>):null}
-        
-        {!isPlaylist ? (
-        <div>
-          <div>
-        {isLinguoo ? (
-              isPlaylist ? null : (
-                <button
-                  className={
-                    isVotedUp
-                      ? "Row__poster-info--icon-reverse icon--play icon--play__like"
-                      : "Row__poster-info--icon icon--play icon--play__like"
-                  }
-                  onClick={handleVoteAction}
-                >
-                  <FaHeart />
-                </button>
-              )
-            ) : null}
-        </div>
-        </div>):null}
-        
+            <div>
+              {!isPlaylist &&
+                (isLocalFavourite ? (
+                  <button
+                    className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                    onClick={handleRemove}
+                  >
+                    <FaMinus />
+                  </button>
+                ) : (
+                  <button
+                    className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                    onClick={handleAdd}
+                  >
+                    <FaPlus />
+                  </button>
+                ))}
+            </div>
+          </div>
+        ) : null}
+
         <div
           className={
             isPlaylist
@@ -542,9 +527,7 @@ const RowPoster = (result) => {
               : "Row__poster-info"
           }
         >
-          <div className="Row__poster-info--iconswrp Row__poster-info--iconswrp-breeder">
-            
-          </div>
+          <div className="Row__poster-info--iconswrp Row__poster-info--iconswrp-breeder"></div>
 
           <div></div>
 
@@ -581,9 +564,28 @@ const RowPoster = (result) => {
                 <p>{handleDate()}</p>
               </span>
               <span
-                style={{ textAlign: "end", fontSize: 15, marginLeft: "2em" }}
+                style={{ textAlign: "end", fontSize: 15 }}
               >
-                <FaHeart />
+                {!isPlaylist ? (
+                  <div>
+                    <div>
+                      {isLinguoo ? (
+                        isPlaylist ? null : (
+                          <button
+                            className={
+                              isVotedUp
+                                ? "Row__poster-info--icon-reverse icon--play icon--play__like"
+                                : "Row__poster-info--icon icon--play icon--play__like--active"
+                            }
+                            onClick={handleVoteAction}
+                          >
+                            <FaHeart />
+                          </button>
+                        )
+                      ) : null}
+                    </div>
+                  </div>
+                ) : null}
               </span>
             </div>
           ) : null}

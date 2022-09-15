@@ -16,5 +16,12 @@
         border-radius: 100%;
         background: $color-brand-primary;
 
+        &--children{
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 50%;
+        }
     }
 }

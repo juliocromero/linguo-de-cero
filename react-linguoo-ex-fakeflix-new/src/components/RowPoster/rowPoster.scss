@@ -154,7 +154,7 @@
       border-radius: 1em;
 
       flex-wrap: nowrap;
-      width: 100%;
+      width: 92%;
       bottom: 80%;
       left: 0;
 
@@ -397,9 +397,46 @@
   }
 }
 .Row__poster-info--iconswrp-breeder {
+}.icon--play__favourite{
+  
+  &__play{
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12px;
+
+
+    &--icon{
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  &__like{
+    background: none;
+    border: none;
+    &--active{
+      border: none;
+      background: none;
+      border: none;
+    }
+  }
+
 }
 .icon--play{
+  &__favourite{
+    position: absolute;   
+    top:0; 
+    z-index:101;
+    margin: 10px;
+
+  }
   &__play{
+    
     border: none;
     border-radius: 0;
     position: absolute;
@@ -413,27 +450,36 @@
     align-items: center;
     margin: 0;
     width: 100%;
+
+    display: none;
     border-radius: 8px 8px 0 0 ;
     &--icon{
       width: 20px;
       height: 20px;
     }
     &:hover{
+      .icon--play__play{
+        display: flex;
+      }
       background-color: rgba(0, 0, 0, 0.319);
     }
   }
-  &__favourite{
-    position: absolute;   
-    top:0; 
-    z-index:101;
-    margin: 10px;
-
-  }
+  
   &__like{
-    display: none;
+    border: none;
+    background: none;
+    border: none;
+    &--active{
+      border: none;
+      background: none;
+      border: none;
+    }
   }
 }
 .Row__icon{
   position: absolute;
   z-index: 100;
+}
+.icon-like{
+  padding: 10px;
 }
