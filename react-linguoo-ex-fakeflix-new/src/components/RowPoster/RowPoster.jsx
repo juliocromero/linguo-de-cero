@@ -430,7 +430,7 @@ const RowPoster = (result) => {
         )}
         {!isPlaylist || durationToShow ? (
           <div className="Row__poster--time">
-            <div className="Row__poster--time_min">{`${durationToShow} m`}</div>
+            <div className="Row__poster--time_min">{`${durationToShow} min`}</div>
           </div>
         ) : null}
         {!isPlaylist && narrator.image ? (
