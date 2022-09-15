@@ -1,32 +1,35 @@
 import "./siderbar.scss";
 import React, { useEffect } from "react";
-import { LOGO_URL, MOBILE_LOGO_URL } from "../../requests";
+import { LOGO_URL, MOBILE_LOGO_URL,DOWLOAND} from "../../requests";
 import useViewport from "../../hooks/useViewport";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion'
 import { NavLink , useLocation } from "react-router-dom";
 import { Switch } from 'react-switch-input';
-import {FaHome , FaHeadphonesAlt  , FaRegLaugh , FaDownload , FaRegPlayCircle} from 'react-icons/fa'
+import IconHome from "../../assests/icon/iconHome";
+import IconPlayslist from "../../assests/icon/iconPlayslist";
+import Favorite from "../../assests/icon/iconFavorite";
+import IconMeet from "../../assests/icon/iconMeet"
 const routes = [
     {
         path: '/browse',
         name : 'Descubre',
-        icon: <FaHome /> 
+        Icon: IconHome 
     },
     {
         path: '/mylist',
-        name : 'Mi Biblioteca',
-        icon : <FaHeadphonesAlt />
+        name : 'Mi Favoritos',
+        Icon : Favorite
     },
     {
         path: '/Category',
         name : 'Crear Playlist',
-        icon : <FaRegPlayCircle />
+        Icon : IconPlayslist
     },
     {
         path: '/Category',
-        name : 'Conocenos!',
-        icon : <FaRegLaugh/>
+        name : 'Conocenos',
+        Icon : IconMeet
     },
 ]
 const Siderbar = () =>{
@@ -47,13 +50,13 @@ const Siderbar = () =>{
 					<img className="siderbar__logo" src={width >= 800 ? LOGO_URL : MOBILE_LOGO_URL} alt="" />
 				</Link>
             <section className="siderbar__routes">
-                {routes.map((route)=>(
-                    <NavLink to={route.path} key={route.name} className={location.pathname == route.path ? "siderbar__link-after siderbar__link" : "siderbar__link"}>
-                        <div className={location.pathname == route.path ? "siderbar__icon-radius-after siderbar__icon-radius " : "siderbar__icon-radius"}>
-                        <div className={location.pathname == route.path ? "siderbar__icon-after siderbar__icon" : "siderbar__icon"}>{route.icon}</div>
+                {routes.map(({path , Icon , name})=>(
+                    <NavLink to={path} key={name} className={location.pathname == path ? "siderbar__link-after siderbar__link" : "siderbar__link"}>
+                        <div className={location.pathname == path ? "siderbar__icon-radius-after siderbar__icon-radius " : "siderbar__icon-radius"}>
+                        <div className={location.pathname == path ? "siderbar__icon-after siderbar__icon" : "siderbar__icon"}><Icon/></div>
                         </div>
                         
-                     <div className="siderbar__link_text">{route.name}</div>
+                     <div className="siderbar__link_text">{name}</div>
                     </NavLink>
                 ))}
                  
@@ -62,7 +65,7 @@ const Siderbar = () =>{
                     <hr className="siderbar__hr" />
                     <NavLink to={'/'} className="siderbar__link">
                         <div className="siderbar__icon-radius ">
-                            <div className="siderbar__icon"><FaDownload color="#ffffff" /></div>
+                            <div className="siderbar__icon"><img src={DOWLOAND} /></div>
                         </div>
                         
                      <div className="siderbar__link_text">Descargar app</div>

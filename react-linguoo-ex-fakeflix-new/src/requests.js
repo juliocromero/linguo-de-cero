@@ -14,6 +14,11 @@ export const FALLBACK_IMG_URL = `${GITHUB_ASSETS_BASE_URL}/Fakeflix_readme.png`;
 // export const LOGO_URL = `https://imgnews.s3.us-west-1.amazonaws.com/linguoologo1.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEkaCXNhLWVhc3QtMSJHMEUCIFhHScYrelI64aAmpQ%2F%2BaEXUG04A0dslwkdnTQdVvLsaAiEAqHETuUGXjHfjP54kWwQ7hcflImSMSXA5GKXyfkaBtKgqngIIsf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgw5Mzg5Njg3MTgzMjUiDEiG29FWmZLdsFLbOSryAXQDS%2Baxo9olAcXJGWgewVefuSUBcT%2FoWgpuK0%2BtQSFZO3aI1qYkef%2BjzL4kdTEVkytgBM58YgLk1MfVKkSTWnEDxA3Oa%2BtRn%2B9zkNDJa4Ur%2FptVD%2BjoK7bLyCaoaner4CypS4f5CY3OZSObvAxoxPwo4BR8vVPpjGVAFWanOxrvh9efsO%2Fhi2ztlkDGeqelJimY6pU%2FV7Hw1gnsnQKEJ05NWAs8i8fcdYhzQiL9nUzdMMPlgYT9tGHp7TbjDCzm%2Bb0GMnKZwjE9CC13uKyG4e%2BXPn5S4UDlvN0zHFTczUYt8eocxNjWTbk887ef4GwmYWW0MLbBmpEGOt8ByV%2BpqMeugxb0LqL%2BzZ%2FRCgX3Ug9RGmBHKMCkE%2F9GKPCuv3ZkssWuU6TzAIyfwbbg5CtVIb9iFWol%2BqqgKs769QenuMiIx2eg5ECPButIssTtyQER4zpOylQGlcUb%2FAIFJHVeaUhea8vIDsboe7BLPz8UmUReBnqvj7UwAwbH1LuZWMv0gQFaRWq3qk8nIoBgtu2o24UtuNGTrIRSzXG8T63cgzj3uuEwjmDqrrRl%2BimYLGK6EzrNHmzcMmrfoHOBmLs7jvrCwv90uTaIzeKJ1q79qjXK3St2i65Iuxog1g%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220308T003219Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIA5VHXFTP2S3Q4CXAO%2F20220308%2Fus-west-1%2Fs3%2Faws4_request&X-Amz-Signature=0140205bccb1741e94f8a7034ef42994344d71e0025276ac2f601b528182a2d9`;
 // export const LOGO_URL = process.env.PUBLIC_URL + '/linguoologo1.png';
 export const LOGO_URL = process.env.PUBLIC_URL + '/logolinguoopositivo.png';
+export const HOME = process.env.PUBLIC_URL + '/home_1.svg';
+export const PLAYLIST = process.env.PUBLIC_URL +'playlist_play_black_36dp.svg';
+export const CONOCENOS = process.env.PUBLIC_URL   + 'face_black_36dp.svg';
+export const CORAZON = process.env.PUBLIC_URL   + 'corazon.svg';
+export const DOWLOAND = process.env.PUBLIC_URL + 'download.svg'
 export const BACKGROUND_BANER_URL = process.env.PUBLIC_URL + '/linguoolog.png';
 export const BACKGROUND_LOGIN_URL = process.env.PUBLIC_URL + '/spacelinguoo.jpg';
 // export const BACKGROUND_BANER_URL = process.env.PUBLIC_URL + '/Sintítulo.png';

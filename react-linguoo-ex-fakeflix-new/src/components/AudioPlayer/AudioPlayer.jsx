@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import AudioControls from "./AudioControls";
 import Backdrop from "./Backdrop";
 import "./styles.css";
-import { ReactComponent as Next } from "./assets/group.svg";
+//import { ReactComponent as Next } from "./assets/group.svg";
 import { ReactComponent as Volumen } from "./assets/volume.svg";
 // import {setAudioPlayingCompleteData, setAudioPaused, setAudioTracking} from '../../redux/audioplaying/audioplaying.actions'
 import {setAudioPlayingCompleteData, setAudioTracking} from '../../redux/audioplaying/audioplaying.actions'
@@ -301,9 +301,9 @@ const changeVelocity = velActual => {
             // calcTimeToShow(audioRef.current.duration) }  
             }            
           </h2>  
-          <h2 className="changeVelocity">
+          {/* <h2 className="changeVelocity">
             <Next/>
-          </h2>
+          </h2> */}
           <h2 className="changeVelocity">
             <AudioVelocity 
               // audioData = {audioPlaying}

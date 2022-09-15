@@ -51,7 +51,7 @@ const Auth = () => {
 					{authError && <motion.p variants={authFadeInUpVariants} className='Auth__content--errors'>{authError}</motion.p>}
 					<motion.hr variants={authFadeInUpVariants} className="Auth__content--divider" />
 					<motion.small variants={authFadeInUpVariants} className="Auth__content--toggleView">
-					{isSignedUp ? t('header.HAVENT') : ''}
+					{isSignedUp ? t('header.HAVENT') : t('header.COUNT')}
 						<span className="toggler" onClick={() => setIsSignedUp(!isSignedUp)}>
 						{ isSignedUp ? t('header.REGIST') : t('header.LOGIN') }
 						</span>

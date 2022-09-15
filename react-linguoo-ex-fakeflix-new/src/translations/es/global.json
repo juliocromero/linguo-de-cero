@@ -7,6 +7,7 @@
     "PASS": "Contraseña",
     "NAME": "Nombre",
     "CREAR_ACCOUT": "Crear Cuenta",
-    "LOGIN": "¿Iniciar Sesión?"
+    "LOGIN": "¿Iniciar Sesión?",
+    "COUNT": "¿Ya tienes cuenta?"
   }
 }

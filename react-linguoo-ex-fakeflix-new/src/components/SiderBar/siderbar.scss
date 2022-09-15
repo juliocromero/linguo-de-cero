@@ -64,7 +64,13 @@
     text-align: center;
     color: $color-icon;
     &-after {
-      color: rgb(255, 255, 255);
+      svg {
+        height: 100%;
+        path {
+          stroke: white;
+        }
+      }
+     
     }
     svg {
       height: 100%;
