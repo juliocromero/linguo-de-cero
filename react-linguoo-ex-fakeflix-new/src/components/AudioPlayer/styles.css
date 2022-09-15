@@ -42,13 +42,18 @@ input[type="range"] {
 
 .artwork {
   border-radius: 120px;
-  margin-left: 1em;
+  margin-left: 0.8em;
   z-index: 2000;
   display: inline-block;
   /* margin: auto; */
   height: 3.2em;
   width: 3.2em;
   /* text-align: center; */
+}
+@media (min-width: 800px) {
+  .artwork {
+    margin-left: 1.8em;
+  }
 }
 
 .track-info {
@@ -180,6 +185,7 @@ input[type="range"] {
     margin-left: 1.5em;
   }
   .progress {
+    color: red;
     /* margin-left: 2em; */
     /* flex-shrink: 5; */
     display: inline-block;

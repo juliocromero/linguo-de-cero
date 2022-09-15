@@ -2,7 +2,8 @@ import React from "react";
 import './Avatar.scss'
 import Badge from "../Badge/Badge";
 
-function Avatar({img, active, className, badge, icon}) {
+function Avatar({img, active, className, badge, children}) {
+  console.log(children, 'icoooooon')
   return (
     <div className={className ?`${className} avatar` :"avatar"}>
       <div className="avatar-img">
@@ -11,7 +12,7 @@ function Avatar({img, active, className, badge, icon}) {
         </div>
         {active ? null: null}
       </div>
-      {badge ? <Badge icon={icon} /> : null}
+      {badge ? <Badge>{children}</Badge> : null}
      
     </div>
   );

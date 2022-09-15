@@ -22,6 +22,8 @@ import {
   FaHeart,
   FaStop,
 } from "react-icons/fa";
+
+import Like from '../../assests/Like'
 // import { FaChevronDown, FaMinus, FaPlay, FaPlus } from "react-icons/fa";
 import useGenreConversion from "../../hooks/useGenreConversion";
 import { showModalDetail } from "../../redux/modal/modal.actions";
@@ -471,12 +473,12 @@ const Poster = (result) => {
               <button
                 className={
                   isVotedUp
-                    ? "Poster__info--icon-reverse icon--play"
-                    : "Poster__info--icon icon--play"
+                    ? "Poster__info--icon-reverse icon--play "
+                    : "Poster__info--icon icon--play "
                 }
                 onClick={handleVoteAction}
               >
-                <FaHeart />
+                <Like />asd
               </button>
             )
           ) : null}
