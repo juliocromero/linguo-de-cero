@@ -13,6 +13,10 @@ import {setAudioPlayingCompleteData, setAudioTracking} from '../../redux/audiopl
 import { useSelector } from 'react-redux';
 import { selectAudioPlayingSelector } from '../../redux/audioplaying/audioplaying.selectors';
 
+import Avatar from "../Avatar/Avatar";
+
+import IconCheck from '../../assests/icon/IconCheck'
+
 import { motion
   // , useReducedMotion 
 } from "framer-motion";
@@ -242,19 +246,24 @@ const changeVelocity = velActual => {
       <motion.footer
         className={`Footer ${isScrolled && "Footer__fixed"}`}      
       >
+        
         <div className="audio-player">
-          <img
-            className="artwork"
-            src={backdropPath}
-            alt={`track artwork for ${originalName} by ${narratorName}`}
-          />
+        <Avatar
+              badge={true}
+              className="Row__poster--avatar artwork"
+              img={backdropPath}
+              active={null}
+              alt={`track artwork for ${originalName} by ${narratorName}`}
+            >
+            <IconCheck/></Avatar>
+          
           <div className="track-info">
             {/* <img
               className="artwork"
               src={backdropPath}
               alt={`track artwork for ${originalName} by ${narratorName}`}
             /> */}
-            <h2 className="title">{originalName}</h2>
+            <h2 className="title audio-player__title">{originalName}</h2>
             {/* <h3 className="artist">{narratorName}</h3> */}
           </div>
           <div className="audio-controls"> 

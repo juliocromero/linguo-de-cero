@@ -19,6 +19,9 @@ import {
   FaHeart,
   FaStop,
 } from "react-icons/fa";
+
+import Like from '../../assests/Like'
+
 import useGenreConversion from "../../hooks/useGenreConversion";
 import { showModalDetail } from "../../redux/modal/modal.actions";
 import { Link } from "react-router-dom";
@@ -170,8 +173,10 @@ const RowPoster = (result) => {
 
   const handleVoteAction = (event) => {
     event.stopPropagation();
+
+    setIsVotedUp(!isVotedUp);
+    
     if (!isVotedUp) {
-      setIsVotedUp(true);
       dispatch(addToVotedAsync(_id));
       dispatch(updateVotesSuccess(_id));
       //console.log(status);
@@ -355,6 +360,41 @@ const RowPoster = (result) => {
                 position: "relative",
               }}
             >
+              <div>
+          {!isPlaylist ? (
+            <div>
+              {isLinguoo ? (
+                isPlaylist ? null : showPlayIcon ? (
+                  <button
+                    className={
+                      isPlayingPaused
+                        ? "icon--play__play"
+                        : "icon--play__play"
+                    }
+                    onClick={handlePlayActionLinguoo}
+                  >
+                    <FaPlay className="icon--play" />
+                  </button>
+                ) : (
+                  <button
+                    className=" icon--play__play"
+                    onClick={handlePauseActionLinguoo}
+                  >
+                    <FaPause className="icon--play" />
+                  </button>
+                )
+              ) : (
+                <Link
+                  className=" icon--play__play"
+                  onClick={handlePlayAction}
+                  to={"/play"}
+                >
+                  <FaPlay className="icon--play" />
+                </Link>
+              )}
+            </div>
+          ) : null}
+        </div>
               {isLarge ? (
                 poster_path ? (
                   isLinguoo ? (
@@ -446,48 +486,14 @@ const RowPoster = (result) => {
             <IconCheck/></Avatar>
           </div>
         ) : null}
-        <div>
-          {!isPlaylist ? (
-            <div>
-              {isLinguoo ? (
-                isPlaylist ? null : showPlayIcon ? (
-                  <button
-                    className={
-                      isPlayingPaused
-                        ? "Row__poster-info--icon-reverse icon--play"
-                        : "Row__poster-info--icon icon--play__play"
-                    }
-                    onClick={handlePlayActionLinguoo}
-                  >
-                    <FaPlay className="icon--play" />
-                  </button>
-                ) : (
-                  <button
-                    className="Row__poster-info--icon icon--play__play"
-                    onClick={handlePauseActionLinguoo}
-                  >
-                    <FaPause className="icon--play" />
-                  </button>
-                )
-              ) : (
-                <Link
-                  className="Row__poster-info--icon icon--play__play"
-                  onClick={handlePlayAction}
-                  to={"/play"}
-                >
-                  <FaPlay className="icon--play" />
-                </Link>
-              )}
-            </div>
-          ) : null}
-        </div>
+        
         {!isPlaylist ? (
           <div>
             <div>
               {!isPlaylist && isLinguoo ? (
                 isPlaylist ? null : isPlayingPaused ? (
                   <button
-                    className="Row__poster-info--icon icon--play__play"
+                    className="Row__poster-info--icon icon--play__stop"
                     onClick={handleStopActionLinguoo}
                   >
                     <FaStop />
@@ -574,12 +580,12 @@ const RowPoster = (result) => {
                           <button
                             className={
                               isVotedUp
-                                ? "Row__poster-info--icon-reverse icon--play icon--play__like"
-                                : "Row__poster-info--icon icon--play icon--play__like--active"
+                                ? " icon--play__like"
+                                : " icon--play__like--active"
                             }
                             onClick={handleVoteAction}
-                          >
-                            <FaHeart />
+                          >                            
+                            {isVotedUp ?  <FaHeart/>:  <Like /> }
                           </button>
                         )
                       ) : null}
