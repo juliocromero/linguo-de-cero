@@ -64,19 +64,19 @@ const Row = ({
 			prevEl: navigationPrevRef.current,
 			nextEl: navigationNextRef.current,
 		},
-		breakpoints:{			
-			
-		2000: { slidesPerView: 6, slidesPerGroup: 6 },
-		1900: { slidesPerView: 5, slidesPerGroup: 5 },
-		1700: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
-		1400: { slidesPerView: 4, slidesPerGroup: 4 },
-		1280: { slidesPerView: 3.5, slidesPerGroup: 3.5 },
-		1000: { slidesPerView: 3, slidesPerGroup: 3 },
-		625: { slidesPerView: 2, slidesPerGroup: 2 },
-		430: { slidesPerView: 1.5, slidesPerGroup: 1.5 },
-		300: { slidesPerView: 1, slidesPerGroup: 1 },
-		},
-		loopAdditionalSlides: width >= 1378 ? 5 : width >= 998 ? 3 : width >= 625 ? 2 : 2,
+			breakpoints:{			
+				
+			2000: { slidesPerView: 6, slidesPerGroup: 6 },
+			1900: { slidesPerView: 5, slidesPerGroup: 5 },
+			1700: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
+			1400: { slidesPerView: 4, slidesPerGroup: 4 },
+			1280: { slidesPerView: 3.5, slidesPerGroup: 3.5 },
+			1000: { slidesPerView: 3, slidesPerGroup: 3 },
+			625: { slidesPerView: 2, slidesPerGroup: 2 },
+			430: { slidesPerView: 1.5, slidesPerGroup: 1.5 },
+			300: { slidesPerView: 1, slidesPerGroup: 1 },
+			},
+		
 		pagination: true,
 		loop: false,
 		grabCursor: false,

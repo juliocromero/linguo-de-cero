@@ -41,7 +41,7 @@
     }
     margin-bottom: 5em;
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: 2fr;
     grid-column-gap: 2em;
     grid-row-gap: 10px;
 
@@ -50,16 +50,16 @@
     }
 
     @media (max-width: 800px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    @media (min-width: 1000px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    @media (min-width: 1400px) {
+    @media (min-width: 1000px) {
       grid-template-columns: repeat(3, 1fr);
     }
-    @media (min-width: 1900px) {
+    @media (min-width: 1400px) {
       grid-template-columns: repeat(4, 1fr);
+    }
+    @media (min-width: 1900px) {
+      grid-template-columns: repeat(5, 1fr);
     }
     @media (min-width: 2500px) {
       grid-template-columns: repeat(6, 1fr);
@@ -70,4 +70,8 @@
     margin-top: 3vh;
     width: 100%;
   }
+}
+
+.Row__poster--card{
+  height: 100%;
 }

@@ -347,7 +347,7 @@ const RowPoster = (result) => {
             className="Row__poster--card--img"
             style={{
               witdth: "200px",
-              height: "auto",
+              height: "100%",
               overflow: "hidden",
               position: "relative",
             }}
@@ -355,7 +355,7 @@ const RowPoster = (result) => {
             <div
               style={{
                 witdth: "200px",
-                height: isPlaylist ? "auto" : "160px",
+                height: isPlaylist ? "100px" : "100%",
                 overflow: "hidden",
                 position: "relative",
               }}
@@ -538,13 +538,13 @@ const RowPoster = (result) => {
           <div></div>
 
           {!isPlaylist && narrator.name ? (
-            <h2 className="Row__poster-info--name">{narrator.name}</h2>
+            <h2 className="Row__poster-info--name pl-2 pr-2">{narrator.name}</h2>
           ) : null}
-          <div className="Row__poster-info--title">
+          <div className="Row__poster-info--title pl-2 pr-2">
             <h3>{fallbackTitle}</h3>
           </div>
           {!isPlaylist ? (
-            <div className="Row__poster-info--iconswrp">
+            <div className="Row__poster-info--iconswrp pl-2 pr-2">
               <span
                 className="pt-1 text-max Row__poster-info--iconswrp-description"
                 style={{ width: "150px", fontSize: 15, marginBottom: "0.3em" }}
