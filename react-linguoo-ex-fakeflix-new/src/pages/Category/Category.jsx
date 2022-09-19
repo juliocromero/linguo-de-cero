@@ -21,7 +21,7 @@ const Category = ({ match }) => {
     const preventUndefinedSelector = () => undefined;
     const selector = categoryData ? categoryData.selector : preventUndefinedSelector;
     const selectedGenre = useSelector(selector);
-    console.log(selectedGenre,'test')
+    /* console.log(selectedGenre,'test') */
     const handleLoadMore = () => setPage(page => page + 50);
     const [endPageRef, isIntersecting] = useLazyLoad(handleLoadMore);
 

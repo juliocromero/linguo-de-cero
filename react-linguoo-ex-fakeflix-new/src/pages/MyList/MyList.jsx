@@ -1,5 +1,6 @@
 import "./myList.scss"
-import Poster from "../../components/Poster/Poster";
+//import Poster from "../../components/Poster/Poster";
+import RowPoster from "../../components/RowPoster/RowPoster";
 // import Credits from "../../components/Credits/Credits";
 import { motion } from "framer-motion";
 import { staggerHalf, defaultPageFadeInVariants } from "../../motionUtils";
@@ -37,26 +38,32 @@ const MyList = () => {
                 <h2 className="MyList__title">My List</h2>
             )}
             <motion.div
-                className="MyList__wrp"
+                className="PlayListContent__wrp"
                 variants={staggerHalf}
                 initial="initial"
                 animate="animate"
                 exit="exit"
+                style={{ marginBottom: "5em" }}
             >
+                <div className="PlayListContent__row">
                 {favs && favs.length > 0
                     ? favs.map(result => (
-                        <Poster
-                            key={result._id}
+                        <div
+                            className="PlayListContent__row--col"
+                            key={result._id}>
+                            <RowPoster
                             item={result}
+                            isFavourite={result.isFavourite}
                             {...result}
-                        />
+                            />
+                        </div>
                     ))
                     : (
                         <h2 className="MyList__title">
                             Sorry, you don&apos;t have a favourite movie or tv-show yet.
                         </h2>
                     )
-                }
+                }</div>
             </motion.div>
             {/* <Credits /> */}
         </motion.div>

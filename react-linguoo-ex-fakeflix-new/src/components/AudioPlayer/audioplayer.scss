@@ -327,3 +327,29 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.range-slider {
+  width: 60px;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+  // Slider
+  &__volumen{
+    width: 200px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+
+  transform: translate(0px, -90px) rotate(-90deg);
+  
+  
+  }
+}
+.input-range {
+  transition: all 1s;
+  
+}
+.button-volumen{
+  transform: rotate(90deg);
+  
+}

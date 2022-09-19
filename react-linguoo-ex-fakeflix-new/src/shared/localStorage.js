@@ -11,8 +11,7 @@ export const getToken = () => {
 
 export const removeUserAuth = ()=> {
     localStorage.removeItem('user');
-    //console.log(localStorage.getItem(tokenName));
-    console.log(tokenName)
+   
     localStorage.removeItem(tokenName);
     localStorage.removeItem('persist:root');
 }

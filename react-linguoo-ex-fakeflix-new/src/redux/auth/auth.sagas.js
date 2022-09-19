@@ -17,7 +17,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
 }
 
 export function* getSnapshotFromMongoDBUserAuth(isSignUp, userAuth, token) {
-	console.log(isSignUp, userAuth, token)
+	
 	try {
 		const userRef = yield call(authMongoDB.createUserProfileDocument, isSignUp, userAuth, token);
 		// const userSnapshot = yield userRef.get();

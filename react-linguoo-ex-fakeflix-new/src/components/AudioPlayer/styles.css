@@ -229,7 +229,7 @@ input[type="range"] {
     -webkit-appearance: none;
     height: 5px;
     background: #f6ab3b;
-    box-shadow: 5px 0 0 5px #f6ab3b;
+    box-shadow: 1px 0 0 5px #f6ab3b;
     border-radius: 100%;
   }
 }

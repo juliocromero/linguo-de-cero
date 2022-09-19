@@ -77,7 +77,7 @@ const RowPoster = (result) => {
       duration,
       first_air_date,
       plays,
-      upVotes,
+     // upVotes,
       status,
       playListName,
       category,
@@ -119,7 +119,7 @@ const RowPoster = (result) => {
   const [isVotedUp, setIsVotedUp] = useState(status && status == "upVote");
   const [showPlayIcon, setShowPlayIcon] = useState(true);
   const [durationToShow, setDurationToShow] = useState("");
-  console.log(durationToShow, upVotes, isPlaylist, "asdasdasdasdasd");
+  /* console.log(durationToShow, upVotes, isPlaylist, "asdasdasdasdasd"); */
   //#endregion
 
   //#region PlayingBehaviorVariableDefinitions
