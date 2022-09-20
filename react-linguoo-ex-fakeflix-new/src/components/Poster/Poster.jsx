@@ -485,17 +485,17 @@ const Poster = (result) => {
         </div>
         {!isPlaylist ? (
           <div className="Poster__info--iconswrp">
-            <span style={{ fontSize: 15, marginBottom: "0.3em" }}>
+            <p style={{ fontSize: 15, marginBottom: "0.3em" }}>
               {durationToShow}
-            </span>
-            <span style={{ fontSize: 15, marginLeft: "2em" }}>
+            </p>
+            <p style={{ fontSize: 15, marginLeft: "2em" }}>
               <FaPlay />
-            </span>
-            <span style={{ fontSize: 15, marginLeft: "0.2em" }}>{plays}</span>
-            <span style={{ fontSize: 15, marginLeft: "2em" }}>
+            </p>
+            <p style={{ fontSize: 15, marginLeft: "0.2em" }}>{plays}</p>
+            <p style={{ fontSize: 15, marginLeft: "2em" }}>
               <FaHeart />
-            </span>
-            <span style={{ fontSize: 15, marginLeft: "0.2em" }}>{upVotes}</span>
+            </p>
+            <p style={{ fontSize: 15, marginLeft: "0.2em" }}>{upVotes}</p>
           </div>
         ) : null}
         <div className="Poster__info--title">

@@ -502,3 +502,23 @@
 .icon--play__play{
   z-index: 0;
 }
+@media (max-width: 1400px) {
+  .Row__poster-info--name{
+    font-size: 0.5rem;
+  }
+  
+  .Row__poster-info--title{
+
+    h3{
+      font-size: 0.5rem !important;
+    }
+  }
+  .Row__poster-info--iconswrp{
+    
+
+    p{
+      font-size: 0.7rem;
+
+    }
+  }
+}

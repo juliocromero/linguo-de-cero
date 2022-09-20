@@ -64,7 +64,7 @@ const Row = ({
 			breakpoints:{			
 				
 				1400: { slidesPerView: 6, slidesPerGroup: 6 },
-				1280: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
+				1280: { slidesPerView: 5, slidesPerGroup: 5 },
 				1000: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
 				625: { slidesPerView: 2.5, slidesPerGroup: 2.5 },
 				330: { slidesPerView: 2, slidesPerGroup: 2 },
