@@ -29,7 +29,7 @@ export const setLocalStorageCurrentUser = user => {
 } 
 
 export const setToken = token => {
-    localStorage.setItem(tokenName, token);                
+    if(token) localStorage.setItem(tokenName, token);                
 }
 
 export const setLocalStorageKey = (key, value) => {

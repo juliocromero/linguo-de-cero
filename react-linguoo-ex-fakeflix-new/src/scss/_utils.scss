@@ -27,3 +27,15 @@ $breakpoints-padding: (
 .pointer {
   cursor: pointer !important;
 }
+.flex {
+  display: flex;
+}
+.justify-center {
+  justify-content: center;
+}
+.align-center{
+  align-items: center
+}
+.flex-column {
+  flex-direction: column;
+}

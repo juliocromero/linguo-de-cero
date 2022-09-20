@@ -22,7 +22,7 @@ body {
   display: flex;
 }
 .container-root{
-  width: calc(100% - 15.4em);
+  width: calc(100% - 25vh) !important;
   height: 100vh;
   background-color: $color-bg;
 
@@ -33,7 +33,7 @@ body {
 }
 @media (max-width: 800px) {
   .container-root{
-    width: calc(100% - 60px);
+    width: calc(100% - 4vh) !important;
   }
 }
 

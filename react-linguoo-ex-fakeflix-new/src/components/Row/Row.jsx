@@ -48,14 +48,11 @@ const Row = ({
 	
 	let breakpointsPlay = {
 
-		2300: { slidesPerView: 5, slidesPerGroup: 5 },
-		1900: { slidesPerView: 4, slidesPerGroup: 4 },
-		1700: { slidesPerView: 3.5, slidesPerGroup: 3.5 },
-		1400: { slidesPerView: 3, slidesPerGroup: 3 },
-		1280: { slidesPerView: 2.5, slidesPerGroup: 2.5 },
-		1000: { slidesPerView: 2, slidesPerGroup: 2 },
-		625: { slidesPerView: 1.5, slidesPerGroup: 1.5 },
-		330: { slidesPerView: 1, slidesPerGroup: 1 },
+		1400: { slidesPerView: 5, slidesPerGroup: 5 },
+		1280: { slidesPerView: 4, slidesPerGroup: 4 },
+		1000: { slidesPerView: 3.5, slidesPerGroup: 4.5 },
+		625: { slidesPerView: 2.5, slidesPerGroup: 2.5 },
+		330: { slidesPerView: 2, slidesPerGroup: 2 },
 	}
     const customSwiperParams = {
         observer: true,
@@ -66,15 +63,11 @@ const Row = ({
 		},
 			breakpoints:{			
 				
-			2000: { slidesPerView: 6, slidesPerGroup: 6 },
-			1900: { slidesPerView: 5, slidesPerGroup: 5 },
-			1700: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
-			1400: { slidesPerView: 4, slidesPerGroup: 4 },
-			1280: { slidesPerView: 3.5, slidesPerGroup: 3.5 },
-			1000: { slidesPerView: 3, slidesPerGroup: 3 },
-			625: { slidesPerView: 2, slidesPerGroup: 2 },
-			430: { slidesPerView: 1.5, slidesPerGroup: 1.5 },
-			300: { slidesPerView: 1, slidesPerGroup: 1 },
+				1400: { slidesPerView: 6, slidesPerGroup: 6 },
+				1280: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
+				1000: { slidesPerView: 4.5, slidesPerGroup: 4.5 },
+				625: { slidesPerView: 2.5, slidesPerGroup: 2.5 },
+				330: { slidesPerView: 2, slidesPerGroup: 2 },
 			},
 		
 		pagination: true,

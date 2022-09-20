@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -26,6 +26,8 @@ import requests from './requests';
 import { setDefaultAudioListValuesAsync } from './redux/audioplaying/audioplaying.actions';
 import { fetchNarratorsAsync } from './redux/narrators/narrators.actions';
 import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
+/* import Modal from "./components/Modal/Modal"; */
+/* import CheckOut from "./pages/CheckOut/CheckOut"; */
 // import { getLocalStorageCurrentUser } from './shared/localStorage'
 
 const App = () => {
@@ -46,11 +48,20 @@ const App = () => {
     useEffect(() => {
         dispatch(checkUserSession());
     }, [dispatch])
+    useEffect(()=> {
+       let check = window.localStorage.getItem('check')
+       if(check) setCheckOut(check)
+    },[])
+    const [checkout, setCheckOut] = useState(true)
 
     return (
         <div className="App">
-            {currentUser && (<SideBar />)}
-            <div className={currentUser ? "container-root" : 'container-root--before'}>
+            
+            {/* <Modal>
+                <div>asdasd</div>
+            </Modal> */}
+            {currentUser  && (<SideBar />)}
+            <div className={currentUser ? "container-root" : checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
                 {currentUser && (
                     <>
 
@@ -62,6 +73,7 @@ const App = () => {
                 <AnimatePresence exitBeforeEnter>
 
                     <Switch location={location} key={location.pathname}>
+                        
                         <Route
                             exact
                             path="/"
@@ -144,10 +156,15 @@ const App = () => {
                             path="/mylist"
                             render={() => currentUser ? <MyList /> : <Redirect to="/login" />}
                         />
+                         {/* <Route
+                            exact
+                            path="/checkout"
+                            render={() => currentUser  ?  <CheckOut to={setCheckOut} /> : <CheckOut to={setCheckOut} />}
+                        /> */}
                         <Route
                             exact
                             path="/login"
-                            render={() => currentUser ? <Redirect to="/browse" /> : <Auth />}
+                            render={() => currentUser ?  <Redirect to="/browse" /> :  <Auth /> }
                         />
                         <Route path="*">
                             <Redirect to="/" />
