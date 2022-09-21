@@ -38,7 +38,7 @@
     "build": "react-scripts build",
     "build-prod": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync build/ s3://new-linguoo --acl public-read",
+    "deploy": "aws s3 sync build/ s3://new-react-linguoo --acl public-read",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\""
   },

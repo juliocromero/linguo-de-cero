@@ -300,7 +300,7 @@ export const AudioPlayer = () => {
           <h2 className="title audio-player__title">{originalName}</h2>
           {/* <h3 className="artist">{narratorName}</h3> */}
         </div>
-        <div className="audio-controls">
+        <div>
           <AudioControls
             audioData={audioPlaying}
             isLocalPlaying={localIsPlaying}
