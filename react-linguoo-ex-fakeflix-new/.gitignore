@@ -2,6 +2,14 @@
 
 # dependencies
 /node_modules
+/keypairs
+/sentence_for_deployment.txt/keypairs
+/sentence_for_deployment.txt/keypairs
+/sentence_for_deployment.txt/keypairs
+/sentence_for_deployment.txt/keypairs
+/sentence_for_deployment.txt/keypairs
+/sentence_for_deployment.txt/keypairs
+/sentence_for_deployment.txt
 /.pnp
 .pnp.js
 

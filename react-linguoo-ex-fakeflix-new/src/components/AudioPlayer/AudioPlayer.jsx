@@ -27,8 +27,9 @@ import {
 // import useViewport from "../../hooks/useViewport";
 import useScroll from "../../hooks/useScroll";
 import { calcTimeToShow } from "../../shared/timer/calcTime";
-import AudioVelocity from "./AudioVelocity";
+import AudioSpeed from "./AudioSpeed";
 // import { selectCurrentPlayListDataSelector } from '../../redux/currentplaylistdata/currentplaylistdata.selectors';
+import { ReactComponent as Next } from "./assets/Seconds.svg";
 
 /*
  * Read the blog post here:
@@ -59,7 +60,7 @@ export const AudioPlayer = () => {
   const [localIsPlaying, setLocalIsPlaying] = useState(isPlaying);
   const dispatch = useDispatch();
 
-  const [velActual, setVelActual] = useState(1);
+  const [currSpeed, setCurrSpeed] = useState(1);
   const [activeVol, setActiveVol] = useState(true);
 
   // const selectorCurrentPlaylistData = selectCurrentPlayListDataSelector ? selectCurrentPlayListDataSelector : preventUndefinedSelector;
@@ -76,19 +77,21 @@ export const AudioPlayer = () => {
   const intervalRef = useRef();
   const isReady = useRef(false);
 
-  const [vol, setVol] = useState((audioRef.current.volume * 100))
+  const [vol, setVol] = useState(audioRef.current.volume * 100);
   // Destructure for conciseness
   // const { duration } = audioRef.current;
 
   const currentPercentage =
-    duration / velActual
-      ? `${(trackProgress / velActual / (duration / velActual)) * 100}%`
+    duration / currSpeed
+      ? `${(trackProgress / currSpeed / (duration / currSpeed)) * 100}%`
       : "0%";
   const trackStyling = `
     -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #F6AB3B), color-stop(${currentPercentage}, #777))
   `;
   const volStyling = `
-  -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${vol*0.01}, #F6AB3B), color-stop(${vol*0.01}, #777))
+  -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${
+    vol * 0.01
+  }, #F6AB3B), color-stop(${vol * 0.01}, #777))
 `;
 
   //#endregion
@@ -182,17 +185,13 @@ export const AudioPlayer = () => {
 
   //#endregion
 
-  const changeVelocity = (velActual) => {
+  const changeSpeed = (currSpeed) => {
     // console.log('changing velocity to ', velActual)
-    if (velActual >= 2) {
-      setVelActual(1);
+    if (currSpeed >= 2) {
+      setCurrSpeed(1);
     } else {
-      setVelActual(velActual + 0.5);
+      setCurrSpeed(currSpeed + 0.5);
     }
-    // audioRef.current.playbackRate = velActual;
-    // setDuration(duration/velActual);
-    // setAudioTracking(trackProgress)
-    // setTrackProgress(trackProgress/velActual);
   };
 
   //#region Effects
@@ -204,7 +203,7 @@ export const AudioPlayer = () => {
       audioRef.current.currentTime = trackingProgress;
     }
     if (localIsPlaying) {
-      audioRef.current.playbackRate = velActual;
+      audioRef.current.playbackRate = currSpeed;
       // setDuration(duration);
       audioRef.current.play();
       startTimer();
@@ -212,7 +211,7 @@ export const AudioPlayer = () => {
       audioRef.current.pause();
       clearInterval(intervalRef.current);
     }
-  }, [localIsPlaying, isPlaying, trackingProgress, velActual]);
+  }, [localIsPlaying, isPlaying, trackingProgress, currSpeed]);
 
   useEffect(() => {
     let provisoryIndex = 0;
@@ -250,7 +249,7 @@ export const AudioPlayer = () => {
     dispatch(setAudioTracking(audioRef.current.currentTime));
 
     if (isReady.current) {
-      audioRef.current.playbackRate = velActual;
+      audioRef.current.playbackRate = currSpeed;
       audioRef.current.play();
       setLocalIsPlaying(true);
       startTimer();
@@ -260,117 +259,182 @@ export const AudioPlayer = () => {
     }
   }, [audio]);
 
-  function onVolument(e) {   
-    audioRef.current.volume = e * 0.01
-    setVol(e)
+  function onVolument(e) {
+    audioRef.current.volume = e * 0.01;
+    setVol(e);
   }
   useEffect(() => {
-    let rangeSlider = document.getElementsByClassName('range-slider__volumen')
-    rangeSlider[0].addEventListener('mouseleave', () => {
-      setActiveVol(false)
-    })
-    
+    let rangeSlider = document.getElementsByClassName("range-slider__volumen");
+    rangeSlider[0].addEventListener("mouseleave", () => {
+      setActiveVol(false);
+    });
+
     // Pause and clean up on unmount
     return () => {
       audioRef.current.pause();
       clearInterval(intervalRef.current);
     };
   }, []);
-  
+
   //#endregion
   return (
     <motion.footer className={`Footer ${isScrolled && "Footer__fixed"}`}>
-      <div className="audio-player">
-        <Avatar
-          badge={true}
-          className="Row__poster--avatar artwork"
-          img={backdropPath}
-          active={null}
-          alt={`track artwork for ${originalName} by ${narratorName}`}
+      <div
+        // className="audio-player"
+        style={{
+          position: "relative",
+          boxSizing: "border-box",
+          background: "#141414",
+          fontFamily: "Arial, Helvetica, sans-serif",
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "inline-flex",
+            justifyContent: "start",
+            alignItems: "center",
+            width: "50%",
+          }}
         >
-          <IconCheck />
-        </Avatar>
-
-        <div className="track-info">
-          {/* <img
+          <Avatar
+            badge={true}
+            // className="artwork"
+            className="Row__poster--avatar artwork"
+            img={backdropPath}
+            active={null}
+            alt={`track artwork for ${originalName} by ${narratorName}`}
+            // style={{
+            //   display: "block",
+            //   position: "sticky",
+            // }}
+          >
+            <IconCheck />
+          </Avatar>
+          <div
+            // className="track-info"
+            style={{
+              display: "inline-flex",
+              marginLeft: "1em",
+              textAlign: "left",
+              // position: "relative",
+              // paddingRight: "3em",
+              overflow: "hidden",
+              maxWidth: "80%",
+              textWrap: "nowrap",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {/* <img
               className="artwork"
               src={backdropPath}
               alt={`track artwork for ${originalName} by ${narratorName}`}
             /> */}
-          <h2 className="title audio-player__title">{originalName}</h2>
-          {/* <h3 className="artist">{narratorName}</h3> */}
-        </div>
-        <div className="audio-controls">
-          <AudioControls
-            audioData={audioPlaying}
-            isLocalPlaying={localIsPlaying}
-            onPrevClick={toPrevTrack}
-            onNextClick={toNextTrack}
-            onPlayPauseClick={setLocalIsPlaying}
-            // onPlayPauseClick={dispatch(setAudioPlayingCompleteData(audio, category, articleid, duration, trackProgress, playIngCurrentList))}
-          />
-        </div>
-        <h2 className="calcTime calcTimeLeft">
-          {trackProgress ? calcTimeToShow(trackProgress / velActual) : "0:00"}
-        </h2>
-        {/* <div className="progress-range"> */}
-        <input
-          type="range"
-          value={trackProgress}
-          step="1"
-          min="0"
-          max={duration ? duration : `${duration}`}
-          className="progress"
-          onChange={(e) => onScrub(e.target.value)}
-          onMouseUp={onScrubEnd}
-          onKeyUp={onScrubEnd}
-          style={{ background: trackStyling }}
-        />
-        <h2 className="calcTime">
-          {duration && trackProgress
-            ? calcTimeToShow(duration / velActual - trackProgress / velActual)
-            : calcTimeToShow(duration / velActual)}
-          {
-            // {
-            // duration && trackProgress  ?
-            // calcTimeToShow((duration) - (trackProgress)) :
-            // calcTimeToShow(duration)  }
-            // {
-            // audioRef && audioRef.current && audioRef.current.duration  ?
-            // calcTimeToShow((audioRef.current.duration) - (audioRef.current.currentTime)) :
-            // calcTimeToShow(audioRef.current.duration) }
-          }
-        </h2>
-        {/* <h2 className="changeVelocity">
-            <Next/>
-          </h2> */}
-        <h2 className="changeVelocity">
-          <AudioVelocity
-            // audioData = {audioPlaying}
-            onChangeVelocityClick={changeVelocity}
-            velActual={velActual}
-          />
-        </h2>
-        <div className="range-slider">
-          <div className="range-slider__volumen" >
-            <Volumen type="button" className="button-volumen pointer" onClick={() => setActiveVol(!activeVol)}/>
-            {activeVol ? (
-              <input
-                value={vol}
-                className="input-range "
-                onInput={(e) => onVolument(e.target.value)}
-                name="inputRange"
-                type="range"
-                step="1"
-                max="100"
-                style={{ background: volStyling }}
-              />
-            ) : null}
-
-            <span></span>
+            {/* <h2 className="title audio-player__title">{originalName}</h2> */}
+            <h2 className="title">{originalName}</h2>
+            {/* <h3 className="artist">{narratorName}</h3> */}
           </div>
         </div>
+        <div
+          style={{
+            display: "flex",
+            width: "55%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <AudioControls
+              audioData={audioPlaying}
+              isLocalPlaying={localIsPlaying}
+              onPrevClick={toPrevTrack}
+              onNextClick={toNextTrack}
+              onPlayPauseClick={setLocalIsPlaying}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              width: "60%",
+              justifyContent: "space-around",
+            }}
+          >
+            <h2 className="calcTime">
+              {trackProgress
+                ? calcTimeToShow(trackProgress / currSpeed)
+                : "0:00"}
+            </h2>
+            <input
+              type="range"
+              value={trackProgress}
+              step="1"
+              min="0"
+              max={duration ? duration : `${duration}`}
+              className="progress"
+              onChange={(e) => onScrub(e.target.value)}
+              onMouseUp={onScrubEnd}
+              onKeyUp={onScrubEnd}
+              style={{
+                background: trackStyling,
+                Width: "60%",
+                marginTop: "0.4em",
+              }}
+            />
+            <h2 className="calcTime">
+              {duration && trackProgress
+                ? calcTimeToShow(
+                    duration / currSpeed - trackProgress / currSpeed
+                  )
+                : calcTimeToShow(duration / currSpeed)}
+            </h2>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignContent: "center",
+              justifyContent: "space-around",
+              alignItems: "center",
+              marginRight: "2em",
+            }}
+          >
+            <Next />
 
+            <AudioSpeed
+              // audioData = {audioPlaying}
+              onChangeSpeedClick={changeSpeed}
+              currSpeed={currSpeed}
+            />
+            <div
+              className="range-slider"
+              // style={{}}
+            >
+              <div className="range-slider__volumen">
+                <Volumen
+                  type="button"
+                  className="button-volumen pointer"
+                  onClick={() => setActiveVol(!activeVol)}
+                />
+                {activeVol ? (
+                  <input
+                    value={vol}
+                    className="input-range "
+                    onInput={(e) => onVolument(e.target.value)}
+                    name="inputRange"
+                    type="range"
+                    step="1"
+                    max="100"
+                    style={{ background: volStyling }}
+                  />
+                ) : null}
+              </div>
+
+              <span></span>
+            </div>
+          </div>
+        </div>
         <Backdrop
           trackIndex={trackIndex}
           activeColor={color}

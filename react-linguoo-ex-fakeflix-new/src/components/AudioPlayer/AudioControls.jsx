@@ -1,9 +1,9 @@
 import React from "react";
-import { ReactComponent as Play } from "./assets/Newplay.svg";
-import { ReactComponent as Pause } from "./assets/pause.svg";
-import { ReactComponent as Next } from "./assets/Newnext.svg";
 //import { ReactComponent as Prev } from "./assets/prev.svg";
-import { ReactComponent as Previous } from "./assets/previous.svg";
+import IconPrevious from "./assets/icons/iconsPrevious";
+import IconsPlay from "./assets/icons/iconPlay";
+import IconsNext from "./assets/icons/iconsNext";
+import IconPause from "./assets/icons/iconsPause";
 import {setAudioPlayingCompleteData, setAudioPaused} from '../../redux/audioplaying/audioplaying.actions'
 import { useDispatch } from "react-redux";
 // import { fetchMovieDataConfig } from '../../dataConfig'
@@ -36,14 +36,14 @@ const AudioControls = ({
   }   
  
   return (
-  <div className="audio-controls">
+  <div>
     <button
       type="button"
       className="prev"
       aria-label="Previous"
       onClick={onPrevClick}
     >
-      <Previous />
+      <IconPrevious />
     </button>
     {isLocalPlaying ? (
       <button
@@ -53,7 +53,7 @@ const AudioControls = ({
         onClick={() => onPlayPauseClick(localSetAudioPaused())}
         aria-label="Pause"
       >
-        <Pause />
+        <IconPause />
       </button>
     ) : (
       <button
@@ -69,7 +69,7 @@ const AudioControls = ({
           playIngCurrentList)))}
         aria-label="Play"
       >
-        <Play />
+        <IconsPlay />
       </button>
     )}
     <button
@@ -78,7 +78,7 @@ const AudioControls = ({
       aria-label="Next"
       onClick={onNextClick}
     >
-      <Next />
+      <IconsNext />
     </button>
   </div>
   )

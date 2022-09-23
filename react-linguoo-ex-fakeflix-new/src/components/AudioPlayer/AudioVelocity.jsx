@@ -15,7 +15,7 @@ const AudioVelocity = (
         style={{ color: 'white', fontSize:'1em'}}
         onClick = {() => onChangeVelocityClick(velActual)}
       >
-         <Next/> {`${velActual}`}
+         <Next/> {`${velActual} x`}
       </button>
   </div>
   )

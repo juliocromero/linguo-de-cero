@@ -1,6 +1,6 @@
 import "./siderbar.scss";
 import React, { useEffect } from "react";
-import { LOGO_URL, MOBILE_LOGO_URL,DOWLOAND} from "../../requests";
+import { LOGO_URL, MOBILE_LOGO_URL} from "../../requests";
 import useViewport from "../../hooks/useViewport";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion'
@@ -9,7 +9,8 @@ import { Switch } from 'react-switch-input';
 import IconHome from "../../assests/icon/iconHome";
 import IconPlayslist from "../../assests/icon/iconPlayslist";
 import Favorite from "../../assests/icon/iconFavorite";
-import IconMeet from "../../assests/icon/iconMeet"
+import IconMeet from "../../assests/icon/iconMeet";
+import IconDowloand from "../../assests/icon/iconDowloand"
 const routes = [
     {
         path: '/browse',
@@ -18,7 +19,7 @@ const routes = [
     },
     {
         path: '/mylist',
-        name : 'Mi Favoritos',
+        name : 'Mis Favoritos',
         Icon : Favorite
     },
     {
@@ -28,6 +29,7 @@ const routes = [
     },
     {
         path: '/Category',
+        href : 'http://linguoo.com/community/',
         name : 'Conocenos',
         Icon : IconMeet
     },
@@ -50,8 +52,15 @@ const Siderbar = () =>{
 					<img className="siderbar__logo" src={width >= 800 ? LOGO_URL : MOBILE_LOGO_URL} alt="" />
 				</Link>
             <section className="siderbar__routes">
-                {routes.map(({path , Icon , name})=>(
-                    <NavLink to={path} key={name} className={location.pathname == path ? "siderbar__link-after siderbar__link" : "siderbar__link"}>
+                {routes.map(({path , Icon , name , href})=>(
+                    href ? <a href={href} target="_blank" rel="noreferrer" className={location.pathname == path ? "siderbar__link-after siderbar__link" : "siderbar__link"}>
+                         <div className={location.pathname == path ? "siderbar__icon-radius-after siderbar__icon-radius " : "siderbar__icon-radius"}>
+                        <div className={location.pathname == path ? "siderbar__icon-after siderbar__icon" : "siderbar__icon"}><Icon/></div>
+                        </div>
+                        
+                     <div className="siderbar__link_text">{name}</div>
+                    </a> :
+                    <NavLink to={path} href={href} key={name} className={location.pathname == path ? "siderbar__link-after siderbar__link" : "siderbar__link"}>
                         <div className={location.pathname == path ? "siderbar__icon-radius-after siderbar__icon-radius " : "siderbar__icon-radius"}>
                         <div className={location.pathname == path ? "siderbar__icon-after siderbar__icon" : "siderbar__icon"}><Icon/></div>
                         </div>
@@ -65,7 +74,7 @@ const Siderbar = () =>{
                     <hr className="siderbar__hr" />
                     <NavLink to={'/'} className="siderbar__link">
                         <div className="siderbar__icon-radius ">
-                            <div className="siderbar__icon"><img src={DOWLOAND} /></div>
+                            <div className="siderbar__icon"><IconDowloand/></div>
                         </div>
                         
                      <div className="siderbar__link_text">Descargar app</div>
