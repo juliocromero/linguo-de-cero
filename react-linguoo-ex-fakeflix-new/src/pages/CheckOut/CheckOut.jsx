@@ -33,10 +33,10 @@ export default function CheckOut({to}) {
             <div className='checkout-container__content' >
                 
                 <img className='checkout-container__img' src={bg} />
-                <div className='container'>
+                <div className=''>
                     <div className='checkout-container__title '>
                         <IconLinguo />
-                        <h1>Get <span>unlimited</span> access to more than 8,500 nonfiction bestsellers</h1>
+                        <h1 className='pt-2'>Get <span>unlimited</span> access to more than 8,500 nonfiction bestsellers</h1>
                         <p>Listen to the best ideas of the world in 15 minutes or less</p>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ export default function CheckOut({to}) {
                     (Cancel your trial any time before it ends, and you won´t be charged)
                     </p>
                 </div>
-                <p className='pt-2'>Or</p>
+                <p className='pt-2 pb-2'>Or</p>
                 
                 <button className='button-premiun' onClick={()=> handleCheck()} to="/browse">Premium Monthly
 </button>
