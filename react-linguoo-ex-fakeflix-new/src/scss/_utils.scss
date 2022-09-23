@@ -43,3 +43,23 @@ $breakpoints-padding: (
 .Row__title{
   font-size: 1.5rem;
 }
+
+$breakpoints: (sm:640px, md:992px, lg:1280px, xl:1536px);
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+
+    @each $name, $size in $breakpoints {
+      @media (min-width: $size) {
+        & {
+          max-width: $size;
+        }
+      }
+    }
+
+    &--fluid {
+      max-width: 100%;
+    }
+  }
