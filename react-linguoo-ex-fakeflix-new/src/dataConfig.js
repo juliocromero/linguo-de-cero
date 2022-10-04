@@ -17,6 +17,12 @@ import {
 	fetchUpcomingMoviesAsync,
 	fetchRecentLastAsync
 } from "./redux/movies/movies.actions";
+
+import {
+	fetchContinueListeningAsync
+}
+from "./redux/listcontinuelistening/listcontinuelistening.actions"
+
 import {
 	fetchActionAdventureSeriesAsync,
 	fetchAnimationSeriesAsync,
@@ -54,18 +60,20 @@ const {
 	fetchKidsSeries,
 	fetchSciFiFantasySeries,
 	fetchTrendingSeries,
-	fetchRecentLastAudios
+	fetchRecentLastAudios,
+	fetchContinueListeningItems
 } = requests;
 
 export const fetchMovieDataConfig = [
-	// {
-	// 	id: 0,
-	// 	thunk: fetchTopRatedMoviesAsync,
-	// 	url: fetchTopRated,
-	// 	title: "Top Rated on Fakeflix",
-	// 	genre: "toprated",
-	// 	selector: movieSelectors.selectTopRatedMovies,
-	// },
+	{
+		id: 10,
+		thunk: fetchContinueListeningAsync,
+		url: fetchContinueListeningItems,
+		title: "Continue Listening",
+		genre: "toprated",
+		selector: movieSelectors.selectTopRatedMovies,
+	},
+
 	{
 		id: 0,
 		thunk: fetchTopRatedMoviesAsync,
@@ -131,7 +139,7 @@ export const fetchMovieDataConfig = [
 		selector: movieSelectors.selectUpcomingMovies,
 	},
 	{
-		id: 3,
+		id: 9,
 		thunk: fetchAdventureMoviesAsync,
 		url: fetchAdventureMovies,
 		// title: "Adventure",

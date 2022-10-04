@@ -4,7 +4,7 @@
 @import './scss/mixin';
 @import './scss/variables';
 @import './scss/utils';
-
+@import './scss/mobile';
 * {
   margin: 0;
   padding: 0;
@@ -31,9 +31,9 @@ body {
 
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 500px) {
   .container-root{
-    width: calc(100% - 4vh) !important;
+    width: calc(100% ) !important;
   }
 }
 

@@ -17,10 +17,10 @@ import {
   FaPlay,
   FaPause,
   FaHeart,
-  FaStop,
+  // FaStop,
 } from "react-icons/fa";
 
-import Like from '../../assests/Like'
+import Like from "../../assests/Like";
 
 import useGenreConversion from "../../hooks/useGenreConversion";
 import { showModalDetail } from "../../redux/modal/modal.actions";
@@ -41,6 +41,8 @@ import { calcTimeToShow } from "../../shared/timer/calcTime";
 import {
   removeContinueListeningArticle,
   pushContinueListeningArticle,
+  upsertContinueListeningAsync,
+  removeContinueListeningAsync,
 } from "../../redux/listcontinuelistening/listcontinuelistening.actions";
 import { selectContinueListeningData } from "../../redux/listcontinuelistening/listcontinuelistening.selectors";
 // import { setDefaultAudioListValuesAsync } from '../../redux/audioplaying/audioplaying.actions';
@@ -51,7 +53,9 @@ import {
 
 import Avatar from "../Avatar/Avatar";
 
-import IconCheck from '../../assests/icon/IconCheck'
+import IconCheck from "../../assests/icon/IconCheck";
+import url from "../../requests";
+import useUnload from "../../hooks/useUnload";
 
 //#endregion
 
@@ -76,8 +80,8 @@ const RowPoster = (result) => {
       audio,
       duration,
       first_air_date,
-      plays,
-     // upVotes,
+      //plays,
+      // upVotes,
       status,
       playListName,
       category,
@@ -99,6 +103,10 @@ const RowPoster = (result) => {
     : fMDC.filter((el) => el.categoryid == category);
   const selectorCatList = data ? data.selector : preventUndefinedSelector;
   const selectedCurrentListBySelector = useSelector(selectorCatList);
+
+  const trackingAudioValue = item.trackingAudioValue
+    ? item.trackingAudioValue
+    : undefined;
 
   const selectedCurrentList = !fromPlaylist
     ? selectedCurrentListBySelector
@@ -130,10 +138,16 @@ const RowPoster = (result) => {
   const audioPlaying = useSelector(selectorAudioPlaying);
   const [isPlayingPaused, setIsPlayingPaused] = useState(false);
   const { articleid, trackingProgress, isPlaying } = audioPlaying;
+  console.log("AUDIOPLAYING: ", audioPlaying, Date.now());
   // const [localTrackingProgress, setLocalTrackingProgress] = useState(trackingProgress);
   // const [localTrackingProgress, setLocalTrackingProgress] = useState(0.1);
-  const [localTrackingProgress, setLocalTrackingProgress] = useState(0);
+  const [localTrackingProgress, setLocalTrackingProgress] = useState(
+    trackingAudioValue ? trackingAudioValue : 0
+  );
 
+  const [isAddedContinueListening, setIsAddedContinueListening] = useState(
+    trackingAudioValue && trackingAudioValue > 0.1 ? true : false
+  );
   const continueListeningSelector = selectContinueListeningData
     ? selectContinueListeningData
     : preventUndefinedSelector;
@@ -162,6 +176,21 @@ const RowPoster = (result) => {
     // dispatch(removeFromFavourites({ ...item, isFavourite }));
     setIsLocalFavourite(false);
   };
+
+  // const handleRemoveContinueListening = (event) => {
+  //   event.stopPropagation();
+  //   dispatch(
+  //     removeContinueListeningAsync(
+  //       url.useRouteContinueListeningItems,
+  //       result.item._id
+  //     )
+  //   );
+  //   dispatch(setAudioStoped());
+  //   setIsAddedContinueListening(false);
+  //   setLocalTrackingProgress(0);
+  //   dispatch(removeContinueListeningArticle(_id));
+  // };
+
   const handleModalOpening = () => {
     dispatch(
       showModalDetail({ ...item, fallbackTitle, genresConverted, isFavourite })
@@ -175,7 +204,7 @@ const RowPoster = (result) => {
     event.stopPropagation();
 
     setIsVotedUp(!isVotedUp);
-    
+
     if (!isVotedUp) {
       dispatch(addToVotedAsync(_id));
       dispatch(updateVotesSuccess(_id));
@@ -189,6 +218,25 @@ const RowPoster = (result) => {
 
   const handlePlayActionLinguoo = (event) => {
     event.stopPropagation();
+
+    // //Send previous audio playing to continue listening
+    // if (audioPlaying && audioPlaying.isPlaying) {
+    //   const resultHP = audioPlaying.playIngCurrentList.find(
+    //     (article) => article._id === audioPlaying.articleid
+    //   );
+    //   dispatch(setAudioPaused());
+    //   dispatch(
+    //     pushContinueListeningArticle(resultHP, audioPlaying.trackingProgress)
+    //   );
+    //   dispatch(
+    //     upsertContinueListeningAsync(
+    //       url.useRouteContinueListeningItems,
+    //       audioPlaying.articleid,
+    //       audioPlaying.trackingProgress
+    //     )
+    //   );
+    // }
+
     dispatch(addToPlayedAsync(_id));
     dispatch(updatePlaysSuccess(_id));
     const prevUndefinedData =
@@ -209,31 +257,18 @@ const RowPoster = (result) => {
     );
   };
 
-  const stopActionLinguoo = () => {
-    setLocalTrackingProgress(0);
-    dispatch(setAudioStoped());
-    dispatch(removeContinueListeningArticle(_id));
-  };
-
-  const handleStopActionLinguoo = (event) => {
-    event.stopPropagation();
-    // if(selectedContinueListening && selectedContinueListening.data &&
-    // 	selectedContinueListening.data.length > 0 &&
-    // 	selectedContinueListening.data.find(cl => cl._id == _id)){
-    // 		const currentArticle = selectedContinueListening.data.find(cl => cl._id == _id);
-    // 		currentArticle.localTrackingProgress = 0
-    // 		setPublicLocalTrackingProgress(0);
-    // }
-    // else {
-    stopActionLinguoo();
-    // }
-  };
-
   const handlePauseActionLinguoo = (event) => {
     event.stopPropagation();
     // setLocalTrackingProgress(trackingProgress);
     dispatch(setAudioPaused());
-    dispatch(pushContinueListeningArticle(result, localTrackingProgress));
+    dispatch(pushContinueListeningArticle(result, trackingProgress));
+    dispatch(
+      upsertContinueListeningAsync(
+        url.useRouteContinueListeningItems,
+        result.item._id,
+        trackingProgress
+      )
+    );
   };
 
   //#endregion
@@ -257,43 +292,35 @@ const RowPoster = (result) => {
       dispatch(fetchplaylistsAsync(selectedPlayList, fallbackTitle));
   }, [selectedPlayList]);
 
-  //#endregion
-
-  //#region PlayingBehaviorEffects
-
-  // useEffect(()=>{
-  // 	if(articleid == _id && trackingProgress > 0){
-  // 		setIsPlayingPaused(true);
-  // 		setShowPlayIcon(!isPlaying);
-  // 	}
-  // 	else{
-  // 		setIsPlayingPaused(false);
-  // 		setShowPlayIcon(true);
-  // 	}
-  // 	setLocalTrackingProgress(trackingProgress);
-  // },[articleid, isPlaying])
-
-  // useEffect(()=> {
-  // 	// if(localTrackingProgress === 0 ){
-  // 		if(selectedContinueListening && selectedContinueListening.data &&
-  // 			selectedContinueListening.data.length > 0 &&
-  // 			selectedContinueListening.data.find(cl => cl._id == _id)){
-  // 				const currentArticle = selectedContinueListening.data.find(cl => cl._id == _id);
-  // 				if( currentArticle.localTrackingProgress === 0){
-  // 					stopActionLinguoo();
-  // 					dispatch(removeContinueListeningArticle(_id));
-  // 				}
-  // 		}
-  // 		// setLocalTrackingProgress(0);
-  // 	// }
-  // }, [publicLocalTrackingProgress])
-
   useEffect(() => {
-    if (!existsInContinueListening && !isPlaying && localTrackingProgress > 0) {
+    if (
+      !existsInContinueListening &&
+      !isPlaying &&
+      localTrackingProgress > 0 &&
+      trackingProgress < duration
+    ) {
       setLocalTrackingProgress(0);
+      setIsAddedContinueListening(false);
       // dispatch(setAudioStoped());
+    } else if (
+      existsInContinueListening &&
+      isPlaying &&
+      trackingProgress >= duration - 1
+    ) {
+      dispatch(removeContinueListeningArticle(_id));
+      dispatch(
+        removeContinueListeningAsync(url.useRouteContinueListeningItems, _id)
+      );
+      dispatch(setAudioStoped());
+      setIsAddedContinueListening(false);
+      setLocalTrackingProgress(0);
     }
-  }, [existsInContinueListening, isPlaying]);
+  }, [
+    existsInContinueListening,
+    isPlaying,
+    isAddedContinueListening,
+    trackingProgress,
+  ]);
 
   useEffect(() => {
     if (articleid == _id) {
@@ -301,9 +328,13 @@ const RowPoster = (result) => {
       if (trackingProgress > 0) {
         setIsPlayingPaused(true);
         setShowPlayIcon(!isPlaying);
+        // if (trackingAudioValue) {
+        existsInContinueListening && setIsAddedContinueListening(true);
+        // }
       } else {
         setIsPlayingPaused(false);
         setShowPlayIcon(true);
+        setIsAddedContinueListening(false);
       }
       setLocalTrackingProgress(trackingProgress);
     } else {
@@ -314,9 +345,25 @@ const RowPoster = (result) => {
       } else {
         setIsPlayingPaused(false);
         setShowPlayIcon(true);
+        // setIsAddedContinueListening(false);
       }
     }
-  }, [articleid, isPlaying, localTrackingProgress]);
+  }, [articleid, isPlaying, localTrackingProgress, isAddedContinueListening]);
+
+  useUnload((e) => {
+    e.preventDefuault();
+    if (trackingProgress > 0.1) {
+      dispatch(
+        upsertContinueListeningAsync(
+          url.useRouteContinueListeningItems,
+          result.item._id,
+          trackingProgress
+        )
+      );
+    }
+  });
+
+  // const handleBlur = () => alert("Blur!!");
 
   //#endregion
   function handleDate() {
@@ -361,40 +408,41 @@ const RowPoster = (result) => {
               }}
             >
               <div>
-          {!isPlaylist ? (
-            <div>
-              {isLinguoo ? (
-                isPlaylist ? null : showPlayIcon ? (
-                  <button
-                    className={
-                      isPlayingPaused
-                        ? "icon--play__play"
-                        : "icon--play__play"
-                    }
-                    onClick={handlePlayActionLinguoo}
-                  >
-                    <FaPlay className="icon--play" />
-                  </button>
-                ) : (
-                  <button
-                    className=" icon--play__play"
-                    onClick={handlePauseActionLinguoo}
-                  >
-                    <FaPause className="icon--play" />
-                  </button>
-                )
-              ) : (
-                <Link
-                  className=" icon--play__play"
-                  onClick={handlePlayAction}
-                  to={"/play"}
-                >
-                  <FaPlay className="icon--play" />
-                </Link>
-              )}
-            </div>
-          ) : null}
-        </div>
+                {!isPlaylist ? (
+                  <div>
+                    {isLinguoo ? (
+                      isPlaylist ? null : showPlayIcon ? (
+                        <button
+                          className={
+                            isPlayingPaused
+                              ? "icon--play__play"
+                              : "icon--play__play"
+                          }
+                          onClick={handlePlayActionLinguoo}
+                          // onBlurCapture={handleBlur}
+                        >
+                          <FaPlay className="icon--play" />
+                        </button>
+                      ) : (
+                        <button
+                          className=" icon--play__play"
+                          onClick={handlePauseActionLinguoo}
+                        >
+                          <FaPause className="icon--play" />
+                        </button>
+                      )
+                    ) : (
+                      <Link
+                        className=" icon--play__play"
+                        onClick={handlePlayAction}
+                        to={"/play"}
+                      >
+                        <FaPlay className="icon--play" />
+                      </Link>
+                    )}
+                  </div>
+                ) : null}
+              </div>
               {isLarge ? (
                 poster_path ? (
                   isLinguoo ? (
@@ -472,7 +520,7 @@ const RowPoster = (result) => {
         )}
         {!isPlaylist || durationToShow ? (
           <div className="Row__poster--time">
-            <div className="Row__poster--time_min">{`${durationToShow} min`}</div>
+            <div className="Row__poster--time_min">{`${durationToShow}`}</div>
           </div>
         ) : null}
         {!isPlaylist && narrator.image ? (
@@ -483,10 +531,11 @@ const RowPoster = (result) => {
               img={narrator.image}
               active={null}
             >
-            <IconCheck/></Avatar>
+              <IconCheck />
+            </Avatar>
           </div>
         ) : null}
-        
+
         {!isPlaylist ? (
           <div>
             <div>
@@ -494,9 +543,10 @@ const RowPoster = (result) => {
                 isPlaylist ? null : isPlayingPaused ? (
                   <button
                     className="Row__poster-info--icon icon--play__stop"
-                    onClick={handleStopActionLinguoo}
+                    onClick={handlePauseActionLinguoo}
                   >
-                    <FaStop />
+                    {/* <FaStop /> */}
+                    <FaPause />
                   </button>
                 ) : null
               ) : null}
@@ -505,24 +555,43 @@ const RowPoster = (result) => {
         ) : null}
         {!isPlaylist ? (
           <div>
-            <div>
-              {!isPlaylist &&
-                (isLocalFavourite ? (
-                  <button
-                    className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
-                    onClick={handleRemove}
-                  >
-                    <FaMinus />
-                  </button>
-                ) : (
-                  <button
-                    className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
-                    onClick={handleAdd}
-                  >
-                    <FaPlus />
-                  </button>
-                ))}
-            </div>
+            {/* <div> */}
+            {
+              // !isAddedContinueListening &&
+              isLocalFavourite && (
+                <button
+                  className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                  onClick={handleRemove}
+                >
+                  <FaMinus />
+                </button>
+              )
+            }
+            {
+              // !isAddedContinueListening &&
+              !isLocalFavourite && (
+                <button
+                  className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                  onClick={handleAdd}
+                >
+                  <FaPlus />
+                </button>
+              )
+            }
+            {/* {isAddedContinueListening &&
+            // !isPlaying &&
+            genre_ids.findIndex((gi) => gi === 100) > -1 ? (
+              <button
+                className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                onClick={handleRemoveContinueListening}
+                style={{
+                  marginTop: "4em",
+                }}
+              >
+                <FaMinus />
+              </button>
+            ) : null} */}
+            {/* </div> */}
           </div>
         ) : null}
 
@@ -538,14 +607,16 @@ const RowPoster = (result) => {
           <div></div>
 
           {!isPlaylist && narrator.name ? (
-            <h2 className="Row__poster-info--name pl-2 pr-2">{narrator.name}</h2>
+            <h2 className="Row__poster-info--name pl-2 pr-2">
+              {narrator.name}
+            </h2>
           ) : null}
           <div className="Row__poster-info--title pl-2 pr-2">
             <h3>{fallbackTitle}</h3>
           </div>
           {!isPlaylist ? (
             <div className="Row__poster-info--iconswrp pl-2 pr-2">
-              <span
+              {/* <span
                 className="pt-1 text-max Row__poster-info--iconswrp-description"
                 style={{ width: "150px", fontSize: 15, marginBottom: "0.3em" }}
               >
@@ -562,16 +633,14 @@ const RowPoster = (result) => {
               </span>
               <span className="pt-1 pr-1 Row__poster-info--iconswrp-description">
                 <p>•</p>
-              </span>
+              </span> */}
               <span
                 className="pt-1 text-max Row__poster-info--iconswrp-description"
                 style={{ fontSize: 15, marginLeft: "0.2em" }}
               >
                 <p>{handleDate()}</p>
               </span>
-              <span
-                style={{ textAlign: "end", fontSize: 15 }}
-              >
+              <span style={{ textAlign: "end", fontSize: 15 }}>
                 {!isPlaylist ? (
                   <div>
                     <div>
@@ -584,8 +653,8 @@ const RowPoster = (result) => {
                                 : " icon--play__like--active"
                             }
                             onClick={handleVoteAction}
-                          >                            
-                            {isVotedUp ?  <FaHeart/>:  <Like /> }
+                          >
+                            {isVotedUp ? <FaHeart /> : <Like />}
                           </button>
                         )
                       ) : null}

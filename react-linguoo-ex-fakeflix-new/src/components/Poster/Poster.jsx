@@ -20,10 +20,10 @@ import {
   FaPlay,
   FaPause,
   FaHeart,
-  FaStop,
+  // FaStop,
 } from "react-icons/fa";
 
-import Like from '../../assests/Like'
+import Like from "../../assests/Like";
 // import { FaChevronDown, FaMinus, FaPlay, FaPlus } from "react-icons/fa";
 import useGenreConversion from "../../hooks/useGenreConversion";
 import { showModalDetail } from "../../redux/modal/modal.actions";
@@ -45,8 +45,11 @@ import { selectAudioPlayingSelector } from "../../redux/audioplaying/audioplayin
 // import { fetchMovieDataConfig } from '../../dataConfig'
 import { calcTimeToShow } from "../../shared/timer/calcTime";
 import {
-  removeContinueListeningArticle,
+  // removeContinueListeningArticle,
   pushContinueListeningArticle,
+  upsertContinueListeningAsync,
+  removeContinueListeningArticle,
+  removeContinueListeningAsync,
 } from "../../redux/listcontinuelistening/listcontinuelistening.actions";
 import { selectContinueListeningData } from "../../redux/listcontinuelistening/listcontinuelistening.selectors";
 // import { selectSearchResults } from '../../redux/search/search.selectors'
@@ -54,6 +57,7 @@ import {
   updateVotesSuccess,
   updatePlaysSuccess,
 } from "../../redux/movies/movies.actions";
+import url from "../../requests";
 
 //#endregion
 
@@ -84,11 +88,16 @@ const Poster = (result) => {
       // playListName,
       category,
       // idList
+      // trackingAudioValue
     },
     isLarge,
     isFavourite,
   } = result;
   // const history = useHistory()
+
+  const trackingAudioValue = item.trackingAudioValue
+    ? item.trackingAudioValue
+    : undefined;
 
   const favs = useSelector(selectFavouritesList);
   // const selectedSearchResults = useSelector(selectSearchResults);
@@ -132,7 +141,9 @@ const Poster = (result) => {
   const { articleid, trackingProgress, isPlaying } = audioPlaying;
   // const [localTrackingProgress, setLocalTrackingProgress] = useState(trackingProgress);
   // const [localTrackingProgress, setLocalTrackingProgress] = useState(0.1);
-  const [localTrackingProgress, setLocalTrackingProgress] = useState(0);
+  const [localTrackingProgress, setLocalTrackingProgress] = useState(
+    trackingAudioValue ? trackingAudioValue : 0
+  );
 
   const continueListeningSelector = selectContinueListeningData
     ? selectContinueListeningData
@@ -144,6 +155,10 @@ const Poster = (result) => {
     selectedContinueListening.data &&
     selectedContinueListening.data.length > 0 &&
     selectedContinueListening.data.some((cl) => cl._id == _id);
+
+  const [isAddedContinueListening, setIsAddedContinueListening] = useState(
+    trackingAudioValue && trackingAudioValue > 0.1 ? true : false
+  );
 
   //#endregion
 
@@ -162,6 +177,21 @@ const Poster = (result) => {
     // dispatch(removeFromFavourites({ ...item, isFavourite }));
     setIsLocalFavourite(false);
   };
+
+  // const handleRemoveContinueListening = (event) => {
+  //   event.stopPropagation();
+  //   dispatch(
+  //     removeContinueListeningAsync(
+  //       url.useRouteContinueListeningItems,
+  //       result.item._id
+  //     )
+  //   );
+  //   dispatch(setAudioStoped());
+  //   setIsAddedContinueListening(false);
+  //   setLocalTrackingProgress(0);
+  //   dispatch(removeContinueListeningArticle(_id));
+  // };
+
   const handleModalOpening = () => {
     dispatch(
       showModalDetail({ ...item, fallbackTitle, genresConverted, isFavourite })
@@ -207,26 +237,6 @@ const Poster = (result) => {
     );
   };
 
-  const stopActionLinguoo = () => {
-    setLocalTrackingProgress(0);
-    dispatch(setAudioStoped());
-    dispatch(removeContinueListeningArticle(_id));
-  };
-
-  const handleStopActionLinguoo = (event) => {
-    event.stopPropagation();
-    // if(selectedContinueListening && selectedContinueListening.data &&
-    // 	selectedContinueListening.data.length > 0 &&
-    // 	selectedContinueListening.data.find(cl => cl._id == _id)){
-    // 		const currentArticle = selectedContinueListening.data.find(cl => cl._id == _id);
-    // 		currentArticle.localTrackingProgress = 0
-    // 		setPublicLocalTrackingProgress(0);
-    // }
-    // else {
-    stopActionLinguoo();
-    // }
-  };
-
   const handlePauseActionLinguoo = (event) => {
     event.stopPropagation();
     // setLocalTrackingProgress(trackingProgress);
@@ -235,6 +245,13 @@ const Poster = (result) => {
     result.item.fromPlaylist = true;
     // const changedResultAddedFromPlaylist = {...result.item, fromPlaylist: true}
     dispatch(pushContinueListeningArticle(result, localTrackingProgress));
+    dispatch(
+      upsertContinueListeningAsync(
+        url.useRouteContinueListeningItems,
+        result.item._id,
+        localTrackingProgress
+      )
+    );
     // dispatch(pushContinueListeningArticle(changedResultAddedFromPlaylist, localTrackingProgress));
   };
 
@@ -246,55 +263,38 @@ const Poster = (result) => {
     setDurationToShow(calcTimeToShow(duration));
   }, [duration]);
 
-  // const [selectedPlayList, setSelectedPlaylist] = useState('');
-
-  // const handlePlayListOpening = () =>
-  // {
-  // 	setSelectedPlaylist(playListName);
-  // 	history.push('/playlistcontent');
-  // }
-
-  // useEffect(()=> {
-  // 	selectedPlayList !== '' && dispatch(fetchplaylistsAsync(selectedPlayList, fallbackTitle));
-  // }, [selectedPlayList])
-
-  //#endregion
-
-  //#region PlayingBehaviorEffects
-
-  // useEffect(()=>{
-  // 	if(articleid == _id && trackingProgress > 0){
-  // 		setIsPlayingPaused(true);
-  // 		setShowPlayIcon(!isPlaying);
-  // 	}
-  // 	else{
-  // 		setIsPlayingPaused(false);
-  // 		setShowPlayIcon(true);
-  // 	}
-  // 	setLocalTrackingProgress(trackingProgress);
-  // },[articleid, isPlaying])
-
-  // useEffect(()=> {
-  // 	// if(localTrackingProgress === 0 ){
-  // 		if(selectedContinueListening && selectedContinueListening.data &&
-  // 			selectedContinueListening.data.length > 0 &&
-  // 			selectedContinueListening.data.find(cl => cl._id == _id)){
-  // 				const currentArticle = selectedContinueListening.data.find(cl => cl._id == _id);
-  // 				if( currentArticle.localTrackingProgress === 0){
-  // 					stopActionLinguoo();
-  // 					dispatch(removeContinueListeningArticle(_id));
-  // 				}
-  // 		}
-  // 		// setLocalTrackingProgress(0);
-  // 	// }
-  // }, [publicLocalTrackingProgress])
-
   useEffect(() => {
-    if (!existsInContinueListening && !isPlaying && localTrackingProgress > 0) {
+    if (
+      !existsInContinueListening &&
+      !isPlaying &&
+      localTrackingProgress > 0 &&
+      trackingProgress < duration
+    ) {
       setLocalTrackingProgress(0);
+      setIsAddedContinueListening(false);
       // dispatch(setAudioStoped());
+    } else if (
+      existsInContinueListening &&
+      isPlaying &&
+      trackingProgress >= duration - 1
+    ) {
+      dispatch(removeContinueListeningArticle(_id));
+      dispatch(
+        removeContinueListeningAsync(
+          url.useRouteContinueListeningItems,
+          result.item._id
+        )
+      );
+      dispatch(setAudioStoped());
+      setIsAddedContinueListening(false);
+      setLocalTrackingProgress(0);
     }
-  }, [existsInContinueListening, isPlaying]);
+  }, [
+    existsInContinueListening,
+    isPlaying,
+    isAddedContinueListening,
+    trackingProgress,
+  ]);
 
   useEffect(() => {
     if (articleid == _id) {
@@ -302,9 +302,11 @@ const Poster = (result) => {
       if (trackingProgress > 0) {
         setIsPlayingPaused(true);
         setShowPlayIcon(!isPlaying);
+        existsInContinueListening && setIsAddedContinueListening(true);
       } else {
         setIsPlayingPaused(false);
         setShowPlayIcon(true);
+        setIsAddedContinueListening(false);
       }
       setLocalTrackingProgress(trackingProgress);
     } else {
@@ -317,7 +319,7 @@ const Poster = (result) => {
         setShowPlayIcon(true);
       }
     }
-  }, [articleid, isPlaying, localTrackingProgress]);
+  }, [articleid, isPlaying, localTrackingProgress, isAddedContinueListening]);
 
   //#endregion
 
@@ -446,28 +448,54 @@ const Poster = (result) => {
             isPlaylist ? null : isPlayingPaused ? (
               <button
                 className="Poster__info--icon icon--play"
-                onClick={handleStopActionLinguoo}
+                onClick={handlePauseActionLinguoo}
               >
-                <FaStop />
+                {/* <FaStop /> */}
+                <FaPause />
               </button>
             ) : null
           ) : null}
-          {!isPlaylist &&
-            (isLocalFavourite ? (
-              <button
-                className="Poster__info--icon icon--favourite"
-                onClick={handleRemove}
-              >
-                <FaMinus />
-              </button>
-            ) : (
-              <button
-                className="Poster__info--icon icon--favourite"
-                onClick={handleAdd}
-              >
-                <FaPlus />
-              </button>
-            ))}
+          {!isPlaylist ? (
+            <div>
+              {/* <div> */}
+              {
+                // !isAddedContinueListening &&
+                isLocalFavourite && (
+                  <button
+                    className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                    onClick={handleRemove}
+                  >
+                    <FaMinus />
+                  </button>
+                )
+              }
+              {
+                // !isAddedContinueListening &&
+                !isLocalFavourite && (
+                  <button
+                    className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                    onClick={handleAdd}
+                  >
+                    <FaPlus />
+                  </button>
+                )
+              }
+              {/* {isAddedContinueListening &&
+              !isPlaying &&
+              genre_ids.findIndex((gi) => gi === 100) > -1 ? (
+                <button
+                  className="Row__poster-info--icon icon--favourite icon--play__favourite__play"
+                  onClick={handleRemoveContinueListening}
+                  style={{
+                    marginTop: "4em",
+                  }}
+                >
+                  <FaMinus />
+                </button>
+              ) : null} */}
+              {/* </div> */}
+            </div>
+          ) : null}
           {isLinguoo ? (
             isPlaylist ? null : (
               <button
@@ -478,7 +506,7 @@ const Poster = (result) => {
                 }
                 onClick={handleVoteAction}
               >
-                <Like />asd
+                <Like />
               </button>
             )
           ) : null}
@@ -507,51 +535,6 @@ const Poster = (result) => {
           )}
         </div>
       </div>
-
-      {/* {backdrop_path ? (
-                isLinguoo ?
-                <img src={`${backdrop_path}`} alt={fallbackTitle} /> 
-                : <img src={`${BASE_IMG_URL}/${backdrop_path}`} alt={fallbackTitle} />
-            ) : (
-                <>
-                    <img src={FALLBACK_IMG_URL} alt={fallbackTitle} />
-                    <div className='PosterPrev__fallback'>
-                        <span>{fallbackTitle}</span>
-                    </div>
-                </>
-            )}
-            <div className="PosterPrev__info">
-                <div className="PosterPrev__info--iconswrp">
-                    <Link
-                        className="PosterPrev__info--icon icon--play"
-                        onClick={handlePlayAction}
-                        to={'/play'}
-                    >
-                        <FaPlay />
-                    </Link>
-                    {!isFavourite
-                        ? (
-                            <button className='PosterPrev__info--icon icon--favourite' onClick={handleAdd}>
-                                <FaPlus />
-                            </button>
-                        ): (
-                            <button className='PosterPrev__info--icon icon--favourite' onClick={handleRemove}>
-                                <FaMinus />
-                            </button>
-                        )}
-                    <button className='PosterPrev__info--icon icon--toggleModal'>
-                        <FaChevronDown onClick={handleModalOpening}/>
-                    </button>
-                </div>
-                <div className="PosterPrev__info--title">
-                    <h3>{fallbackTitle}</h3>
-                </div>
-                <div className="PosterPrev__info--genres">
-                    {genresConverted && genresConverted.map(genre => (
-                        <span key={`Genre--id_${genre}`} className="genre-title">{genre}</span>
-                    ))}
-                </div>
-            </div> */}
     </motion.div>
   );
 };

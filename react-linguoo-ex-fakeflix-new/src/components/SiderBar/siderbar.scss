@@ -55,7 +55,6 @@
   &__main-container {
     width: 25vh;
     display: flex;
-    position: relative;
   }
 
   &__icon {
@@ -137,30 +136,51 @@
   &__mode{
     display: flex;
   }
-  &__Switch--text{
-    
-  }
 }
 
 .siderbar__main-container {
   width: 25vh;
+  position: flex;
+  z-index: 99;
 }
 
 @media (max-width: 800px) {
+ 
+}
+@media (max-width: 500px) {
+  .siderbar-close{
+    transform: translate(-250px, 0px);
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    -webkit-transform: translate(-250px, 0px);
+    -moz-transform: translate(-250px, 0px);
+    -ms-transform: translate(-250px, 0px);
+    -o-transform: translate(-250px, 0px);
+}
+.siderbar-close-after{
+  transform: translate(-0px, 0px);
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -ms-transition: all 1s;
+  -o-transition: all 1s;
+  -webkit-transform: translate(-0px, 0px);
+  -moz-transform: translate(-0px, 0px);
+  -ms-transform: translate(-0px, 0px);
+  -o-transform: translate(-0px, 0px);
+}
+  .siderbar-mobile {
+    width: 50%;
+}
   .siderbar__main-container {
-    width: 60px !important;
+    width: 25vh;
+    position: fixed;
+    z-index: 99;
   }
-  .siderbar {
-    width: 60px !important;
-    &__link_text {
-      display: none;
-    }
-    &__routes{
-      align-items: center;
-    }
-    &__logo {
-      padding: 0 15px;
-      padding-top: 1.5em;
-    }
+  .siderbar__logo{
+    width: 50%;
   }
 }

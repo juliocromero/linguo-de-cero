@@ -13,10 +13,18 @@ const listContinueListeningReducer = (state = initialState, action) => {
                 ? state.data 
                 : [...state.data, action.payload],
             }
-        // case listContinueListeningTypes.UPDATE_ARTICLE:
+        // case listContinueListeningTypes.UPSERT_CONTINUE_LISTENING_SUCCESS: 
         //     return {
-
-        //     }   
+        //         ...state,
+        //         data: state.data.some(dataArticle => dataArticle._id == action.payload._id) 
+        //         ? state.data 
+        //         : [...state.data, action.payload],
+        //     }
+        case listContinueListeningTypes.FETCH_CONTINUE_LISTENING_SUCCESS: 
+            return {
+                ...state,
+                data: [ ...action.payload],
+            }
         case listContinueListeningTypes.REMOVE_ARTICLE:
             return {
                 ...state,

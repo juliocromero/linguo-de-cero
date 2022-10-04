@@ -17,9 +17,11 @@ import { VscChromeClose } from "react-icons/vsc";
 import { formatDate } from '../../utils';
 // import { capitalizeFirstLetter } from "../../utils";
 // import { FaMinus, FaPlay, FaPlus } from "react-icons/fa";
-import { FaStop, FaPlay } from "react-icons/fa";
+// import { FaStop, FaPlay } from "react-icons/fa";
+import { FaPause, FaPlay } from "react-icons/fa";
 // import {setAudioPlayingCompleteData, setAudioPaused, setAudioStoped } from '../../redux/audioplaying/audioplaying.actions';
-import {setAudioPlayingCompleteData, setAudioStoped } from '../../redux/audioplaying/audioplaying.actions';
+// import {setAudioPlayingCompleteData, setAudioStoped } from '../../redux/audioplaying/audioplaying.actions';
+import {setAudioPlayingCompleteData, setAudioPaused } from '../../redux/audioplaying/audioplaying.actions';
 // import { FaPlay } from "react-icons/fa";
 // import { addToFavouritesAsync, removeFromFavouritesAsync } from "../../redux/favourites/favourites.actions";
 // import { addToFavourites, removeFromFavourites } from "../../redux/favourites/favourites.actions";
@@ -127,16 +129,16 @@ const selectedCurrentList =  { data: [modalContent] }
 				prevUndefinedData));
 	}
 
-	const stopActionLinguoo = () => {
+	const pauseActionLinguoo = () => {
 		setLocalTrackingProgress(0);
 		setShowPlayIcon(true);
-		dispatch(setAudioStoped());
+		dispatch(setAudioPaused());
 		dispatch(removeContinueListeningArticle(_id));
 	}
 
-	const handleStopActionLinguoo = event => {
+	const handlePauseActionLinguoo = event => {
 		event.stopPropagation();		
-		stopActionLinguoo();
+		pauseActionLinguoo();
 	}
 
 	// const handlePauseActionLinguoo = event => {
@@ -238,10 +240,10 @@ const selectedCurrentList =  { data: [modalContent] }
 										// className="Row__poster-info--icon icon--play"
 										className="Modal__image--button"
 										// onClick={handlePauseActionLinguoo}
-										onClick={handleStopActionLinguoo}
+										onClick={handlePauseActionLinguoo}
 									>
-										{/* <FaPause /> */}
-										<FaStop />
+										<FaPause />
+										{/* <FaStop /> */}
 									</button>					
 									} 				
 
@@ -261,7 +263,7 @@ const selectedCurrentList =  { data: [modalContent] }
 								<motion.h3 variants={modalFadeInUpVariants} className="Modal__info--title">{name}</motion.h3>
 								<motion.p variants={modalFadeInUpVariants} className="Modal__info--description">{overview}</motion.p>
 								<motion.hr variants={modalFadeInUpVariants} className="Modal__info--line"/>
-								<motion.h4 variants={modalFadeInUpVariants} className="Modal__info--otherTitle">Info on <b>{name}</b></motion.h4>
+								{/* <motion.h4 variants={modalFadeInUpVariants} className="Modal__info--otherTitle">Info on <b>{name}</b></motion.h4> */}
 								{/* <motion.h4 variants={modalFadeInUpVariants} className="Modal__info--otherTitle">Info on <b>{name}</b></motion.h4> */}
 								<motion.div variants={modalFadeInUpVariants} className="Modal__info--row">
 									<span className='Modal__info--row-label'>Category: </span>

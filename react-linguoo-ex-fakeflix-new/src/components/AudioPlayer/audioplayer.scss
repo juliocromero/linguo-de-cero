@@ -26,7 +26,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 2px;
   transition: all 0.2s ease-out;
 
   // overflow-x: scroll;
@@ -352,4 +351,26 @@
 .button-volumen{
   transform: rotate(90deg);
   
+}
+@media (max-width : 500px) {
+  .rep-mobile{
+  flex-direction: column;
+  align-content: center;
+  }
+  .rep-title{
+    text-align: center;
+    justify-content: center !important ;
+    padding: 5px;
+    width: 90% !important;
+  }
+  .rep-component{
+    width: 100% !important;
+    padding-left: 5%;
+  }
+  .control-audio-padre{
+    display: flex;
+  }
+  .progress {
+    width: 200px;
+  }
 }

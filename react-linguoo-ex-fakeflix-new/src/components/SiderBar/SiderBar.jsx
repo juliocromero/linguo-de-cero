@@ -34,15 +34,13 @@ const routes = [
         Icon : IconMeet
     },
 ]
-const Siderbar = () =>{
+const Siderbar = ({open}) =>{
     const { width } = useViewport();
     let location = useLocation()
-   
     useEffect(()=>{
         
     }, [location])
-    return <div className='siderbar__main-container'>
-              
+    return <div className={ open ? 'siderbar__main-container siderbar-mobile siderbar-close-after' : 'siderbar__main-container siderbar-close siderbar-mobile'} >
         <motion.div animate ={{width : '250px'}} className="siderbar">
             <div className="siderbar__space">
                    

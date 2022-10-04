@@ -14,13 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../redux/auth/auth.selectors";
 import { signOutStart } from "../../redux/auth/auth.actions";
+import IconMenu from "../../assests/icon/iconMenu";
 // import { getLocalStorageCurrentUser, removeUserAuth } from '../../shared/localStorage'
 
-const Navbar = () => {
-
+const Navbar = ({opensiderbar, sideBar}) => {
 	const isScrolled = useScroll(70);
 	const [genresNav, setGenresNav] = useState(false);
 	const [profileNav, setProfileNav] = useState(false);
+	
 	const genresNavRef = useRef();
 	const profileNavRef = useRef();
 	const currentUser = useSelector(selectCurrentUser);
@@ -36,6 +37,10 @@ const Navbar = () => {
 
 	async function handleSubmit() {
 		dispatch(signOutStart())
+	}
+	function handleMenu(){
+		opensiderbar(!sideBar)
+		
 	}
 	
 
@@ -54,6 +59,11 @@ const Navbar = () => {
 					<div className="Navbar__navitem">
 						<Searchbar />
 					</div>
+						<div className="Navbar__navitem nav-button-mobile pr-1" onClick={()=>{handleMenu()}}>
+						<IconMenu />
+						</div>
+						
+					
 					<div className="Navbar__navitem">
 						<div
 							className={`Navbar__navprofile ${profileNav && "active"}`}

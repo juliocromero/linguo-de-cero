@@ -12,6 +12,7 @@ import { ReactComponent as Volumen } from "./assets/volume.svg";
 import {
   setAudioPlayingCompleteData,
   setAudioTracking,
+  setAudioStoped,
 } from "../../redux/audioplaying/audioplaying.actions";
 import { useSelector } from "react-redux";
 import { selectAudioPlayingSelector } from "../../redux/audioplaying/audioplaying.selectors";
@@ -30,6 +31,13 @@ import { calcTimeToShow } from "../../shared/timer/calcTime";
 import AudioSpeed from "./AudioSpeed";
 // import { selectCurrentPlayListDataSelector } from '../../redux/currentplaylistdata/currentplaylistdata.selectors';
 import { ReactComponent as Next } from "./assets/Seconds.svg";
+import { selectContinueListeningData } from "../../redux/listcontinuelistening/listcontinuelistening.selectors";
+import {
+  removeContinueListeningArticle,
+  removeContinueListeningAsync,
+} from "../../redux/listcontinuelistening/listcontinuelistening.actions";
+import url from "../../requests";
+import useViewport from "../../hooks/useViewport";
 
 /*
  * Read the blog post here:
@@ -40,6 +48,8 @@ import { ReactComponent as Next } from "./assets/Seconds.svg";
 
 export const AudioPlayer = () => {
   //#region VariableDefinitions
+  const { width } = useViewport();
+  const isMobileW = width <= 500;
 
   // const { width } = useViewport();
   const isScrolled = useScroll(70);
@@ -61,7 +71,7 @@ export const AudioPlayer = () => {
   const dispatch = useDispatch();
 
   const [currSpeed, setCurrSpeed] = useState(1);
-  const [activeVol, setActiveVol] = useState(true);
+  const [activeVol, setActiveVol] = useState(false);
 
   // const selectorCurrentPlaylistData = selectCurrentPlayListDataSelector ? selectCurrentPlayListDataSelector : preventUndefinedSelector;
   // const basedOn = useSelector(selectorCurrentPlaylistData);
@@ -78,6 +88,7 @@ export const AudioPlayer = () => {
   const isReady = useRef(false);
 
   const [vol, setVol] = useState(audioRef.current.volume * 100);
+  // const [vol, setVol] = useState(0);
   // Destructure for conciseness
   // const { duration } = audioRef.current;
 
@@ -94,12 +105,24 @@ export const AudioPlayer = () => {
   }, #F6AB3B), color-stop(${vol * 0.01}, #777))
 `;
 
+  const continueListeningSelector = selectContinueListeningData
+    ? selectContinueListeningData
+    : preventUndefinedSelector;
+  const selectedContinueListening = useSelector(continueListeningSelector);
+  // const [publicLocalTrackingProgress, setPublicLocalTrackingProgress] = useState(0);
+  const existsInContinueListening =
+    selectedContinueListening &&
+    selectedContinueListening.data &&
+    selectedContinueListening.data.length > 0 &&
+    selectedContinueListening.data.some((cl) => cl._id == articleid);
+
   //#endregion
 
   //#region FunctionVariableDefinitions
 
   const startTimer = () => {
     // Clear any timers already running
+
     clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
@@ -259,6 +282,37 @@ export const AudioPlayer = () => {
     }
   }, [audio]);
 
+  useEffect(() => {
+    if (trackProgress >= duration - 5) {
+      setCurrSpeed(1);
+      // audioRef.current.playbackRate = currSpeed;
+    }
+  }, [trackProgress]);
+
+  useEffect(() => {
+    if (
+      isPlaying &&
+      existsInContinueListening &&
+      trackProgress >= duration - 1
+    ) {
+      dispatch(removeContinueListeningArticle(articleid));
+      dispatch(
+        removeContinueListeningAsync(
+          url.useRouteContinueListeningItems,
+          articleid
+        )
+      );
+      dispatch(setAudioStoped());
+    }
+  }, [
+    trackProgress,
+    isPlaying,
+    existsInContinueListening,
+    articleid,
+    dispatch,
+    duration,
+  ]);
+
   function onVolument(e) {
     audioRef.current.volume = e * 0.01;
     setVol(e);
@@ -280,7 +334,7 @@ export const AudioPlayer = () => {
   return (
     <motion.footer className={`Footer ${isScrolled && "Footer__fixed"}`}>
       <div
-        // className="audio-player"
+         className="rep-mobile"
         style={{
           position: "relative",
           boxSizing: "border-box",
@@ -288,153 +342,294 @@ export const AudioPlayer = () => {
           fontFamily: "Arial, Helvetica, sans-serif",
           width: "100%",
           display: "flex",
+          flexDirection: isMobileW ? "column" : "row",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <div
-          style={{
-            display: "inline-flex",
-            justifyContent: "start",
-            alignItems: "center",
-            width: "50%",
-          }}
-        >
-          <Avatar
-            badge={true}
-            // className="artwork"
-            className="Row__poster--avatar artwork"
-            img={backdropPath}
-            active={null}
-            alt={`track artwork for ${originalName} by ${narratorName}`}
-            // style={{
-            //   display: "block",
-            //   position: "sticky",
-            // }}
-          >
-            <IconCheck />
-          </Avatar>
-          <div
-            // className="track-info"
-            style={{
-              display: "inline-flex",
-              marginLeft: "1em",
-              textAlign: "left",
-              // position: "relative",
-              // paddingRight: "3em",
-              overflow: "hidden",
-              maxWidth: "80%",
-              textWrap: "nowrap",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {/* <img
-              className="artwork"
-              src={backdropPath}
-              alt={`track artwork for ${originalName} by ${narratorName}`}
-            /> */}
-            {/* <h2 className="title audio-player__title">{originalName}</h2> */}
-            <h2 className="title">{originalName}</h2>
-            {/* <h3 className="artist">{narratorName}</h3> */}
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            width: "55%",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <AudioControls
-              audioData={audioPlaying}
-              isLocalPlaying={localIsPlaying}
-              onPrevClick={toPrevTrack}
-              onNextClick={toNextTrack}
-              onPlayPauseClick={setLocalIsPlaying}
-            />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              width: "60%",
-              justifyContent: "space-around",
-            }}
-          >
-            <h2 className="calcTime">
-              {trackProgress
-                ? calcTimeToShow(trackProgress / currSpeed)
-                : "0:00"}
-            </h2>
-            <input
-              type="range"
-              value={trackProgress}
-              step="1"
-              min="0"
-              max={duration ? duration : `${duration}`}
-              className="progress"
-              onChange={(e) => onScrub(e.target.value)}
-              onMouseUp={onScrubEnd}
-              onKeyUp={onScrubEnd}
-              style={{
-                background: trackStyling,
-                Width: "60%",
-                marginTop: "0.4em",
-              }}
-            />
-            <h2 className="calcTime">
-              {duration && trackProgress
-                ? calcTimeToShow(
-                    duration / currSpeed - trackProgress / currSpeed
-                  )
-                : calcTimeToShow(duration / currSpeed)}
-            </h2>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignContent: "center",
-              justifyContent: "space-around",
-              alignItems: "center",
-              marginRight: "2em",
-            }}
-          >
-            <Next />
-
-            <AudioSpeed
-              // audioData = {audioPlaying}
-              onChangeSpeedClick={changeSpeed}
-              currSpeed={currSpeed}
-            />
+        {!isMobileW ? (
+          <>
             <div
-              className="range-slider"
-              // style={{}}
+              style={{
+                display: "inline-flex",
+                justifyContent: "start",
+                alignItems: "center",
+                width: "50%",
+              }}
             >
-              <div className="range-slider__volumen">
-                <Volumen
-                  type="button"
-                  className="button-volumen pointer"
-                  onClick={() => setActiveVol(!activeVol)}
+              <Avatar
+               id="1"
+                badge={true}
+                // className="artwork"
+                className="Row__poster--avatar artwork"
+                img={backdropPath}
+                active={null}
+                alt={`track artwork for ${originalName} by ${narratorName}`}
+                // style={{
+                //   display: "block",
+                //   position: "sticky",
+                // }}
+              >
+                <IconCheck id="2"/>
+              </Avatar>
+              <div
+                // className="track-info"
+                style={{
+                  display: "inline-flex",
+                  marginLeft: "1em",
+                  textAlign: "left",
+                  // position: "relative",
+                  // paddingRight: "3em",
+                  overflow: "hidden",
+                  maxWidth: "80%",
+                  textWrap: "nowrap",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <h2 id="4" className="title">{originalName}</h2>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                width: "55%",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <AudioControls
+                id="5"
+                  audioData={audioPlaying}
+                  isLocalPlaying={localIsPlaying}
+                  onPrevClick={toPrevTrack}
+                  onNextClick={toNextTrack}
+                  onPlayPauseClick={setLocalIsPlaying}
                 />
-                {activeVol ? (
-                  <input
-                    value={vol}
-                    className="input-range "
-                    onInput={(e) => onVolument(e.target.value)}
-                    name="inputRange"
-                    type="range"
-                    step="1"
-                    max="100"
-                    style={{ background: volStyling }}
-                  />
-                ) : null}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  width: "60%",
+                  justifyContent: "space-around",
+                }}
+              >
+                <h2 className="calcTime">
+                  {trackProgress
+                    ? calcTimeToShow(trackProgress / currSpeed)
+                    : "0:00"}
+                </h2>
+                <input
+                  type="range"
+                  value={trackProgress}
+                  step="1"
+                  min="0"
+                  max={duration ? duration : `${duration}`}
+                  className="progress"
+                  onChange={(e) => onScrub(e.target.value)}
+                  onMouseUp={onScrubEnd}
+                  onKeyUp={onScrubEnd}
+                  style={{
+                    background: trackStyling,
+                    Width: "60%",
+                    marginTop: "0.4em",
+                  }}
+                />
+                <h2 className="calcTime">
+                  {duration && trackProgress
+                    ? calcTimeToShow(
+                        duration / currSpeed - trackProgress / currSpeed
+                      )
+                    : calcTimeToShow(duration / currSpeed)}
+                </h2>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignContent: "center",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginRight: "2em",
+                }}
+              >
+                <Next />
+
+                <AudioSpeed
+                  // audioData = {audioPlaying}
+                  onChangeSpeedClick={changeSpeed}
+                  currSpeed={currSpeed}
+                />
+                <div
+                  className="range-slider"
+                  // style={{}}
+                >
+                  <div className="range-slider__volumen">
+                    <Volumen
+                      type="button"
+                      className="button-volumen pointer"
+                      onClick={() => setActiveVol(!activeVol)}
+                    />
+                    {activeVol ? (
+                      <input
+                        value={vol}
+                        className="input-range "
+                        onInput={(e) => onVolument(e.target.value)}
+                        name="inputRange"
+                        type="range"
+                        step="1"
+                        max="100"
+                        style={{ background: volStyling }}
+                      />
+                    ) : null}
+                  </div>
+
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          //Mobile
+          <>
+            <div
+              style={{
+                display: "inline-flex",
+                justifyContent: "center",
+                textAlign: "center",
+                width: "100%",
+                padding: "0.5em 0",
+              }}
+            >
+              <Avatar
+                badge={true}
+                // className="artwork"
+                className="Row__poster--avatar artwork"
+                img={backdropPath}
+                active={null}
+                alt={`track artwork for ${originalName} by ${narratorName}`}
+              >
+                <IconCheck />
+              </Avatar>
+              <div
+                // className="track-info"
+                style={{
+                  display: "inline-flex",
+                  marginLeft: "1em",
+                  textAlign: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  overflow: "hidden",
+                  maxWidth: "80%",
+                  flexWrap: "nowrap",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <h2 className="title">{originalName}</h2>
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "inline-flex",
+                width: "100%",
+                justifyContent: "space-around",
+                alignItems: "center",
+                padding: "0 0 2em",
+              }}
+            >
+              <div
+                style={{
+                  paddingLeft: "0.3em",
+                }}
+              >
+                <AudioControls
+                  audioData={audioPlaying}
+                  isLocalPlaying={localIsPlaying}
+                  onPrevClick={toPrevTrack}
+                  onNextClick={toNextTrack}
+                  onPlayPauseClick={setLocalIsPlaying}
+                />
+              </div>
+              <div
+                style={{
+                  display: "inline-flex",
+                  width: "50%",
+                  alignContent: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <h2 className="calcTime">
+                  {trackProgress
+                    ? calcTimeToShow(trackProgress / currSpeed)
+                    : "0:00"}
+                </h2>
+                <input
+                  type="range"
+                  value={trackProgress}
+                  step="1"
+                  min="0"
+                  max={duration ? duration : `${duration}`}
+                  className="progress"
+                  onChange={(e) => onScrub(e.target.value)}
+                  onMouseUp={onScrubEnd}
+                  onKeyUp={onScrubEnd}
+                  style={{
+                    background: trackStyling,
+                    Width: "80%",
+                    marginTop: "0.4em",
+                  }}
+                />
+                <h2 className="calcTime">
+                  {duration && trackProgress
+                    ? calcTimeToShow(
+                        duration / currSpeed - trackProgress / currSpeed
+                      )
+                    : calcTimeToShow(duration / currSpeed)}
+                </h2>
               </div>
 
-              <span></span>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignContent: "center",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                }}
+              >
+                <Next />
+
+                <AudioSpeed
+                  onChangeSpeedClick={changeSpeed}
+                  currSpeed={currSpeed}
+                />
+                <div className="range-slider">
+                  <div className="range-slider__volumen">
+                    <Volumen
+                      type="button"
+                      className="button-volumen pointer"
+                      onClick={() => setActiveVol(!activeVol)}
+                    />
+                    {activeVol ? (
+                      <input
+                        value={vol}
+                        className="input-range "
+                        onInput={(e) => onVolument(e.target.value)}
+                        name="inputRange"
+                        type="range"
+                        step="1"
+                        max="100"
+                        style={{ background: volStyling }}
+                      />
+                    ) : null}
+                  </div>
+
+                  <span></span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
+
         <Backdrop
           trackIndex={trackIndex}
           activeColor={color}

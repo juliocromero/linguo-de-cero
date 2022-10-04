@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { staggerOne, bannerFadeInLoadSectionVariants, bannerFadeInVariants, bannerFadeInUpVariants } from "../../motionUtils";
 // import { BASE_IMG_URL } from "../../requests";
 import { BACKGROUND_BANER_URL } from "../../requests";
-import { FaPlay, FaStop } from "react-icons/fa";
+// import { FaPlay, FaStop } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 import { BiInfoCircle } from "react-icons/bi";
 // import { randomize, truncate } from "../../utils";
 // import { Link } from "react-router-dom";
@@ -15,8 +16,8 @@ import { showModalDetail } from "../../redux/modal/modal.actions";
 // import { selectTrendingMovies, selectNetflixMovies } from "../../redux/movies/movies.selectors";
 // import { selectNetflixSeries } from "../../redux/series/series.selectors";
 import { selectRecentLastAudios } from '../../redux/movies/movies.selectors'
-import {setAudioPlayingCompleteData, setAudioStoped } from '../../redux/audioplaying/audioplaying.actions';
-import { removeContinueListeningArticle } from '../../redux/listcontinuelistening/listcontinuelistening.actions';
+import {setAudioPlayingCompleteData, setAudioPaused } from '../../redux/audioplaying/audioplaying.actions';
+// import { removeContinueListeningArticle } from '../../redux/listcontinuelistening/listcontinuelistening.actions';
 
 const Banner = () => {
 	// let selector;
@@ -89,16 +90,17 @@ const Banner = () => {
 				[preventUndefinedData?.data]));
 	}
 
-	const stopActionLinguoo = () => {
-		setLocalTrackingProgress(0);
+	const pauseActionLinguoo = () => {
+		// setLocalTrackingProgress(0);
 		setShowPlayIcon(true);
-		dispatch(setAudioStoped());
-		dispatch(removeContinueListeningArticle(_id));
+		// dispatch(setAudioStoped());
+		dispatch(setAudioPaused());
+		// dispatch(removeContinueListeningArticle(_id));
 	}
 
-	const handleStopActionLinguoo = event => {
+	const handlePauseActionLinguoo = event => {
 		event.stopPropagation();		
-		stopActionLinguoo();
+		pauseActionLinguoo();
 	}
 
 	//#endregion
@@ -147,11 +149,11 @@ const Banner = () => {
 										// className="Row__poster-info--icon icon--play"
 										className="Banner__button"
 										// onClick={handlePauseActionLinguoo}
-										onClick={handleStopActionLinguoo}
+										onClick={handlePauseActionLinguoo}
 									>
-										{/* <FaPause /> */}
-										<FaStop />
-										<span>Stop</span>
+										<FaPause />
+										{/* <FaStop /> */}
+										<span>Pause</span>
 									</button>					
 									} 				
 

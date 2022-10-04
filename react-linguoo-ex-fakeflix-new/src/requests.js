@@ -34,6 +34,9 @@ const ONEMONTHAGO = getOneMonthAgoReleaseDate();
 const { REACT_APP_API_KEY } = process.env;
 
 const requests = {
+	fetchContinueListeningItems: '/continue-listening?populate[0]=pausedNew', //Multi propos route (GET, PUT, POST ) for continue listening
+	useRouteContinueListeningItems: '/continue-listening', //Multi propos route (GET, PUT, POST ) for continue listening
+	
 	fetchSearchArticles: `/news?limit=50&offset=0&populate[0]=narrator&where[title][$regex]=.*`,
 	fetchSearchQuery: `/search/multi?api_key=${REACT_APP_API_KEY}&language=${LANG}&query=`,
 	fetchTrendingAll: `/trending/all/week?api_key=${REACT_APP_API_KEY}&sort_by=popularity.desc&language=${LANG}`,

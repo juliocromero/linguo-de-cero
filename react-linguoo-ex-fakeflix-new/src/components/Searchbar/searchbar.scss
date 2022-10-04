@@ -75,4 +75,11 @@
         width: 230px;
       }
     }
+
+    @media (max-width : 500px) {
+      .Searchbar--search {
+          width: 70% ;
+          height: 35px;
+      }
+  }
 }

@@ -21,7 +21,7 @@ const audioPlayingReducer = (state = initialState, action) => {
                 articleid: action.payload.articleId,
                 duration: action.payload.duration,
                 trackingProgress: action.payload.trankingProgress,
-                playIngCurrentList: action.payload.playIngCurrentList,                
+                playIngCurrentList: action.payload.playIngCurrentList,
                 isPlaying: true
             }
         case audioplayingActionTypes.SET_AUDIO_PLAYING_JUSTPLAY:

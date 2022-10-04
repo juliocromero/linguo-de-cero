@@ -10,9 +10,11 @@ const AudioVelocity = ({ currSpeed, onChangeSpeedClick }) => {
         type="button"
         style={{
           color: "white",
-          fontSize: "1em",
+          fontSize: currSpeed !== 1.5 ? "1em" : "0.8em",
+          // fontSize: "0.8em",
+          // fontSize: "1em",
           // marginLeft: "2em",
-          // zIndex: 40,
+          zIndex: 40,
         }}
         onClick={() => onChangeSpeedClick(currSpeed)}
       >

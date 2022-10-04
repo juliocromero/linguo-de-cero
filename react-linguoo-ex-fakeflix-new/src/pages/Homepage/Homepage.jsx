@@ -70,7 +70,7 @@ const Homepage = () => {
     >
       {rowPlaylists.data && rowPlaylists.data.length > 0 ? (
         <Row
-          key={0}
+          key={17}
           selector={playListSelector}
           title={"Playlists"}
           genre={"toprated"}

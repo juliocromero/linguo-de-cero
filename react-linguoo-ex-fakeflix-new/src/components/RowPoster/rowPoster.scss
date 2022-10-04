@@ -13,7 +13,7 @@
     top: 0;
     right: 0;
     padding: 0.8rem;
-    &_min{
+    &_min {
       padding: 0.1rem 0.5rem;
       background: rgba(0, 0, 0, 0.451);
       border-radius: 7px;
@@ -74,11 +74,10 @@
     &--img {
       background-size: cover;
     }
-    &:hover{
-      .icon--play__play{
+    &:hover {
+      .icon--play__play {
         display: flex;
       }
-      
     }
   }
   &--big {
@@ -95,7 +94,6 @@
     &__play-list {
       img {
         border-radius: 12px;
-        
       }
     }
   }
@@ -126,7 +124,7 @@
     position: absolute;
     bottom: 0 !important;
     height: 50% !important;
-    
+
     &-play-list {
       position: absolute;
       top: 1.5em;
@@ -146,7 +144,6 @@
       pointer-events: all;
     }
     &--iconswrp-breeder {
-      
     }
     &--iconswrp {
       display: flex;
@@ -248,7 +245,6 @@
       &:hover {
         background: rgba($white, 0.7);
         border-color: rgba($white, 0.7);
-        
       }
 
       // &:first-child {
@@ -398,9 +394,9 @@
   }
 }
 .Row__poster-info--iconswrp-breeder {
-}.icon--play__favourite{
-  
-  &__play{
+}
+.icon--play__favourite {
+  &__play {
     position: absolute;
     z-index: 100;
     top: 0;
@@ -410,43 +406,40 @@
     align-items: center;
     margin: 12px;
 
-
-    &--icon{
+    &--icon {
       width: 20px;
       height: 20px;
     }
   }
-  
-  &__like{
+
+  &__like {
     background: none;
     border: none;
-    &--active{
+    &--active {
       border: none;
       background: none;
       border: none;
     }
   }
-
 }
-.icon--play{
+.icon--play {
   width: 60px;
   height: 60px;
-  &__favourite{
-    position: absolute;   
-    top:0; 
-    z-index:101;
+  &__favourite {
+    position: absolute;
+    top: 0;
+    z-index: 101;
     margin: 10px;
-
   }
-  &__stop{
+  &__stop {
     display: none;
   }
-  &__play{
+  &__play {
     color: white;
     border: none;
     border-radius: 0;
     position: absolute;
-    z-index: 100;
+    z-index: 200;
     left: 0;
     width: calc(100% - 20px);
     display: flex;
@@ -455,37 +448,37 @@
     margin: 0;
     width: 100%;
     display: none;
-    border-radius: 8px 8px 0 0 ;
+    border-radius: 8px 8px 0 0;
     bottom: 50%;
     height: 50%;
 
-    &--icon{
+    &--icon {
       width: 20px;
       height: 20px;
     }
-    &:hover{
-      .icon--play__play{
+    &:hover {
+      .icon--play__play {
         display: flex;
       }
-        background-color: rgba(0, 0, 0, 0.319) !important;
+      background-color: rgba(0, 0, 0, 0.319) !important;
     }
   }
-  
-  &__like{
-    color: white ;
-    &--active{
+
+  &__like {
+    color: white;
+    &--active {
     }
   }
 }
-.Row__icon{
+.Row__icon {
   position: absolute;
   z-index: 100;
 }
-.icon-like{
+.icon-like {
   padding: 10px;
 }
-.icon--play__like{
-  svg{    
+.icon--play__like {
+  svg {
     stroke: while;
   }
 }
@@ -493,32 +486,65 @@
 .Row__poster--card--img img {
   width: 100%;
   height: 100%;
-  padding-bottom: 38%;  
+  padding-bottom: 38%;
 }
 
-.Row__poster-info--icon{
+.Row__poster-info--icon {
   z-index: 0;
 }
-.icon--play__play{
+.icon--play__play {
   z-index: 0;
 }
 @media (max-width: 1400px) {
-  .Row__poster-info--name{
+  .Row__poster-info--name {
     font-size: 0.5rem;
   }
-  
-  .Row__poster-info--title{
 
-    h3{
+  .Row__poster-info--title {
+    h3 {
       font-size: 0.5rem !important;
     }
   }
-  .Row__poster-info--iconswrp{
-    
-
-    p{
+  .Row__poster-info--iconswrp {
+    p {
       font-size: 0.7rem;
-
     }
   }
+}
+
+@media screen and (max-width: 500px) {
+  // SwipperSlide {
+  //   width: $wrp-cardvw;
+  // }
+
+  img {
+    width: $wrp-cardvw;
+  }
+
+  .icon--play {
+    &__stop {
+      display: none;
+    }
+    &__play {
+      display: flex;
+    }
+  }
+
+  .Row__poster {
+    width: $wrp-cardvw;
+
+    &--card {
+      width: $wrp-cardvw;
+
+      &--img {
+        width: $wrp-cardvw;
+      }
+    }
+    &-info {
+      width: $wrp-cardvw;
+    }
+  }
+}
+@media (max-width : 500px) {
+ 
 }
