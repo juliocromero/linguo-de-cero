@@ -293,4 +293,37 @@
   .Row__title {
     line-height: 100%;
   }
+  .Row__poster--card {
+    width: 100% !important;
+  }
+  .Row__poster--card--img{
+    width: 100% !important;
+  }
+  .Row__poster-info{
+    width: 100% !important;
+  }
+  .avatar-img{
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .badge{
+
+    top: 75%;
+    right: 0;
+    left: 80%;
+
+  }
+  .PlayListContent__row img{
+    height: 100% !important;
+  }
+  .Row__poster-info--icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .Row__poster-info--name{
+    font-size: 0.8rem !important;
+  }
+  .swiper-pagination{
+    display: none;
+  }
 }
