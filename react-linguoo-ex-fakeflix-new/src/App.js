@@ -27,7 +27,7 @@ import { setDefaultAudioListValuesAsync } from './redux/audioplaying/audioplayin
 import { fetchNarratorsAsync } from './redux/narrators/narrators.actions';
 import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 /* import Modal from "./components/Modal/Modal"; */
-/* import CheckOut from "./pages/CheckOut/CheckOut"; */
+import CheckOut from "./pages/CheckOut/CheckOut";
 // import { getLocalStorageCurrentUser } from './shared/localStorage'
 
 const App = () => {
@@ -50,22 +50,23 @@ const App = () => {
     }, [dispatch])
     useEffect(()=> {
        let check = window.localStorage.getItem('check')
-       if(check) setCheckOut(check)
-    },[])
-    const [checkout, setCheckOut] = useState(true)
-    const [openBurger, setopenBurger] = useState(false)
+       check = JSON.parse(check)
+       check ? setCheckOut(check) :  setCheckOut(false)
+    },)
+    const [checkout, setCheckOut] = useState(false)
+
+
     return (
         <div className="App">
             
             {/* <Modal>
                 <div>asdasd</div>
             </Modal> */}
-            {currentUser  && (<SideBar open={openBurger}/>)}
-            <div className={currentUser ? "container-root" : checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
-                {currentUser && (
+            {currentUser && checkout  && (<SideBar /> )}
+            <div className={currentUser && checkout ? "container-root" : !checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
+                {currentUser && checkout &&  (
                     <>
-
-                        <Navbar opensiderbar={setopenBurger} sideBar={openBurger}/>
+                        <Navbar />
                         <DetailModal />
                     </>
 
@@ -156,15 +157,15 @@ const App = () => {
                             path="/mylist"
                             render={() => currentUser ? <MyList /> : <Redirect to="/login" />}
                         />
-                         {/* <Route
+                         <Route
                             exact
                             path="/checkout"
-                            render={() => currentUser  ?  <CheckOut to={setCheckOut} /> : <CheckOut to={setCheckOut} />}
-                        /> */}
+                            render={() => currentUser  ?  <CheckOut to={setCheckOut} check={checkout} /> : <Redirect to="/login" />}
+                        />
                         <Route
                             exact
                             path="/login"
-                            render={() => currentUser ?  <Redirect to="/browse" /> :  <Auth /> }
+                            render={() => currentUser ?  <Redirect to="/checkout" /> :  <Auth /> }
                         />
                         <Route path="*">
                             <Redirect to="/" />
@@ -173,7 +174,7 @@ const App = () => {
                     <div style={{ position: 'relative', marginTop: '6em' }}></div>
                 </AnimatePresence>
             </div>
-            {currentUser && (
+            {currentUser && checkout && (
                 <>
                     <AudioPlayer />
                 </>

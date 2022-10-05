@@ -3,12 +3,11 @@
 
 
 .Navbar {
-    z-index: 999999 !important;
+    z-index: 101 !important;
     padding-left: 22vh;
     position: fixed;
     padding: 70px;
     box-sizing: border-box;
-    z-index: 10;
     width: calc(100% - 15em);
     height: 70px;
     top: 0;

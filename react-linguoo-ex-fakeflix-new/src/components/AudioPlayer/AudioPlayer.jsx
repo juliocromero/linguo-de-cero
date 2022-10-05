@@ -334,7 +334,7 @@ export const AudioPlayer = () => {
   return (
     <motion.footer className={`Footer ${isScrolled && "Footer__fixed"}`}>
       <div
-         className="rep-mobile"
+        className="rep-mobile"
         style={{
           position: "relative",
           boxSizing: "border-box",
@@ -358,7 +358,6 @@ export const AudioPlayer = () => {
               }}
             >
               <Avatar
-               id="1"
                 badge={true}
                 // className="artwork"
                 className="Row__poster--avatar artwork"
@@ -370,7 +369,7 @@ export const AudioPlayer = () => {
                 //   position: "sticky",
                 // }}
               >
-                <IconCheck id="2"/>
+                <IconCheck />
               </Avatar>
               <div
                 // className="track-info"
@@ -386,7 +385,7 @@ export const AudioPlayer = () => {
                   textOverflow: "ellipsis",
                 }}
               >
-                <h2 id="4" className="title">{originalName}</h2>
+                <h2 className="title">{originalName}</h2>
               </div>
             </div>
             <div
@@ -399,7 +398,6 @@ export const AudioPlayer = () => {
             >
               <div>
                 <AudioControls
-                id="5"
                   audioData={audioPlaying}
                   isLocalPlaying={localIsPlaying}
                   onPrevClick={toPrevTrack}

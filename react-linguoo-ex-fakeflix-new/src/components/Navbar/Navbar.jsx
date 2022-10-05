@@ -37,6 +37,7 @@ const Navbar = ({opensiderbar, sideBar}) => {
 
 	async function handleSubmit() {
 		dispatch(signOutStart())
+		window.localStorage.setItem("check", false);
 	}
 	function handleMenu(){
 		opensiderbar(!sideBar)
