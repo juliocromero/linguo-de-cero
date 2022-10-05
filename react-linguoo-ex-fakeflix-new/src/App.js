@@ -50,7 +50,8 @@ const App = () => {
     }, [dispatch])
     useEffect(()=> {
         let check = window.localStorage.getItem('check')
-        if(check) setCheckOut(check)
+        
+        if(check) setCheckOut(JSON.parse(check))
      },[])
      const [checkout, setCheckOut] = useState(true)
      const [openBurger, setopenBurger] = useState(false)
@@ -60,9 +61,9 @@ const App = () => {
              {/* <Modal>
                  <div>asdasd</div>
              </Modal> */}
-             {currentUser  && (<SideBar open={openBurger}/>)}
-             <div className={currentUser ? "container-root" : checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
-                 {currentUser && (
+             {currentUser && checkout  && (<SideBar open={openBurger}/>)}
+             <div className={currentUser && checkout  ? "container-root" : checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
+                 {currentUser  && checkout  && (
                      <>
  
                          <Navbar opensiderbar={setopenBurger} sideBar={openBurger}/>
@@ -159,7 +160,7 @@ const App = () => {
                          <Route
                             exact
                             path="/checkout"
-                            render={() => currentUser  ?  <CheckOut to={setCheckOut} check={checkout} /> : <Redirect to="/login" />}
+                            render={() => currentUser  ?  <CheckOut to={setCheckOut} /> : <Redirect to="/login" />}
                         />
                         <Route
                             exact
