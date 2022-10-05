@@ -51,7 +51,12 @@ const App = () => {
     useEffect(()=> {
         let check = window.localStorage.getItem('check')
         
-        if(check) setCheckOut(JSON.parse(check))
+        if(check){
+            setCheckOut(JSON.parse(check))
+        }else {
+            window.localStorage.setItem('check', false)
+            setCheckOut(false)
+        }
      },[])
      const [checkout, setCheckOut] = useState(true)
      const [openBurger, setopenBurger] = useState(false)
