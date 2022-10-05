@@ -49,28 +49,27 @@ const App = () => {
         dispatch(checkUserSession());
     }, [dispatch])
     useEffect(()=> {
-       let check = window.localStorage.getItem('check')
-       check = JSON.parse(check)
-       check ? setCheckOut(check) :  setCheckOut(false)
-    },)
-    const [checkout, setCheckOut] = useState(false)
-
-
-    return (
-        <div className="App">
-            
-            {/* <Modal>
-                <div>asdasd</div>
-            </Modal> */}
-            {currentUser && checkout  && (<SideBar /> )}
-            <div className={currentUser && checkout ? "container-root" : !checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
-                {currentUser && checkout &&  (
-                    <>
-                        <Navbar />
-                        <DetailModal />
-                    </>
-
-                )}
+        let check = window.localStorage.getItem('check')
+        if(check) setCheckOut(check)
+     },[])
+     const [checkout, setCheckOut] = useState(true)
+     const [openBurger, setopenBurger] = useState(false)
+     return (
+         <div className="App">
+             
+             {/* <Modal>
+                 <div>asdasd</div>
+             </Modal> */}
+             {currentUser  && (<SideBar open={openBurger}/>)}
+             <div className={currentUser ? "container-root" : checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
+                 {currentUser && (
+                     <>
+ 
+                         <Navbar opensiderbar={setopenBurger} sideBar={openBurger}/>
+                         <DetailModal />
+                     </>
+ 
+                 )}
                 <AnimatePresence exitBeforeEnter>
 
                     <Switch location={location} key={location.pathname}>

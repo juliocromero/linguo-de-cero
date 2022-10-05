@@ -181,3 +181,30 @@
         }
     }
 }
+
+@media (max-width:500px) {
+    .icon-linguo{
+        svg{
+            width: 50%;
+        }
+    }
+    .title-linguo{
+        font-size: 30px !important;
+    }
+    .sub-title-linguo{
+        font-size: 15px !important;
+    }
+    .owner{
+        p{
+            font-size: 15px;
+        }
+    }
+    .best-value{
+        p{
+            font-size: 15px;
+        }
+        &__orange{
+            font-size: 15px !important;
+        }
+    }
+}

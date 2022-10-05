@@ -61,7 +61,10 @@ export default function CheckOut({ to, check }) {
                 "text-align": "center",
               }}
             >
-              <IconLinguo />
+              <span className="icon-linguo" >
+                <IconLinguo />
+              </span>
+             
               <h1
                 style={{
                   "font-style": "normal",
@@ -75,7 +78,7 @@ export default function CheckOut({ to, check }) {
                   "letter-spacing": "0.5px",
                   color: "white",
                 }}
-                className="pt-2 container"
+                className="pt-2 container title-linguo"
               >
                 Get{" "}
                 <span
@@ -99,7 +102,7 @@ export default function CheckOut({ to, check }) {
             'text-align': 'center',
                 'color': '#FFFFFF' 
                }}
-              className="container">
+              className="container sub-title-linguo">
                 Listen to the best ideas of the world in 15 minutes or less
               </p>
             </div>
@@ -159,7 +162,7 @@ export default function CheckOut({ to, check }) {
                 style={{
                   "font-style": "normal",
                   "font-weight": "500",
-                  "font-size": "30px",
+                  "font-size": "20px",
                   "line-height": "63px",
                   /* identical to box height, or 210% */
 
@@ -178,7 +181,7 @@ export default function CheckOut({ to, check }) {
                 style={{
                   "font-style": "normal",
                   "font-weight": "500",
-                  "font-size": "20px",
+                  "font-size": "15px",
                   "line-height": "24px",
                   /* or 120% */
                   width: "70%",
@@ -220,7 +223,7 @@ export default function CheckOut({ to, check }) {
                 "border-radius": "30px",
                 "font-style": "normal",
                 "font-weight": "500",
-                "font-size": "20px",
+                "font-size": "15px",
                 "line-height": "24px",
                 /* or 120% */
 

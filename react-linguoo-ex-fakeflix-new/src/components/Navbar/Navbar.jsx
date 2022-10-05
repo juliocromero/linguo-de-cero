@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/auth/auth.selectors";
 import { signOutStart } from "../../redux/auth/auth.actions";
 import IconMenu from "../../assests/icon/iconMenu";
+import IconNotification from "../../assests/icon/IconNotification";
 // import { getLocalStorageCurrentUser, removeUserAuth } from '../../shared/localStorage'
 
 const Navbar = ({opensiderbar, sideBar}) => {
@@ -64,7 +65,6 @@ const Navbar = ({opensiderbar, sideBar}) => {
 						<IconMenu />
 						</div>
 						
-					
 					<div className="Navbar__navitem">
 						<div
 							className={`Navbar__navprofile ${profileNav && "active"}`}
@@ -75,7 +75,11 @@ const Navbar = ({opensiderbar, sideBar}) => {
 								src={currentUser && currentUser.photoURL ? currentUser.photoURL : PROFILE_PIC_URL}
 								alt="Profile Picture"
 							/>
+							<p className="pr-2 name-user">{currentUser.name ? currentUser.name : ''}</p>
 							<FaCaretDown className="Navbar__navprofile--toggler Navbar__navprofile--caret" />
+							<span className="pr-2 name-user"></span>
+							<span className="name-user"><IconNotification /></span>
+							
 							<div className={`Navbar__navprofile--content ${profileNav ? "active" : ""}`}>
 								{profileNav && (
 									<ul

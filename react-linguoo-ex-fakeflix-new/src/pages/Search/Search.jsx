@@ -1,5 +1,5 @@
 import "./search.scss"
-import Poster from "../../components/Poster/Poster";
+/* import Poster from "../../components/Poster/Poster"; */
 import { motion } from "framer-motion";
 import { staggerHalf } from "../../motionUtils";
 import { useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import { selectSearchInputValue } from "../../redux/search/search.selectors";
 import { setDefaultAudioListValuesSuccess } from '../../redux/audioplaying/audioplaying.actions'
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
+
+import RowPoster from "../../components/RowPoster/RowPoster";
 
 const Search = searchResults => {
 
@@ -37,7 +39,23 @@ const Search = searchResults => {
 				animate="animate"
 				exit="exit"
 			>
-				{results && results.length > 0
+				<div className="PlayListContent__row">
+              {results &&
+                results.length > 0 &&
+                results.map((result) => (
+                  <div
+                    className="PlayListContent__row--col"
+                    key={result._id}>
+                    <RowPoster
+                      item={result}
+                      isFavourite={result.isFavourite}
+                      playlistcontentData={playlistcontentData}
+                      {...result}
+                    />
+                  </div>
+                ))}
+                </div>
+				{/* {results && results.length > 0
 					? results.map(result => (
 						<Poster
 							key={result._id}
@@ -51,7 +69,7 @@ const Search = searchResults => {
 							Sorry, we searched everywhere but we did not found any audiobook with that title.
 						</h2>
 					)
-				}
+				} */}
 			</motion.div>
 		</div>
 	);
