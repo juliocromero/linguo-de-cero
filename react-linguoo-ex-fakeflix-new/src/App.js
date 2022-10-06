@@ -37,6 +37,8 @@ const App = () => {
     const searchResults = useSelector(selectSearchResults);
     const dispatch = useDispatch();
     const location = useLocation();
+
+    const [checkout, setCheckOut] = useState(false)
     // dispatch(fetchFavouritesAsync);
     if (currentUser) {
         const urlDefaultAudioValues = requests.fetchTrendingMovies;
@@ -48,17 +50,26 @@ const App = () => {
     useEffect(() => {
         dispatch(checkUserSession());
     }, [dispatch])
+
     useEffect(()=> {
         let check = window.localStorage.getItem('check')
-        
-        if(check){
-            setCheckOut(JSON.parse(check))
+        if(JSON.parse(check)){
+            setCheckOut(true)
         }else {
-            window.localStorage.setItem('check', false)
+            window.localStorage.setItem('check',false)
             setCheckOut(false)
         }
-     },[])
-     const [checkout, setCheckOut] = useState(true)
+        /* let checkObj = JSON.parse(check)
+        console.log(checkObj,'checkObj') */
+        
+        /* if(checkObj){
+            setCheckOut(checkObj)
+        }else {
+            setCheckOut(false)
+            
+        } */
+     })
+     
      const [openBurger, setopenBurger] = useState(false)
      return (
          <div className="App">
@@ -66,11 +77,11 @@ const App = () => {
              {/* <Modal>
                  <div>asdasd</div>
              </Modal> */}
+             
              {currentUser && checkout  && (<SideBar open={openBurger}/>)}
              <div className={currentUser && checkout  ? "container-root" : checkout ? 'container-root--before' : ''} style={{width:"100%", height:"100vh"}}>
                  {currentUser  && checkout  && (
                      <>
- 
                          <Navbar opensiderbar={setopenBurger} sideBar={openBurger}/>
                          <DetailModal />
                      </>
@@ -165,7 +176,7 @@ const App = () => {
                          <Route
                             exact
                             path="/checkout"
-                            render={() => currentUser  ?  <CheckOut to={setCheckOut} /> : <Redirect to="/login" />}
+                            render={() => currentUser  ?  <CheckOut to={setCheckOut} check={checkout} /> : <Redirect to="/login" />}
                         />
                         <Route
                             exact

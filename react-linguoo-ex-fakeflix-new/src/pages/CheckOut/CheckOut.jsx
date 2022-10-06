@@ -10,9 +10,10 @@ import IconMusic from "../../assests/icon/IconMusic";
 
 export default function CheckOut({ to, check }) {
   const history = useHistory();
-
+  const toCheck = to
   function handleCheck() {
-    to(true);
+    console.log('que onda perro')
+    toCheck(true);
     window.localStorage.setItem("check", true);
     history.push("/browse");
   }
